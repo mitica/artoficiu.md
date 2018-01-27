@@ -1,0 +1,10 @@
+{
+  "home": "/",
+  "article": "/article/${0}",
+  "articles": "/articles",
+  "contact": "/contact",
+  "page": "/page/${0}",
+  "catalog": {
+    "$url": "/catalog"
+  }
+}

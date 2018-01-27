@@ -1,0 +1,14 @@
+extends ./layouts/root
+
+block styles
+
+block page_main_content
+  section#page-content
+    #error-box
+      h1= data.title
+        |:  
+        span= data.statusCode
+      h4= data.description
+      p
+        strong
+          a(title=config.name, href=links.home())= __('home')

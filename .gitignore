@@ -1,0 +1,11 @@
+.DS_Store
+.env*
+node_modules
+npm-debug.log
+*.tgz
+lib
+types
+
+public/static/css/
+public/static/js/
+public/static/img/

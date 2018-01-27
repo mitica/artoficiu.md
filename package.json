@@ -1,0 +1,78 @@
+{
+  "name": "artoficiu.md",
+  "version": "0.0.1",
+  "private": true,
+  "description": "artoficiu.md",
+  "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
+  "scripts": {
+    "start": "node ./lib/app.js",
+    "dev": "npm run tsc && node ./lib/app.js",
+    "build": "gulp prod && npm run tsc",
+    "pretest": "npm run clean && npm run tsc",
+    "test": "ava --no-cache --verbose  ./lib/*.test.js ./lib/**/*.test.js",
+    "posttest": "npm run clean-test-code",
+    "tsc": "tsc",
+    "tscw": "tsc -w",
+    "preversion": "npm run tsc",
+    "postversion": "git push --follow-tags",
+    "prepublish": "npm run tsc && npm run clean-test-code",
+    "clean": "rm -fr ./lib && rm -fr ./types",
+    "clean-test-code": "rm -fr ./lib/**/*.test.js && rm -fr ./lib/*.test.js && rm -fr ./types/**/*.test.d.ts && rm -fr ./types/*.test.d.ts"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mitica/artoficiu.md.git"
+  },
+  "keywords": [
+    "artoficiu",
+    "artoficiu.md"
+  ],
+  "author": "Dumitru Cantea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mitica/artoficiu.md/issues"
+  },
+  "homepage": "https://github.com/Mitica/artoficiu.md",
+  "dependencies": {
+    "atonic": "^1.0.4",
+    "bootstrap": "^4.0.0",
+    "contentful": "^5.0.5",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^3.0.0",
+    "i18n": "^0.8.3",
+    "lru-cache": "^4.1.1",
+    "marked": "^0.3.12",
+    "moment-timezone": "^0.5.14",
+    "ms": "^2.1.1",
+    "object-hash": "^1.2.0",
+    "ournet.logger": "^0.1.0",
+    "pug": "^2.0.0-rc.4",
+    "urlset": "^0.6.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.11.0",
+    "@types/i18n": "^0.8.3",
+    "@types/lru-cache": "^4.1.0",
+    "@types/marked": "^0.3.0",
+    "@types/ms": "^0.7.30",
+    "@types/node": "^6.x.x",
+    "ava": "^0.23.0",
+    "debug": "^3.1.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.2",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-rev-all": "^0.9.7",
+    "gulp-sass": "3.0.0",
+    "gulp-sourcemaps": "^2.6.3",
+    "gulp-to-ico": "^1.0.0",
+    "typescript": "^2.6.1"
+  }
+}

@@ -1,0 +1,80 @@
+doctype html
+html(lang=culture.language)
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    title= site.head.title
+    if (site.head.description)
+      meta(name='description', content=site.head.description)
+    if (site.head.keywords)
+      meta(name='keywords', content=site.head.keywords)
+    link(rel="icon", type="image/png", href="/static/img/favicon-32x32.png", sizes="32x32")
+    block styles
+    if (site.head.canonical)
+      link(rel='canonical', href=site.head.canonical)
+      meta(property='og:url', content=site.head.canonical)
+    if (config.twitterId)
+      meta(property='twitter:site', content=config.twitterId)
+
+    if (config.facebookId)
+      meta(property='fb:app_id', content=config.facebookId)
+
+    if (config.facebookPublisher)
+      link(rel='publisher', href='https://www.facebook.com/'+ config.facebookPublisher)
+    meta(property='og:site_name', content=config.name)
+    //- meta(property='og:updated_time', content=currentDate.toDate().toISOString())
+    //- meta(property='og:locale', content=culture.locale)
+    block metas
+    if (NODE_ENV === 'production')
+      link(rel="stylesheet", media="all", href="/static/css/" + assets.getName('main.css'))
+    else
+      link(rel="stylesheet", media="all", href="/static/css/main.css")
+
+    //- link(rel='dns-prefetch', href='//ajax.googleapis.com')
+    //- link(rel='dns-prefetch', href='//tpc.googlesyndication.com')
+    //- link(rel='dns-prefetch', href='//pagead2.googlesyndication.com')
+
+    script(async, src="https://www.googletagmanager.com/gtag/js?id=" + config.googleAnalyticsId)
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '#{config.googleAnalyticsId}');
+    if (_events && _events.length)
+      script
+        each a in _events
+          = "gtag('event', '"+a.action+"', {'event_category':'"+a.category+"', 'event_label':'"+a.label+"'})"
+
+  body
+    include ../mixins/articles
+
+    #fb-root
+    header#page-header
+      .container
+        include ../includes/header
+    main#page-main
+      .container
+        block page_main_content
+    footer#page-footer
+      .container
+        include ../includes/footer
+
+    //- if (!noGoogleAds)
+      //- script(async, src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
+    //- script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', crossorigin='anonymous')
+    if (NODE_ENV==='production')
+      script(type='text/javascript', async, src="/static/js/" + assets.getName('main.js'))
+    else
+      script(type='text/javascript', async, src="/static/js/main.js")
+    block scripts
+      //- script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js')
+    if (config.facebookId)
+      script.
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://connect.facebook.net/#{culture.locale}/sdk.js#xfbml=1&version=v2.11&appId=#{config.facebookId}';
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));

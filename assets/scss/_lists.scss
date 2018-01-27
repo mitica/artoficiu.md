@@ -1,0 +1,47 @@
+.o-list-ads {
+    text-align: center;
+}
+.o-list-ads_i {
+    max-height: 320px;
+}
+
+.c-alb_i {
+    min-width: 180px;
+    padding-bottom: 10px;
+}
+.c-alb_pic {
+    width: 100%;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+}
+.c-alb_stats {
+    color: $muted-color;
+    font-size: 80%;
+}
+.c-alb_ads {
+    text-align: center;
+}
+
+
+.c-alm_i {
+    &:hover {
+        text-decoration: none;
+        .c-alm_title {
+            text-decoration: underline;
+        }
+    }
+}
+.c-alm_title {
+    margin-bottom: 2px;
+}
+.c-alm_pic {
+    border-radius: $border-radius;
+    border-radius: $border-radius;
+    height: 50px;
+    width: 50px;
+}
+.c-alm_stats {
+    color: $muted-color;
+    font-size: 80%;
+    text-decoration: none;
+}
