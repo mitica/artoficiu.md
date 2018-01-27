@@ -1,12 +1,19 @@
 {
 	"index": "Principală",
-	"home_page_title": "Descope.ro - Trăiește. Descoperă. Creează.",
-	"home_page_description": "Trăiește, descoperă, creează!",
-	"home_page_keywords": "descopero, trăiește, descoperă, creează",
+	"home_page_title": "ARTOFICIU - Fotolii create pentru confort!",
+	"home_page_description": "Magazin de mobilă Chisinau, fotolii și scaune ergonomice de birou, prețul mobilă de birou, scaun și fotoliu directorial și pentru personal",
+	"home_page_keywords": "artoficiu, magazin, mobila, chisinau",
 	"error_page_title": "Eroare",
 	"error_page_description": "A apărut o eroare. Căutăm vinovații...",
-	"home": "home",
-	"catalog": "catalog",
-	"articles": "articles",
-	"contact": "contact"
+	"home": "Acasă",
+	"catalog": "Catalog",
+	"articles": "Articole",
+	"contact": "Contact",
+	"catalog_products": "catalog_products",
+	"subscribe": "subscribe",
+	"subscribe_us": "subscribe_us",
+	"share_on_facebook": "share_on_facebook",
+	"share_on_twitter": "share_on_twitter",
+	"subscribe_us_info": "subscribe_us_info",
+	"latest_articles": "latest_articles"
 }

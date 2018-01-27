@@ -40,7 +40,7 @@ export default function (req: Request, res: Response, next: NextFunction) {
     const dc = res.locals.dataContainer = new DataContainer();
     dc.push('shopCategories', Data.shopCategories({ limit: 10, language: culture.language }));
     dc.push('pageMenu', createPageMenu());
-    dc.push('latestArticles', Data.pages({ limit: 5, language: culture.language }));
+    dc.push('latestArticles', Data.articles({ limit: 5, language: culture.language }));
 
     function createPageMenu() {
         let menu: { link: string, text: string, title?: string }[] = [{

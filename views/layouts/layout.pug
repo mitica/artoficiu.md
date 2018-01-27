@@ -1,10 +1,24 @@
 extends ./root
 
 block page_main_content
+  include ../mixins/articles
   .row
-    .col-md-3.d-none.d-sm-none
+    .col-md-3.d-none.d-sm-none.d-md-block
       #left-content
-        | Left Content
+        ul.c-menu
+          li.c-menu_header
+            h3
+              a(href=links.catalog({language: culture.language}))= __('catalog_products')
+          each item in shopCategories.items
+            li.c-menu_i
+              a(href=links.catalog.category(item.slug,{language: culture.language}))= item.title
+
+        .c-group
+          h3.c-group_title
+            a(href=links.articles({language: culture.language}))= __('articles')
+          .c-group_content
+            +articleListMedia(latestArticles.items)
+
     .col-md-9
       #main-content
         block main_content

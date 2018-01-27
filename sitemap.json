@@ -5,6 +5,7 @@
   "contact": "/contact",
   "page": "/page/${0}",
   "catalog": {
-    "$url": "/catalog"
+    "$url": "/catalog",
+    "category": "/catalog/${0}"
   }
 }

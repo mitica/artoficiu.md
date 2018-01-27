@@ -19,12 +19,12 @@
 //-           //- = item.countViews.toLocaleString(culture.language)
 
 mixin articleListMedia(articles)
-  .list-unstyled.c-alm
+  .c-alm
     each item in articles
       a.media.c-alm_i(href=links.article(item.slug))
         img.mr-3.c-alm_pic(src=item.image.url+'?w=50&h=50&fit=fill', alt=item.title)
         .media-body
-          h5.c-alm_title= item.title
+          h6.c-alm_title= item.title
           .c-alm_stats
             time= util.moment(item.createdAt).locale(culture.language).format('ll')
           //- i.i-eye
