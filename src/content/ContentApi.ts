@@ -25,6 +25,7 @@ export interface ShopCategoryEntity extends Entity {
     slug?: string
     parent?: ShopCategoryEntity
     order?: number
+    icon?: ImageEntity
 }
 
 export interface PageEntity extends Entity {
@@ -59,14 +60,13 @@ export interface ShopProductVariantEntity extends Entity {
     price?: number
     oldPrice?: number
     isInStock?: boolean
-    image?: ImageEntity
+    icon?: ImageEntity
 }
 
 export interface ShopProductPropertyEntity extends Entity {
     title?: string
-    valueName?: string
     value?: string
-    image?: ImageEntity
+    icon?: ImageEntity
 }
 
 export interface ShopProductEntity extends Entity {
@@ -75,7 +75,6 @@ export interface ShopProductEntity extends Entity {
     price?: number
     oldPrice?: number
     isInStock?: boolean
-    coverImage?: ImageEntity
     images?: ImageEntity[]
     variants?: ShopProductVariantEntity[]
     description?: string
@@ -210,7 +209,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
         }
 
         if (params.category) {
-            query['categories.fields.slug'] = params.category;
+            query['fields.categories.fields.slug'] = params.category;
         }
 
         return this.getShopProducts(query);
