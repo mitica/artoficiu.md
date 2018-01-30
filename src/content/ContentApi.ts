@@ -6,6 +6,8 @@ const ms = require('ms');
 export enum ContentTypes {
     SHOP_CATEGORY = 'shop_category',
     SHOP_PRODUCT = 'shop_product',
+    SHOP_PRODUCT_PROPERTY = 'shop_product_property',
+    SHOP_PRODUCT_VARIANT = 'shop_product_variant',
     FILE = 'file',
     ARTICLE = 'article',
     PAGE = 'page',
@@ -54,18 +56,17 @@ export interface ImageEntity extends Entity {
 
 export interface ShopProductVariantEntity extends Entity {
     title?: string
-    slug?: string
     price?: number
     oldPrice?: number
-    inStock?: number
-    icon?: ImageEntity
+    isInStock?: boolean
+    image?: ImageEntity
 }
 
-export interface ShopProductSpecificationEntity extends Entity {
+export interface ShopProductPropertyEntity extends Entity {
     title?: string
-    slug?: string
-    valueTitle?: string
+    valueName?: string
     value?: string
+    image?: ImageEntity
 }
 
 export interface ShopProductEntity extends Entity {
@@ -73,12 +74,12 @@ export interface ShopProductEntity extends Entity {
     slug?: string
     price?: number
     oldPrice?: number
-    inStock?: number
+    isInStock?: boolean
     coverImage?: ImageEntity
     images?: ImageEntity[]
     variants?: ShopProductVariantEntity[]
     description?: string
-    specifications?: ShopProductSpecificationEntity[]
+    properties?: ShopProductPropertyEntity[]
     categories?: ShopCategoryEntity[]
 }
 
