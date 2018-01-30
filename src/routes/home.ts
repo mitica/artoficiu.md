@@ -34,3 +34,27 @@ route.get('/', function (_req: Request, res: Response, next: NextFunction) {
         })
         .catch(next);
 });
+
+//contact
+
+route.get('/contact', function (_req: Request, res: Response, next: NextFunction) {
+
+    maxageIndex(res);
+    const __ = res.locals.__;
+    const platform = res.locals.site.platform;
+
+    res.locals.site.head.title = __('contact_page_title');
+    res.locals.site.head.description = __('contact_page_description');
+    res.locals.site.head.keywords = __('contact_page_keywords');
+
+    res.locals.currentPageLink = links.contact();
+    res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
+
+    const dc: DataContainer = res.locals.dataContainer;
+
+    dc.getData()
+        .then(data => {
+            res.render('contact_' + platform, data);
+        })
+        .catch(next);
+});

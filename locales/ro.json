@@ -16,5 +16,16 @@
 	"header_address_line2": "tel.: 069 224 224; 022 224 224",
 	"articles_page_title": "articles_page_title",
 	"articles_page_description": "articles_page_description",
-	"articles_page_keywords": "articles_page_keywords"
+	"articles_page_keywords": "articles_page_keywords",
+	"contact_page_title": "contact_page_title",
+	"contact_page_description": "contact_page_description",
+	"contact_page_keywords": "contact_page_keywords",
+	"contact_col_address_title": "Cum ne găsiți?",
+	"contact_col_address": "or. Chișinău, str. Bucuriei 1  (vis-a-vis de stația de testare a centrului BMW).",
+	"tel": "Tel.:",
+	"contact_col_program_title": "Programul de lucru",
+	"contact_col_program": "Luni-Vineri:      9:00 - 18:00/19:00\nSâmbătă:    10:00 - 14:00/16:00",
+	"email": "Email:",
+	"contact_col_contact_us_title": "Contactați-ne",
+	"contact_col_contact_us": "Dacă ai careva propuneri sau dorești un parteneriat, scrie-ne. Lasă-ne mesajul tău în formularul de mai jos:"
 }
