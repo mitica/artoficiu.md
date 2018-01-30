@@ -39,5 +39,5 @@ export default function catchError(req: Request, res: Response, error: any) {
         value: 0
     });
 
-    res.render('error', { error: error, data: data });
+    res.render('error_' + (res.locals.site && res.locals.site.platform || 'desktop'), { error: error, data: data });
 }

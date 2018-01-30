@@ -9,7 +9,7 @@ html(lang=culture.language)
       meta(name='description', content=site.head.description)
     if (site.head.keywords)
       meta(name='keywords', content=site.head.keywords)
-    link(rel="icon", type="image/png", href="/static/img/favicon-32x32.png", sizes="32x32")
+    link(rel='icon', type='image/png', href='/static/img/favicon-32x32.png', sizes='32x32')
     block styles
     if (site.head.canonical)
       link(rel='canonical', href=site.head.canonical)
@@ -27,9 +27,9 @@ html(lang=culture.language)
     //- meta(property='og:locale', content=culture.locale)
     block metas
     if (NODE_ENV === 'production')
-      link(rel="stylesheet", media="all", href="/static/css/" + assets.getName('main.css'))
+      link(rel="stylesheet", media="all", href="/static/css/" + assets.getName(site.platform + '-main.css'))
     else
-      link(rel="stylesheet", media="all", href="/static/css/main.css")
+      link(rel="stylesheet", media="all", href="/static/css/"+ site.platform + "-main.css")
 
     //- link(rel='dns-prefetch', href='//ajax.googleapis.com')
     //- link(rel='dns-prefetch', href='//tpc.googlesyndication.com')
@@ -48,31 +48,26 @@ html(lang=culture.language)
 
   body
     #fb-root
-    header#page-header
-      .container
-        include ../includes/header
-    main#page-main
-      .container
-        block page_main_content
-    footer#page-footer
+    #page-header
+      block page_header
+    #page-main
+      block page_main
+    #page-footer
       .container
         include ../includes/footer
 
-    //- if (!noGoogleAds)
-      //- script(async, src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
-    //- script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', crossorigin='anonymous')
     if (NODE_ENV==='production')
-      script(type='text/javascript', async, src="/static/js/" + assets.getName('main.js'))
+      script(type='text/javascript', async, src="/static/js/" + assets.getName(site.platform + '-main.js'))
     else
-      script(type='text/javascript', async, src="/static/js/main.js")
+      script(type='text/javascript', async, src="/static/js/" + site.platform + "-main.js")
     block scripts
-      //- script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js')
-    if (config.facebookId)
-      script.
-        (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = 'https://connect.facebook.net/#{culture.locale}/sdk.js#xfbml=1&version=v2.11&appId=#{config.facebookId}';
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+
+    //- if (config.facebookId)
+    //-   script.
+    //-     (function(d, s, id) {
+    //-       var js, fjs = d.getElementsByTagName(s)[0];
+    //-       if (d.getElementById(id)) return;
+    //-       js = d.createElement(s); js.id = id;
+    //-       js.src = 'https://connect.facebook.net/#{culture.locale}/sdk.js#xfbml=1&version=v2.11&appId=#{config.facebookId}';
+    //-       fjs.parentNode.insertBefore(js, fjs);
+    //-     }(document, 'script', 'facebook-jssdk'));

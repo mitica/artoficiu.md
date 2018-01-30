@@ -31,6 +31,7 @@ export default function (req: Request, res: Response, next: NextFunction) {
         version: _package.version,
         name: config.name,
         head: {},
+        platform: 'desktop',
     };
 
     res.locals.util = util;

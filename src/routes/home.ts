@@ -15,6 +15,7 @@ route.get('/', function (_req: Request, res: Response, next: NextFunction) {
 
     maxageIndex(res);
     const __ = res.locals.__;
+    const platform = res.locals.site.platform;
 
     res.locals.site.head.title = __('home_page_title');
     res.locals.site.head.description = __('home_page_description');
@@ -28,13 +29,14 @@ route.get('/', function (_req: Request, res: Response, next: NextFunction) {
 
     dc.getData()
         .then(data => {
-            res.render('index', data);
+            res.render('index_' + platform, data);
         })
         .catch(next);
 });
 
 route.get('/page/:slug', function (req: Request, res: Response, next: NextFunction) {
 
+    const platform = res.locals.site.platform;
     const culture = res.locals.culture;
     const slug = req.params.slug;
     // const __ = res.locals.__;
@@ -48,7 +50,7 @@ route.get('/page/:slug', function (req: Request, res: Response, next: NextFuncti
                 error.statusCode = 404;
                 return next(error);
             }
-            res.locals.page = page;
+            res.locals.article = page;
             res.locals.site.head.title = page.title;
             res.locals.site.head.description = page.summary;
             res.locals.site.head.canonical = canonical(links.page(page.slug));
@@ -58,7 +60,7 @@ route.get('/page/:slug', function (req: Request, res: Response, next: NextFuncti
 
             return dc.getData()
                 .then(data => {
-                    res.render('article', data);
+                    res.render('article_' + platform, data);
                 });
         })
         .catch(next);
@@ -66,6 +68,7 @@ route.get('/page/:slug', function (req: Request, res: Response, next: NextFuncti
 
 route.get('/article/:slug', function (req: Request, res: Response, next: NextFunction) {
 
+    const platform = res.locals.site.platform;
     const culture = res.locals.culture;
     const slug = req.params.slug;
     // const __ = res.locals.__;
@@ -89,7 +92,7 @@ route.get('/article/:slug', function (req: Request, res: Response, next: NextFun
 
             return dc.getData()
                 .then(data => {
-                    res.render('article', data);
+                    res.render('article_' + platform, data);
                 });
         })
         .catch(next);
