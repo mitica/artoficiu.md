@@ -58,6 +58,10 @@ html {
         bottom: -4px;
         border-left: 50px solid $primary-color;
     }
+    a:hover {
+        text-decoration: none;
+        color: $primary-color;
+    }
 }
 
 .c-group_content {

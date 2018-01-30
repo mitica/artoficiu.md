@@ -9,7 +9,8 @@ block metas
 
 block main_content
   article.article
-    h1= article.title
+    h1
+      a(href=currentPageLink)= article.title
     .article_details
       time= util.moment(article.createdAt).locale(culture.language).format('ll')
     .article_body!= util.renderArticle(article.text)

@@ -4,8 +4,8 @@
   .c-group_content
     ul.c-catalog-menu
       each item in shopCategories.items
-        li.c-catalog-menu_i
-          a(href=links.catalog.category(item.slug))= item.title
+        li.c-catalog-menu_i(class= currentPageLink.indexOf(links.catalog.category(item.slug))===0 ? 'selected' : null)
+          a(href=links.catalog.category(item.slug))= item.shortTitle || item.title
 
 .c-group
   h3.c-group_title

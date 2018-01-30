@@ -18,7 +18,7 @@ route.get('/articles', function (_req: Request, res: Response, next: NextFunctio
     const platform = res.locals.site.platform;
     const culture = res.locals.culture;
 
-    res.locals.currentPageLink = links.article(links.articles());
+    res.locals.currentPageLink = links.articles();
     res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
 
     res.locals.title = __('latest_articles');

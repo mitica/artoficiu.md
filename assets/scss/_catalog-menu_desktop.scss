@@ -1,0 +1,23 @@
+
+.c-catalog-menu {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+.c-catalog-menu_i {
+    display: block;
+    padding: 2px 0px 2px 10px;
+    font-size: 110%;
+    a {
+        color: $primary-color;
+        font-weight: bold;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    &.selected {
+        a {
+            text-decoration: underline;
+        }
+    }
+}
