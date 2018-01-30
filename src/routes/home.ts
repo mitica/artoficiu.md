@@ -21,7 +21,8 @@ route.get('/', function (_req: Request, res: Response, next: NextFunction) {
     res.locals.site.head.description = __('home_page_description');
     res.locals.site.head.keywords = __('home_page_keywords');
 
-    res.locals.site.head.canonical = canonical(links.home());
+    res.locals.currentPageLink = links.home();
+    res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
 
     const dc: DataContainer = res.locals.dataContainer;
 

@@ -18,7 +18,8 @@ route.get('/articles', function (_req: Request, res: Response, next: NextFunctio
     const platform = res.locals.site.platform;
     const culture = res.locals.culture;
 
-    res.locals.site.head.canonical = canonical(links.articles());
+    res.locals.currentPageLink = links.article(links.articles());
+    res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
 
     res.locals.title = __('latest_articles');
 
@@ -52,10 +53,11 @@ route.get('/page/:slug', function (req: Request, res: Response, next: NextFuncti
                 error.statusCode = 404;
                 return next(error);
             }
+            res.locals.currentPageLink = links.page(page.slug);
+            res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
             res.locals.article = page;
             res.locals.site.head.title = page.title;
             res.locals.site.head.description = page.summary;
-            res.locals.site.head.canonical = canonical(links.page(page.slug));
             res.locals.site.head.image = page.image.url;
 
             maxageArticle(res);
@@ -83,10 +85,12 @@ route.get('/article/:slug', function (req: Request, res: Response, next: NextFun
                 error.statusCode = 404;
                 return next(error);
             }
+            res.locals.currentPageLink = links.article(article.slug);
+            res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
+            
             res.locals.article = article;
             res.locals.site.head.title = article.title;
             res.locals.site.head.description = article.summary;
-            res.locals.site.head.canonical = canonical(links.article(article.slug));
             res.locals.site.head.image = article.image.url;
 
             maxageArticle(res);

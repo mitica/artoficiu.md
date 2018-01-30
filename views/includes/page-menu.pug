@@ -2,5 +2,5 @@
   if (pageMenu)
     ul.c-page-menu_list
       each item in pageMenu
-        li.c-page-menu_i
+        li.c-page-menu_i(class = currentPageLink == item.link ? 'selected' : null)
           a(href=item.link, title=item.title, class=item.css)= item.text
