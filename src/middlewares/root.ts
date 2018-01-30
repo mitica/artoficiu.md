@@ -45,25 +45,25 @@ export default function (req: Request, res: Response, next: NextFunction) {
 
     function createPageMenu() {
         let menu: { link: string, text: string, title?: string }[] = [{
-            link: links.home({ language: culture.language }),
+            link: links.home(),
             text: __('index'),
         }, {
-            link: links.catalog({ language: culture.language }),
+            link: links.catalog(),
             text: __('catalog'),
         }];
         return Data.pages({ limit: 10, language: culture.language }).then(pages => {
             menu = menu.concat(pages && pages.items && pages.items.map(item => {
                 return {
-                    link: links.page(item.slug, { language: links.language }),
-                    text: item.title,
+                    link: links.page(item.slug),
+                    text: item.shortTitle || item.title,
                 }
             }));
 
             menu = menu.concat([{
-                link: links.articles({ language: culture.language }),
+                link: links.articles(),
                 text: __('articles'),
             }, {
-                link: links.contact({ language: culture.language }),
+                link: links.contact(),
                 text: __('contact'),
             }]);
 

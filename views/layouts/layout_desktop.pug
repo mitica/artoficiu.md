@@ -6,12 +6,11 @@ block page_header
 
 block page_main
   include ../mixins/articles
-  .container
-    .row
-      .col-md-3.d-none.d-sm-none.d-md-block
-        #left-content
-          include ../includes/page-left-content_desktop
+  .row
+    .col-md-3.d-none.d-sm-none.d-md-block
+      #left-content
+        include ../includes/page-left-content_desktop
 
-      .col-md-9
-        #main-content
-          block main_content
+    .col-md-9
+      #main-content
+        block main_content

@@ -1,11 +1,5 @@
-#page-top-bar
-  .row
-    .col-3.d-none tel
-    .col.text-center
-      a(href=links.home(), title=config.name)#logo
-    .col.text-right Buy
 .c-page-menu
-  if(pageMenu)
+  if (pageMenu)
     ul.c-page-menu_list
       each item in pageMenu
         li.c-page-menu_i

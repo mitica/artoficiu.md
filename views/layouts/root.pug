@@ -51,7 +51,10 @@ html(lang=culture.language)
     #page-header
       block page_header
     #page-main
-      block page_main
+      .container
+        include ../includes/page-menu
+        #page-content
+          block page_main
     #page-footer
       .container
         include ../includes/footer

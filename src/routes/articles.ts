@@ -73,7 +73,6 @@ route.get('/article/:slug', function (req: Request, res: Response, next: NextFun
     const platform = res.locals.site.platform;
     const culture = res.locals.culture;
     const slug = req.params.slug;
-    // const __ = res.locals.__;
 
     const dc: DataContainer = res.locals.dataContainer;
 

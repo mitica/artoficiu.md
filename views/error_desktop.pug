@@ -5,13 +5,12 @@ block page_header
     include ./includes/page-header_desktop
 
 block page_main
-  .container
-    section#page-content
-      #error-box
-        h1= data.title
-          |:  
-          span= data.statusCode
-        h4= data.description
-        p
-          strong
-            a(title=config.name, href=links.home())= __('home')
+  section#page-content
+    #error-box
+      h1= data.title
+        |:  
+        span= data.statusCode
+      h4= data.description
+      p
+        strong
+          a(title=config.name, href=links.home())= __('home')

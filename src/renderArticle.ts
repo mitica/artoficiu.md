@@ -1,5 +1,5 @@
 
-import * as Url from 'url'
+// import * as Url from 'url'
 import * as marked from 'marked';
 // import config from './config';
 // const atonic = require('atonic');
@@ -20,8 +20,8 @@ renderer.image = function (href: string, title: string, text: string) {
     let imageId = '';
     const result = /images\.contentful\.com\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+\/([a-zA-Z0-9]+)\//.exec(href);
     if (result) {
-        const urlParts = Url.parse(href, false);
-        href = `${urlParts.pathname}?w=650&q=90`;
+        // const urlParts = Url.parse(href, false);
+        // href = `${urlParts.pathname}?w=650&q=90`;
         imageId = 'image-' + result[1];
     }
     title = encodeURIComponent(title || text);

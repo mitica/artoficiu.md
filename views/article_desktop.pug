@@ -1,0 +1,17 @@
+extends ./layouts/layout_desktop
+
+block metas
+  meta(property='og:type', content='article')
+  meta(property='og:title', content=article.title)
+  meta(property='og:description', content=article.summary)
+  meta(property='og:image', content=config.schema+article.image.url)
+  meta(name='twitter:card', content='symmary')
+
+block main_content
+  article.article
+    h1= article.title
+    .article_details
+      time= util.moment(article.createdAt).locale(culture.language).format('ll')
+    .article_body!= util.renderArticle(article.text)
+
+  //- +articleListBlock(articles)

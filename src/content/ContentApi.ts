@@ -27,6 +27,7 @@ export interface ShopCategoryEntity extends Entity {
 
 export interface PageEntity extends Entity {
     title?: string
+    shortTitle?: string
     slug?: string
     text?: string
     summary?: string
@@ -35,6 +36,7 @@ export interface PageEntity extends Entity {
 
 export interface ArticleEntity extends Entity {
     title?: string
+    shortTitle?: string
     slug?: string
     text?: string
     summary?: string
@@ -398,6 +400,7 @@ function toArticle(entity: ContentfulEntity): ArticleEntity {
         createdAt: entity.createdAt,
         updatedAt: entity.updatedAt,
         title: entity.fields.title,
+        shortTitle: entity.fields.shortTitle,
         slug: entity.fields.slug,
         summary: entity.fields.summary,
     }
@@ -438,6 +441,7 @@ function toPage(entity: ContentfulEntity): PageEntity {
         createdAt: entity.createdAt,
         updatedAt: entity.updatedAt,
         title: entity.fields.title,
+        shortTitle: entity.fields.shortTitle,
         slug: entity.fields.slug,
         summary: entity.fields.summary,
     }
