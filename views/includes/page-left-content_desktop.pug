@@ -1,10 +1,11 @@
-ul.c-menu
-  li.c-menu_header
-    h3
-      a(href=links.catalog())= __('catalog_products')
-  each item in shopCategories.items
-    li.c-menu_i
-      a(href=links.catalog.category(item.slug))= item.title
+.c-group
+  h3.c-group_title
+    a(href=links.catalog())= __('catalog_products')
+  .c-group_content
+    ul.c-catalog-menu
+      each item in shopCategories.items
+        li.c-catalog-menu_i
+          a(href=links.catalog.category(item.slug))= item.title
 
 .c-group
   h3.c-group_title

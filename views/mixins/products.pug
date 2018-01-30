@@ -1,0 +1,19 @@
+
+mixin productListBlock(articles, options)
+  - options = options || { }
+  - ads = options.ads || []
+  - itemClass = options.itemClass || 'col-sm-4 col-lg-3'
+  .row.c-alb
+    each item, index in articles
+      if (~ads.indexOf(index))
+        .col-md-4.col-lg-3.col-sm-12.c-alb_i.c-alb_ads
+          include ../includes/list-item-ads
+      .c-alb_i(class=itemClass)
+        a(href=links.article(item.slug))
+          img.c-alb_pic(src=item.image.url+'?w=350&h=200&fit=fill', alt=item.title)
+        h4.c-alb_title
+          a(href=links.article(item.slug))= item.title
+        .c-alb_stats
+          time= util.moment(item.createdAt).locale(culture.language).format('ll')
+          //- i.i-eye
+          //- = item.countViews.toLocaleString(culture.language)

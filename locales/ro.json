@@ -9,11 +9,12 @@
 	"catalog": "Catalog",
 	"articles": "Articole",
 	"contact": "Contact",
-	"catalog_products": "catalog_products",
-	"subscribe": "subscribe",
-	"subscribe_us": "subscribe_us",
-	"share_on_facebook": "share_on_facebook",
-	"share_on_twitter": "share_on_twitter",
-	"subscribe_us_info": "subscribe_us_info",
-	"latest_articles": "latest_articles"
+	"catalog_products": "Catalog produse",
+	"latest_articles": "Articole noi",
+	"weather_in_chisinau": "Vremea în Chișinău",
+	"header_address_line1": "or. Chișinău, str. Bucuriei 1",
+	"header_address_line2": "tel.: 069 224 224; 022 224 224",
+	"articles_page_title": "articles_page_title",
+	"articles_page_description": "articles_page_description",
+	"articles_page_keywords": "articles_page_keywords"
 }

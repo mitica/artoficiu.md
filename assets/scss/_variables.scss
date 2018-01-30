@@ -1,8 +1,14 @@
 
 
-$link-color: #000;
-$accent-color: #e83e8c;
+$link-color: #111;
+$accent-color: #F6D200;
+$primary-color: #E30016;
 $muted-color: #868e96;
+$theme-colors: (
+  "accent": #F6D200,
+  "primary": #E30016,
+  "danger": #ff4136
+);
 // $blue:     #F34175;
 // $indigo:  #6610f2 !default;
 // $purple:  #6f42c1 !default;
