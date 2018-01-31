@@ -3,7 +3,6 @@ import { Router, Request, Response, NextFunction } from 'express';
 import { DataContainer, Data } from '../data';
 import links from '../links';
 import { canonical } from '../utils';
-import { maxageIndex } from '../maxage';
 
 const route: Router = Router();
 
@@ -13,7 +12,6 @@ export default route;
 
 route.get('/catalog', function (_req: Request, res: Response, next: NextFunction) {
 
-    maxageIndex(res);
     const culture = res.locals.culture;
     const __ = res.locals.__;
 

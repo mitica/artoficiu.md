@@ -3,7 +3,6 @@ import { Router, Request, Response, NextFunction } from 'express';
 import { DataContainer, Data } from '../data';
 import links from '../links';
 import { canonical } from '../utils';
-import { maxageIndex } from '../maxage';
 
 const route: Router = Router();
 
@@ -13,10 +12,8 @@ export default route;
 
 route.get('/', function (_req: Request, res: Response, next: NextFunction) {
 
-    maxageIndex(res);
     const culture = res.locals.culture;
     const __ = res.locals.__;
-    const platform = res.locals.site.platform;
 
     res.locals.site.head.title = __('home_page_title');
     res.locals.site.head.description = __('home_page_description');
@@ -33,7 +30,7 @@ route.get('/', function (_req: Request, res: Response, next: NextFunction) {
 
     dc.getData()
         .then(data => {
-            res.render('index_' + platform, data);
+            res.render('index', data);
         })
         .catch(next);
 });
@@ -42,9 +39,7 @@ route.get('/', function (_req: Request, res: Response, next: NextFunction) {
 
 route.get('/contact', function (_req: Request, res: Response, next: NextFunction) {
 
-    maxageIndex(res);
     const __ = res.locals.__;
-    const platform = res.locals.site.platform;
 
     res.locals.site.head.title = __('contact_page_title');
     res.locals.site.head.description = __('contact_page_description');
@@ -57,7 +52,7 @@ route.get('/contact', function (_req: Request, res: Response, next: NextFunction
 
     dc.getData()
         .then(data => {
-            res.render('contact_' + platform, data);
+            res.render('contact', data);
         })
         .catch(next);
 });

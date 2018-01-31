@@ -3,7 +3,6 @@ import { Router, Request, Response, NextFunction } from 'express';
 import { Data, DataContainer } from '../data';
 import links from '../links';
 import { canonical } from '../utils';
-import { maxageIndex, maxageArticle } from '../maxage';
 
 const route: Router = Router();
 
@@ -13,9 +12,7 @@ export default route;
 
 route.get('/articles', function (_req: Request, res: Response, next: NextFunction) {
 
-    maxageIndex(res);
     const __ = res.locals.__;
-    const platform = res.locals.site.platform;
     const culture = res.locals.culture;
 
     res.locals.currentPageLink = links.articles();
@@ -33,14 +30,13 @@ route.get('/articles', function (_req: Request, res: Response, next: NextFunctio
 
     dc.getData()
         .then(data => {
-            res.render('articles_' + platform, data);
+            res.render('articles', data);
         })
         .catch(next);
 });
 
 route.get('/page/:slug', function (req: Request, res: Response, next: NextFunction) {
 
-    const platform = res.locals.site.platform;
     const culture = res.locals.culture;
     const slug = req.params.slug;
 
@@ -60,11 +56,9 @@ route.get('/page/:slug', function (req: Request, res: Response, next: NextFuncti
             res.locals.site.head.description = page.summary;
             res.locals.site.head.image = page.image.url;
 
-            maxageArticle(res);
-
             return dc.getData()
                 .then(data => {
-                    res.render('article_' + platform, data);
+                    res.render('article', data);
                 });
         })
         .catch(next);
@@ -72,7 +66,6 @@ route.get('/page/:slug', function (req: Request, res: Response, next: NextFuncti
 
 route.get('/article/:slug', function (req: Request, res: Response, next: NextFunction) {
 
-    const platform = res.locals.site.platform;
     const culture = res.locals.culture;
     const slug = req.params.slug;
 
@@ -93,11 +86,9 @@ route.get('/article/:slug', function (req: Request, res: Response, next: NextFun
             res.locals.site.head.description = article.summary;
             res.locals.site.head.image = article.image.url;
 
-            maxageArticle(res);
-
             return dc.getData()
                 .then(data => {
-                    res.render('article_' + platform, data);
+                    res.render('article', data);
                 });
         })
         .catch(next);
