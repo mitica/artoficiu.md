@@ -5,6 +5,9 @@ export interface IConfig {
     domain: string
     schema: string
     languages: string[]
+
+    email: string
+
     facebookPublisher?: string
     facebookId?: string
 }
@@ -15,6 +18,9 @@ const config: IConfig = {
     domain: "artoficiu.md",
     schema: "http:",
     languages: ["ro", "ru"],
+
+    email: 'artoficiu@gmail.com',
+
     facebookPublisher: "artoficiu.md",
     facebookId: ""
 };

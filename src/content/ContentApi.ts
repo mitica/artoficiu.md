@@ -1,96 +1,24 @@
 
 import { CacheContentfulApi } from './CacheContentfulApi';
 import { ContentfulEntity, ContentfulEntityCollection, ApiQuery } from './ContentfulApi';
+import {
+    ShopCategoryEntity,
+    ShopCategoryCollection,
+    ShopProductCollection,
+    ShopProductEntity,
+    ArticleCollection,
+    ArticleEntity,
+    PageCollection,
+    PageEntity,
+    ContentTypes,
+    ImageEntity,
+    WebAppSettingsEntity,
+    SliderEntity,
+    SliderItemEntity
+} from './entities';
+
 const ms = require('ms');
 
-export enum ContentTypes {
-    SHOP_CATEGORY = 'shop_category',
-    SHOP_PRODUCT = 'shop_product',
-    SHOP_PRODUCT_PROPERTY = 'shop_product_property',
-    SHOP_PRODUCT_VARIANT = 'shop_product_variant',
-    FILE = 'file',
-    ARTICLE = 'article',
-    PAGE = 'page',
-}
-
-export interface Entity {
-    id: string
-    createdAt?: string
-    updatedAt?: string
-    [index: string]: any
-}
-
-export interface ShopCategoryEntity extends Entity {
-    title?: string
-    slug?: string
-    parent?: ShopCategoryEntity
-    order?: number
-    icon?: ImageEntity
-}
-
-export interface PageEntity extends Entity {
-    title?: string
-    shortTitle?: string
-    slug?: string
-    text?: string
-    summary?: string
-    image?: ImageEntity
-}
-
-export interface ArticleEntity extends Entity {
-    title?: string
-    shortTitle?: string
-    slug?: string
-    text?: string
-    summary?: string
-    image?: ImageEntity
-}
-
-export interface ImageEntity extends Entity {
-    title?: string
-    url?: string
-    width?: number
-    height?: number
-    size?: number
-    contentType?: string
-}
-
-export interface ShopProductVariantEntity extends Entity {
-    title?: string
-    price?: number
-    oldPrice?: number
-    isInStock?: boolean
-    icon?: ImageEntity
-}
-
-export interface ShopProductPropertyEntity extends Entity {
-    title?: string
-    value?: string
-    icon?: ImageEntity
-}
-
-export interface ShopProductEntity extends Entity {
-    title?: string
-    slug?: string
-    price?: number
-    oldPrice?: number
-    isInStock?: boolean
-    images?: ImageEntity[]
-    variants?: ShopProductVariantEntity[]
-    description?: string
-    properties?: ShopProductPropertyEntity[]
-    categories?: ShopCategoryEntity[]
-}
-
-export interface EntityCollection<T extends Entity> {
-    items: T[]
-    total: number
-}
-
-export interface PageCollection extends EntityCollection<PageEntity> { }
-export interface ArticleCollection extends EntityCollection<ArticleEntity> { }
-export interface ShopCategoryCollection extends EntityCollection<ShopCategoryEntity> { }
-export interface ShopProductCollection extends EntityCollection<ShopProductEntity> { }
 
 export interface BaseFilterParams {
     language: string
@@ -122,6 +50,8 @@ export interface IContentApi {
 
     shopProducts(filter: FilterShopProductsParams): Promise<ShopProductCollection>
     shopProduct(params: FilterEntityParams): Promise<ShopProductEntity>
+
+    appSettings(params: BaseFilterParams): Promise<WebAppSettingsEntity>
 }
 
 
@@ -283,6 +213,35 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
         return this.getPages(query);
     }
 
+    appSettings(params: BaseFilterParams): Promise<WebAppSettingsEntity> {
+        const query: ApiQuery = {
+            content_type: ContentTypes.WEB_APP_SETTINGS,
+            locale: formatLocale(params),
+            order: '-sys.createdAt',
+            limit: 1,
+            include: 2,
+        };
+
+        return this.getEntries(query).then(collection => {
+            if (!collection) {
+                return null;
+            }
+
+            if (!collection.items || !collection.items.length) {
+                return null;
+            }
+
+            const item = collection.items[0];
+
+            return {
+                id: item.sys.id,
+                createdAt: item.sys.createdAt,
+                desktopHomepageSlider: convertSlider(item.fields.desktopHomepageSlider),
+                mobileHomepageSlider: convertSlider(item.fields.mobileHomepageSlider),
+            }
+        });
+    }
+
     protected getPages(query: ApiQuery) {
         query.content_type = ContentTypes.PAGE;
 
@@ -315,6 +274,11 @@ function formatLocale(params: BaseFilterParams) {
 
 const CACHE_OPTIONS: { [type: string]: any } = {};
 
+CACHE_OPTIONS[ContentTypes.WEB_APP_SETTINGS] = {
+    item: { max: 2, maxAge: ms('1h') },
+    collection: { max: 2, maxAge: ms('1h') },
+};
+
 CACHE_OPTIONS[ContentTypes.ARTICLE] = {
     item: { max: 50, maxAge: ms('1h') },
     collection: { max: 50, maxAge: ms('30m') },
@@ -334,6 +298,32 @@ CACHE_OPTIONS[ContentTypes.SHOP_PRODUCT] = {
     item: { max: 100, maxAge: ms('130m') },
     collection: { max: 50, maxAge: ms('10m') },
 };
+
+function convertSliderItem(item: ContentfulEntity): SliderItemEntity {
+    if (!item) {
+        return null;
+    }
+    const slider: SliderItemEntity = {
+        id: item.sys.id,
+        title: item.fields.title,
+        link: item.fields.link,
+        image: toImage(item.fields.image),
+    }
+
+    return slider;
+}
+
+function convertSlider(item: ContentfulEntity): SliderEntity {
+    if (!item) {
+        return null;
+    }
+    const slider: SliderEntity = {
+        id: item.sys.id,
+        items: item.fields.items && item.fields.items.map(convertSliderItem) || [],
+    }
+
+    return slider;
+}
 
 function toShopProducts(collection: ContentfulEntityCollection<ContentfulEntity>): ShopProductCollection {
     const data: ShopProductCollection = { total: 0, items: [] };

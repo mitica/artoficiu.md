@@ -5,8 +5,8 @@ block page_header
     include ../includes/page-header_desktop
 
 block page_main
-  include ../mixins/articles
-  .row
+  block slider_content
+  #inner-content.row
     .col-md-3.d-none.d-sm-none.d-md-block
       #left-content
         include ../includes/page-left-content_desktop

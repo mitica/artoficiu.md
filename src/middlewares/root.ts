@@ -1,5 +1,6 @@
 
 const _package = require('../../package.json');
+const debug = require('debug')('artoficiu');
 import { format } from 'util';
 import { moment } from '../utils';
 import renderArticle from '../renderArticle';
@@ -42,6 +43,14 @@ export default function (req: Request, res: Response, next: NextFunction) {
     dc.push('shopCategories', Data.shopCategories({ limit: 10, language: culture.language }));
     dc.push('pageMenu', createPageMenu());
     dc.push('latestArticles', Data.articles({ limit: 5, language: culture.language }));
+    dc.push('settings', Data.appSettings({ language: culture.language }).then(settings => {
+        if (!settings) {
+            throw new Error(`WebAppSettings not created. Please, create one.`)
+        }
+        debug('settings', settings.desktopHomepageSlider.items);
+
+        return settings;
+    }));
 
     function createPageMenu() {
         let menu: { link: string, text: string, title?: string }[] = [{

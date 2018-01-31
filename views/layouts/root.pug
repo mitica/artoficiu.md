@@ -47,6 +47,9 @@ html(lang=culture.language)
           = "gtag('event', '"+a.action+"', {'event_category':'"+a.category+"', 'event_label':'"+a.label+"'})"
 
   body
+    include ../mixins/image-slider
+    include ../mixins/articles
+    
     #fb-root
     #page-header
       block page_header
@@ -59,6 +62,7 @@ html(lang=culture.language)
       .container
         include ../includes/footer
 
+    script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js", crossorigin="anonymous")
     if (NODE_ENV==='production')
       script(type='text/javascript', async, src="/static/js/" + assets.getName(site.platform + '-main.js'))
     else

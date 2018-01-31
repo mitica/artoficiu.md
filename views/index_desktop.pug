@@ -1,4 +1,10 @@
 extends ./layouts/layout_desktop
 
+block slider_content
+  - slider = site.platform === 'desktop' ? settings.desktopHomepageSlider : settings.mobileHomepageSlider
+  if (slider)
+    +imageSlider(slider, { platform: site.platform })
+
+
 block main_content
-    div Main Content
+  div Main Content

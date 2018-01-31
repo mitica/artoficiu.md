@@ -13,7 +13,7 @@ const uglify = require('gulp-uglify');
 // const ico = require('gulp-to-ico');
 // const sourcemaps = require('gulp-sourcemaps');
 
-const mainSassFiles = ['./assets/scss/desktop-main.scss','./assets/scss/mobile-main.scss'];
+const mainSassFiles = ['./assets/scss/desktop-main.scss', './assets/scss/mobile-main.scss'];
 const cssDist = './public/static/css';
 
 gulp.task('sass-dev', function () {
@@ -40,22 +40,24 @@ gulp.task('sass:watch', function () {
   gulp.watch('./assets/scss/*.scss', ['sass-dev']);
 });
 
-const mainJsFiles = [
-  './assets/js/jq-loader.js',
-  './assets/js/nav.js',
-  './assets/js/article.js',
+const mainDesktopJsFiles = [
+  './node_modules/bootstrap/js/dist/util.js',
+  './node_modules/bootstrap/js/dist/carousel.js',
+  './assets/js/desktop.js',
 ];
 const jsDist = './public/static/js';
 
-gulp.task('js-dev', function () {
-  return gulp.src(mainJsFiles)
-    .pipe(concat('main.js'))
+gulp.task('js-dev-desktop', function () {
+  return gulp.src(mainDesktopJsFiles)
+    .pipe(concat('desktop-main.js'))
     .pipe(gulp.dest(jsDist));
 });
 
-gulp.task('js', function () {
-  return gulp.src(mainJsFiles)
-    .pipe(concat('main.js'))
+gulp.task('js-dev', ['js-dev-desktop']);
+
+gulp.task('js-desktop', function () {
+  return gulp.src(mainDesktopJsFiles)
+    .pipe(concat('desktop-main.js'))
     .pipe(gulp.dest(jsDist))
     .pipe(uglify())
     // .pipe(cleanCSS())
@@ -66,6 +68,8 @@ gulp.task('js', function () {
     // .pipe(rename({ basename: config.css.main }))
     .pipe(gulp.dest(jsDist));
 });
+
+gulp.task('js', ['js-desktop']);
 
 gulp.task('js:watch', function () {
   gulp.watch('./assets/js/*.js', ['js-dev']);
