@@ -1,19 +1,15 @@
 
-mixin productListBlock(articles, options)
+mixin productListBlock(items, options)
   - options = options || { }
-  - ads = options.ads || []
-  - itemClass = options.itemClass || 'col-sm-4 col-lg-3'
-  .row.c-alb
-    each item, index in articles
-      if (~ads.indexOf(index))
-        .col-md-4.col-lg-3.col-sm-12.c-alb_i.c-alb_ads
-          include ../includes/list-item-ads
-      .c-alb_i(class=itemClass)
-        a(href=links.article(item.slug))
-          img.c-alb_pic(src=item.image.url+'?w=350&h=200&fit=fill', alt=item.title)
-        h4.c-alb_title
-          a(href=links.article(item.slug))= item.title
-        .c-alb_stats
-          time= util.moment(item.createdAt).locale(culture.language).format('ll')
-          //- i.i-eye
-          //- = item.countViews.toLocaleString(culture.language)
+  - itemClass = options.itemClass || 'col-3'
+  .row.c-prod-bl
+    each item, index in items
+      .c-prod-bl_item(class=itemClass)
+        a.c-prod-bl_inner(href=links.catalog.item(item.slug))
+          .c-prod-bl_img
+            img.c-prod-bl_pic(src=item.images[0].url+'?h=200', alt=item.title)
+          .c-prod-bl_priceline
+            if (item.oldPrice)
+              span.c-prod-bl_oldPrice= item.oldPrice.toLocaleString(culture.language, {maximumFractionDigits: 2})
+            span.c-prod-bl_price= item.oldPrice.toLocaleString(culture.language, {maximumFractionDigits: 2})
+          h2.c-prod-bl_title= item.title

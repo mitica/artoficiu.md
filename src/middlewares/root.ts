@@ -52,6 +52,21 @@ export default function (req: Request, res: Response, next: NextFunction) {
         return settings;
     }));
 
+    dc.push('promotedShopCategories',
+        Data.shopCategories({ limit: 3, language: culture.language, isPromoted: true })
+            .then(categories => {
+                if (categories && categories.items && categories.items.length) {
+                    const tasks: any[] = [];
+                    categories.items.forEach(item => tasks.push(Data.shopProducts({ limit: 4, language: culture.language, categoryId: item.id, order: '-createdAt' })));
+
+                    return Promise.all(tasks)
+                        .then(results => results.forEach((collection, i) => categories.items[i].topProducts = collection))
+                        .then(() => categories);
+                }
+                return categories;
+            })
+    );
+
     function createPageMenu() {
         let menu: { link: string, text: string, title?: string }[] = [{
             link: links.home(),

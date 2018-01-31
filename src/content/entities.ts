@@ -23,6 +23,7 @@ export interface ShopCategoryEntity extends Entity {
     parent?: ShopCategoryEntity
     order?: number
     icon?: ImageEntity
+    isPromoted?: boolean
 }
 
 export interface PageEntity extends Entity {

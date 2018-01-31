@@ -23,7 +23,7 @@ export interface ApiQuery {
     limit: number
     content_type: string
     select?: string
-    [index: string]: string | number
+    [index: string]: string | number | boolean
     locale?: string
 }
 

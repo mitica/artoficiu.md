@@ -28,28 +28,33 @@ export interface ListFilterParams extends BaseFilterParams {
     limit: number
 }
 
-export interface FilterShopProductsParams extends ListFilterParams {
-    order: 'createdAt' | 'price' | '-createdAt' | '-price'
-    category?: string
+export interface ShopCategoryFilterParams extends ListFilterParams {
+    isPromoted?: boolean
 }
 
-export interface FilterEntityParams extends BaseFilterParams {
+export interface ShopProductFilterParams extends ListFilterParams {
+    order: 'createdAt' | 'price' | '-createdAt' | '-price'
+    categorySlug?: string
+    categoryId?: string
+}
+
+export interface EntityFilterParams extends BaseFilterParams {
     slug?: string
     id?: string
 }
 
 export interface IContentApi {
-    shopCategory(params: FilterEntityParams): Promise<ShopCategoryEntity>
-    shopCategories(params: ListFilterParams): Promise<ShopCategoryCollection>
+    shopCategory(params: EntityFilterParams): Promise<ShopCategoryEntity>
+    shopCategories(params: ShopCategoryFilterParams): Promise<ShopCategoryCollection>
 
-    articles(filter: ListFilterParams): Promise<ArticleCollection>
-    article(params: FilterEntityParams): Promise<ArticleEntity>
+    articles(params: ListFilterParams): Promise<ArticleCollection>
+    article(params: EntityFilterParams): Promise<ArticleEntity>
 
-    pages(filter: ListFilterParams): Promise<PageCollection>
-    page(params: FilterEntityParams): Promise<PageEntity>
+    pages(params: ListFilterParams): Promise<PageCollection>
+    page(params: EntityFilterParams): Promise<PageEntity>
 
-    shopProducts(filter: FilterShopProductsParams): Promise<ShopProductCollection>
-    shopProduct(params: FilterEntityParams): Promise<ShopProductEntity>
+    shopProducts(params: ShopProductFilterParams): Promise<ShopProductCollection>
+    shopProduct(params: EntityFilterParams): Promise<ShopProductEntity>
 
     appSettings(params: BaseFilterParams): Promise<WebAppSettingsEntity>
 }
@@ -60,7 +65,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
         super(options, CACHE_OPTIONS)
     }
 
-    shopCategory(params: FilterEntityParams): Promise<ShopCategoryEntity> {
+    shopCategory(params: EntityFilterParams): Promise<ShopCategoryEntity> {
         const query: ApiQuery = {
             locale: formatLocale(params),
             content_type: ContentTypes.SHOP_CATEGORY,
@@ -77,7 +82,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             .then(collection => collection.items.length && collection.items[0] || null);
     }
 
-    shopCategories(params: ListFilterParams): Promise<ShopCategoryCollection> {
+    shopCategories(params: ShopCategoryFilterParams): Promise<ShopCategoryCollection> {
         const query: ApiQuery = {
             locale: formatLocale(params),
             content_type: ContentTypes.SHOP_CATEGORY,
@@ -86,10 +91,14 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             order: 'fields.order',
         };
 
+        if (typeof params.isPromoted === 'boolean') {
+            query['fields.isPromoted'] = params.isPromoted;
+        }
+
         return this.getShopCategories(query);
     }
 
-    shopProduct(params: FilterEntityParams): Promise<ShopProductEntity> {
+    shopProduct(params: EntityFilterParams): Promise<ShopProductEntity> {
 
         const query: ApiQuery = {
             locale: formatLocale(params),
@@ -108,7 +117,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             .then(articles => articles.items.length && articles.items[0] || null);
     }
 
-    shopProducts(params: FilterShopProductsParams): Promise<ShopProductCollection> {
+    shopProducts(params: ShopProductFilterParams): Promise<ShopProductCollection> {
         if (!params) {
             return Promise.reject(new Error(`parameter filter is invalid`));
         }
@@ -138,14 +147,17 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
                 break;
         }
 
-        if (params.category) {
-            query['fields.categories.fields.slug'] = params.category;
+        if (params.categorySlug) {
+            query['fields.categories.fields.slug'] = params.categorySlug;
+        }
+        if (params.categoryId) {
+            query['fields.categories.sys.id'] = params.categoryId;
         }
 
         return this.getShopProducts(query);
     }
 
-    article(params: FilterEntityParams): Promise<ArticleEntity> {
+    article(params: EntityFilterParams): Promise<ArticleEntity> {
 
         const query: ApiQuery = {
             locale: formatLocale(params),
@@ -179,7 +191,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
         return this.getArticles(query);
     }
 
-    page(params: FilterEntityParams): Promise<ArticleEntity> {
+    page(params: EntityFilterParams): Promise<ArticleEntity> {
 
         const query: ApiQuery = {
             locale: formatLocale(params),

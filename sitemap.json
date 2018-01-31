@@ -6,6 +6,7 @@
   "page": "/page/${0}",
   "catalog": {
     "$url": "/catalog",
-    "category": "/catalog/${0}"
+    "category": "/catalog/${0}",
+    "item": "/catalog/item/${0}"
   }
 }
