@@ -25,6 +25,7 @@ export interface ApiQuery {
     select?: string
     [index: string]: string | number | boolean
     locale?: string
+    include?: number
 }
 
 export interface ContentfulEntityCollection<T extends ContentfulEntity> {

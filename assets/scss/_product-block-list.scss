@@ -1,0 +1,49 @@
+.c-prod-bl_i {
+    display: block;
+    background: $layout-dark-color;
+    border-radius: $border-radius;
+    overflow: hidden;
+    padding: 2px;
+    &:hover {
+        background: $accent-color;
+        text-decoration: none;
+    }
+}
+
+.c-prod-bl_img {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+    background: $white;
+    text-align: center;
+    padding: 2px;
+    display: block;
+    max-height: 204px;
+}
+
+.c-prod-bl_pic {
+    max-height: 100%;
+}
+
+.c-prod-bl_priceline {
+    background: $accent-color;
+    padding: 2px 6px;
+    text-align: center;
+    font-size: 110%;
+    display: block;
+}
+
+.c-prod-bl_price {
+    color: $primary-color;
+    font-weight: bold;
+}
+
+.c-prod-bl_oldPrice {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.c-prod-bl_title {
+    margin:0px;
+    padding: 2px 6px;
+    text-align: center;
+}

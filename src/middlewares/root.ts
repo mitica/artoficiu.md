@@ -2,7 +2,7 @@
 const _package = require('../../package.json');
 const debug = require('debug')('artoficiu');
 import { format } from 'util';
-import { moment } from '../utils';
+import { moment, formatNumber } from '../utils';
 import renderArticle from '../renderArticle';
 import { Request, Response, NextFunction } from 'express';
 import config from '../config';
@@ -13,6 +13,7 @@ const util = {
     moment: moment,
     format: format,
     renderArticle: renderArticle,
+    formatNumber,
 };
 
 export default function (req: Request, res: Response, next: NextFunction) {

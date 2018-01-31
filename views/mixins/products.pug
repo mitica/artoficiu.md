@@ -5,11 +5,13 @@ mixin productListBlock(items, options)
   .row.c-prod-bl
     each item, index in items
       .c-prod-bl_item(class=itemClass)
-        a.c-prod-bl_inner(href=links.catalog.item(item.slug))
+        a.c-prod-bl_i(href=links.catalog.item(item.slug))
           .c-prod-bl_img
             img.c-prod-bl_pic(src=item.images[0].url+'?h=200', alt=item.title)
           .c-prod-bl_priceline
             if (item.oldPrice)
-              span.c-prod-bl_oldPrice= item.oldPrice.toLocaleString(culture.language, {maximumFractionDigits: 2})
-            span.c-prod-bl_price= item.oldPrice.toLocaleString(culture.language, {maximumFractionDigits: 2})
-          h2.c-prod-bl_title= item.title
+              del.c-prod-bl_oldPrice= util.formatNumber(item.oldPrice, culture.language,  2)
+            span.c-prod-bl_price= util.formatNumber(item.price, culture.language, 2)
+              |  
+              = __('lei')
+          h6.c-prod-bl_title= item.title

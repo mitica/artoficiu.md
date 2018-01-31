@@ -14,7 +14,9 @@ import {
     ImageEntity,
     WebAppSettingsEntity,
     SliderEntity,
-    SliderItemEntity
+    SliderItemEntity,
+    ShopProductPropertyEntity,
+    ShopProductVariantEntity
 } from './entities';
 
 const ms = require('ms');
@@ -103,7 +105,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
         const query: ApiQuery = {
             locale: formatLocale(params),
             content_type: ContentTypes.SHOP_PRODUCT,
-            include: 1,
+            include: 2,
             limit: 1,
         };
 
@@ -114,7 +116,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
         }
 
         return this.getShopProducts(query)
-            .then(articles => articles.items.length && articles.items[0] || null);
+            .then(collection => collection.items.length && collection.items[0] || null);
     }
 
     shopProducts(params: ShopProductFilterParams): Promise<ShopProductCollection> {
@@ -125,6 +127,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             locale: formatLocale(params),
             limit: params.limit,
             content_type: ContentTypes.SHOP_PRODUCT,
+            include: 2,
         };
         // query.select = 'sys.id,sys.createdAt,sys.updatedAt,fields.title,fields.slug,fields.summary,fields.image,fields.category';
 
@@ -353,25 +356,70 @@ function toShopProducts(collection: ContentfulEntityCollection<ContentfulEntity>
     return data;
 }
 
-function toShopProduct(entity: ContentfulEntity): ShopCategoryEntity {
+function toShopProduct(entity: ContentfulEntity): ShopProductEntity {
     if (!entity) {
         return null;
     }
-    const data: ShopCategoryEntity = {
+    const data: ShopProductEntity = {
         id: entity.id,
         createdAt: entity.createdAt,
         updatedAt: entity.updatedAt,
         title: entity.fields.title,
         slug: entity.fields.slug,
-        summary: entity.fields.summary,
+        description: entity.fields.description,
+        price: entity.fields.price,
+        oldPrice: entity.fields.oldPrice,
+        isInStock: entity.fields.isInStock,
     }
 
-    if (entity.fields.text) {
-        data.text = entity.fields.text;
+    if (entity.fields.images) {
+        data.images = entity.fields.images.map(toImage);
     }
 
-    if (entity.fields.image) {
-        data.image = toImage(entity.fields.image);
+    if (entity.fields.categories) {
+        data.categories = entity.fields.categories.map(toShopCategory);
+    }
+
+    if (entity.fields.properties) {
+        data.properties = entity.fields.properties.map(toShopProductProperty);
+    }
+
+    if (entity.fields.variants) {
+        data.variants = entity.fields.variants.map(toShopProductVariant);
+    }
+
+    return data;
+}
+
+function toShopProductVariant(entity: ContentfulEntity): ShopProductVariantEntity {
+    if (!entity) {
+        return null;
+    }
+    const data: ShopProductVariantEntity = {
+        id: entity.id,
+        createdAt: entity.createdAt,
+        updatedAt: entity.updatedAt,
+        title: entity.fields.title,
+        isInStock: entity.fields.isInStock,
+        price: entity.fields.price,
+        oldPrice: entity.fields.oldPrice,
+        icon: entity.fields.icon && toImage(entity.fields.icon),
+    }
+
+    return data;
+}
+
+function toShopProductProperty(entity: ContentfulEntity): ShopProductPropertyEntity {
+    if (!entity) {
+        return null;
+    }
+    const data: ShopProductPropertyEntity = {
+        id: entity.id,
+        createdAt: entity.createdAt,
+        updatedAt: entity.updatedAt,
+        title: entity.fields.title,
+        value: entity.fields.value,
+        icon: entity.fields.icon && toImage(entity.fields.icon),
     }
 
     return data;

@@ -55,11 +55,22 @@ html {
         left: 0px;
         // top: 50%;
         // margin-top: -3px;
-        bottom: -4px;
+        bottom: -8px;
         border-left: 50px solid $primary-color;
     }
     a:hover {
         text-decoration: none;
+        color: $primary-color;
+    }
+}
+.c-group_title_more {
+    float: right;
+    font-size: 90%;
+    margin-top: 6px;
+    a {
+        display: inline-block;
+        margin-left: 4px;
+        text-decoration: underline;
         color: $primary-color;
     }
 }

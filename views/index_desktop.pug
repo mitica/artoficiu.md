@@ -7,4 +7,15 @@ block slider_content
 
 
 block main_content
-  div Main Content
+  if (promotedShopCategories && promotedShopCategories.items.length)
+    each promotedCategory in promotedShopCategories.items
+      if (promotedCategory.topProducts.items.length)
+        .c-group
+          .c-group_title
+            if (promotedCategory.topProducts.items.length == 4)
+              .c-group_title_more
+                a(href=links.catalog.category(promotedCategory.slug))= __('view_all')
+            h4
+              a(href=links.catalog.category(promotedCategory.slug), title=promotedCategory.title)= promotedCategory.title
+          .c-group_content
+            +productListBlock(promotedCategory.topProducts.items, {itemClass: 'col-6 col-md-3'})
