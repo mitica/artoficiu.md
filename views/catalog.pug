@@ -1,0 +1,15 @@
+extends ./layouts/layout_desktop
+
+block main_content
+  .page-title
+    h2.page-title_h2
+      if (selectedShopCategory)
+        a(href=links.catalog())= __('catalog')
+        |  / 
+        = (selectedShopCategory.shortTitle || selectedShopCategory.title)
+      else
+        = __('catalog')
+
+  .c-catalog-menu_inline.d-lg-none
+    include ./includes/catalog-categories
+  +productListBlock(shopProducts.items, {itemClass: 'col-6 col-md-3'})

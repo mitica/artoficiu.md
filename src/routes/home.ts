@@ -1,6 +1,6 @@
 
 import { Router, Request, Response, NextFunction } from 'express';
-import { DataContainer } from '../data';
+import { DataContainer, Data } from '../data';
 import links from '../links';
 import { canonical } from '../utils';
 import { maxageIndex } from '../maxage';
@@ -14,6 +14,7 @@ export default route;
 route.get('/', function (_req: Request, res: Response, next: NextFunction) {
 
     maxageIndex(res);
+    const culture = res.locals.culture;
     const __ = res.locals.__;
     const platform = res.locals.site.platform;
 
@@ -27,6 +28,8 @@ route.get('/', function (_req: Request, res: Response, next: NextFunction) {
     const dc: DataContainer = res.locals.dataContainer;
 
     // dc.push('articleCollection', Data.articles({ limit: 10, order: '-createdAt' }));
+
+    dc.push('shopProducts', Data.shopProducts({ limit: 8, language: culture.language, order: '-createdAt' }));
 
     dc.getData()
         .then(data => {

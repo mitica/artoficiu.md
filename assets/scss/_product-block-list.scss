@@ -1,10 +1,19 @@
+.c-prod-bl {
+    padding: 0px;
+    list-style: none;
+}
+
+.c-prod-bl_item {
+    margin-bottom: 20px;
+}
+
 .c-prod-bl_i {
     display: block;
     background: $layout-dark-color;
     border-radius: $border-radius;
     overflow: hidden;
     padding: 2px;
-    &:hover {
+    &:hover,&:active,&:focus {
         background: $accent-color;
         text-decoration: none;
     }

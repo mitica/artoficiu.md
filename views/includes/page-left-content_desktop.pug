@@ -1,20 +1,17 @@
 .c-group
-  h3.c-group_title
+  h4.c-group_title
     a(href=links.catalog())= __('catalog_products')
   .c-group_content
-    ul.c-catalog-menu
-      each item in shopCategories.items
-        li.c-catalog-menu_i(class= currentPageLink.indexOf(links.catalog.category(item.slug))===0 ? 'selected' : null)
-          a(href=links.catalog.category(item.slug))= item.shortTitle || item.title
+    include ./catalog-categories
 
 .c-group
-  h3.c-group_title
+  h4.c-group_title
     a(href=links.articles())= __('articles')
   .c-group_content
     +articleListMedia(latestArticles.items)
 
 .c-group
-  h3.c-group_title= __('weather_in_chisinau')
+  h4.c-group_title= __('weather_in_chisinau')
   .c-hroup_content
     // Click.md Weather Widget
     iframe(src='http://meteo.click.md/widget2/widget_frame?color=f1f1f1&itemcolor=&textcolor=&pos=v&days=3&w=250&header=false&id=618426', scrolling='no', frameborder='0', style='border:none;overflow:hidden;height:191px;width:250px;', allowtransparency='true')

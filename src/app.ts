@@ -12,6 +12,7 @@ import rootMiddleware from './middlewares/root';
 import homeRoute from './routes/home';
 import redirectRoute from './routes/redirect';
 import articlesRoute from './routes/articles';
+import catalogRoute from './routes/catalog';
 import assets from './assets';
 import { Response } from 'express';
 
@@ -53,6 +54,7 @@ app.use(initi18n);
 app.use(rootMiddleware);
 app.use(homeRoute);
 app.use(articlesRoute);
+app.use(catalogRoute);
 
 app.use(function (error: any, req: any, res: Response, _next: any) {
     catchError(req, res, error);

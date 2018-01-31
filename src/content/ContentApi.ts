@@ -36,7 +36,6 @@ export interface ShopCategoryFilterParams extends ListFilterParams {
 
 export interface ShopProductFilterParams extends ListFilterParams {
     order: 'createdAt' | 'price' | '-createdAt' | '-price'
-    categorySlug?: string
     categoryId?: string
 }
 
@@ -150,9 +149,6 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
                 break;
         }
 
-        if (params.categorySlug) {
-            query['fields.categories.fields.slug'] = params.categorySlug;
-        }
         if (params.categoryId) {
             query['fields.categories.sys.id'] = params.categoryId;
         }

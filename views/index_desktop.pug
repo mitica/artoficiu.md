@@ -3,7 +3,8 @@ extends ./layouts/layout_desktop
 block slider_content
   - slider = site.platform === 'desktop' ? settings.desktopHomepageSlider : settings.mobileHomepageSlider
   if (slider)
-    +imageSlider(slider, { platform: site.platform })
+    .d-none.d-md-block
+      +imageSlider(slider, { platform: site.platform })
 
 
 block main_content
@@ -12,10 +13,20 @@ block main_content
       if (promotedCategory.topProducts.items.length)
         .c-group
           .c-group_title
-            if (promotedCategory.topProducts.items.length == 4)
+            if (promotedCategory.topProducts.items.length < promotedCategory.topProducts.total)
               .c-group_title_more
                 a(href=links.catalog.category(promotedCategory.slug))= __('view_all')
             h4
               a(href=links.catalog.category(promotedCategory.slug), title=promotedCategory.title)= promotedCategory.title
           .c-group_content
             +productListBlock(promotedCategory.topProducts.items, {itemClass: 'col-6 col-md-3'})
+
+  .c-group
+    .c-group_title
+      if (shopProducts.items.length < shopProducts.total)
+        .c-group_title_more
+          a(href=links.catalog())= __('view_all')
+      h4
+        a(href=links.catalog())= __('catalog')
+    .c-group_content
+      +productListBlock(shopProducts.items, {itemClass: 'col-6 col-md-3'})
