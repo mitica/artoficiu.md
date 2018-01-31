@@ -1,0 +1,30 @@
+
+.c-image-slider_item {
+    max-height: 260px;
+}
+
+.c-image-slider_caption {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    width: 300px;
+    max-width: 80%;
+    text-align: left;
+    text-shadow: 1px 0px 2px rgba(#111, 0.3);
+    @include gradient-x(rgba($accent-color, 1), rgba($accent-color, 0));
+    overflow: hidden;
+
+    h5 {
+        position: absolute;
+        top: 20%;
+        left: 10%;
+    }
+}
+.carousel-indicators {
+    li {
+        width: 13px;
+        height: 13px;
+        border-radius: 100%;
+    }
+}
