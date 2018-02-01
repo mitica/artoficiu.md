@@ -357,9 +357,9 @@ function toShopProduct(entity: ContentfulEntity): ShopProductEntity {
         return null;
     }
     const data: ShopProductEntity = {
-        id: entity.id,
-        createdAt: entity.createdAt,
-        updatedAt: entity.updatedAt,
+        id: entity.sys.id,
+        createdAt: entity.sys.createdAt,
+        updatedAt: entity.sys.updatedAt,
         title: entity.fields.title,
         slug: entity.fields.slug,
         description: entity.fields.description,
@@ -392,9 +392,9 @@ function toShopProductVariant(entity: ContentfulEntity): ShopProductVariantEntit
         return null;
     }
     const data: ShopProductVariantEntity = {
-        id: entity.id,
-        createdAt: entity.createdAt,
-        updatedAt: entity.updatedAt,
+        id: entity.sys.id,
+        createdAt: entity.sys.createdAt,
+        updatedAt: entity.sys.updatedAt,
         title: entity.fields.title,
         isInStock: entity.fields.isInStock,
         price: entity.fields.price,
@@ -410,9 +410,9 @@ function toShopProductProperty(entity: ContentfulEntity): ShopProductPropertyEnt
         return null;
     }
     const data: ShopProductPropertyEntity = {
-        id: entity.id,
-        createdAt: entity.createdAt,
-        updatedAt: entity.updatedAt,
+        id: entity.sys.id,
+        createdAt: entity.sys.createdAt,
+        updatedAt: entity.sys.updatedAt,
         title: entity.fields.title,
         value: entity.fields.value,
         icon: entity.fields.icon && toImage(entity.fields.icon),
@@ -442,9 +442,9 @@ function toArticle(entity: ContentfulEntity): ArticleEntity {
         return null;
     }
     const data: ArticleEntity = {
-        id: entity.id,
-        createdAt: entity.createdAt,
-        updatedAt: entity.updatedAt,
+        id: entity.sys.id,
+        createdAt: entity.sys.createdAt,
+        updatedAt: entity.sys.updatedAt,
         title: entity.fields.title,
         shortTitle: entity.fields.shortTitle,
         slug: entity.fields.slug,
@@ -483,9 +483,9 @@ function toPage(entity: ContentfulEntity): PageEntity {
         return null;
     }
     const data: PageEntity = {
-        id: entity.id,
-        createdAt: entity.createdAt,
-        updatedAt: entity.updatedAt,
+        id: entity.sys.id,
+        createdAt: entity.sys.createdAt,
+        updatedAt: entity.sys.updatedAt,
         title: entity.fields.title,
         shortTitle: entity.fields.shortTitle,
         slug: entity.fields.slug,
@@ -547,7 +547,7 @@ function toImage(entity: ContentfulEntity): ImageEntity {
         return null;
     }
     const data: ImageEntity = {
-        id: entity.id
+        id: entity.sys.id
     }
 
     if (entity.fields) {

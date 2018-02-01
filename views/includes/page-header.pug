@@ -9,4 +9,4 @@
   .col-4.text-right
     .c-ulangs
       each item in config.languages
-        a(href=links.actions.setLanguage(item), class=item===culture.language?'selected':null)= item
+        a(rel='noindex nofollow',href=links.actions.setLanguage(item), class=item===culture.language?'selected':null)= item
