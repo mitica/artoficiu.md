@@ -54,6 +54,7 @@
     text-align: center;
     display: block;
     border: 2px solid $layout-dark-color;
+    cursor: pointer;
 }
 .sp-media_main-pic {
     max-width: 100%;
@@ -70,12 +71,13 @@
     align-items: center;
     background: $white;
     border-radius: $border-radius;
-    height: 50px;
-    width: 50px;
+    height: 62px;
+    width: 62px;
     margin: 3px 3px 3px 0px;
     text-align: center;
     padding: 2px;
     border: 2px solid $layout-dark-color;
+    cursor: pointer;
 
     &.selected {
         border: 2px solid $accent-color;

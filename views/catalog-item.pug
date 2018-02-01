@@ -28,12 +28,12 @@ block main_content
       br
   .row
     .col-md-5
-      .sp-media
-        .sp-media_main-image
+      .sp-media.js-def-pswp(id='sp-media-'+product.id)
+        .sp-media_main-image.js-pswp-big-item(onclick="openProductPhotoSwipe('#sp-media-"+product.id+"')")
           img.sp-media_main-pic(src=product.images[0].url, alt=product.images[0].title)
         .sp-media_images
           each item, i in product.images
-            a.sp-media_image(class=i===0?'selected':null)
+            span.sp-media_image.js-pswp-item(class=i===0?'selected':null, data-image=JSON.stringify(item))
               img.sp-media_pic(src=item.url+'?h=50', alt=item.title)
 
     .col-md-7
@@ -43,7 +43,7 @@ block main_content
         br
         - var anyChecked=false
         each item, i in product.variants
-          - var check = !anyChecked && product.isInStock;
+          - var check = !anyChecked && item.isInStock;
           - anyChecked = anyChecked || check
           .row
             .col-5
@@ -54,7 +54,7 @@ block main_content
 
                 = item.title
             .col-2
-              input.sp-var_check(type='radio', name='variant', value=item.id, id=item.id, checked=check, disabled=!product.isInStock)
+              input.sp-var_check(type='radio', name='variant', value=item.id, id=item.id, checked=check, disabled=!item.isInStock)
             .col-5
               if (item.isInStock)
                 label(for=item.id).sp-var_inStock= __('in_stock')
@@ -96,3 +96,41 @@ block main_content
       .c-group_title
         h3= __('product_description')
       .c-group_content.sp-description!= util.renderArticle(product.description)
+
+  // Root element of PhotoSwipe. Must have class pswp.
+  .pswp(tabindex='-1', role='dialog', aria-hidden='true')
+    //
+      Background of PhotoSwipe.
+      It's a separate element as animating opacity is faster than rgba().
+    .pswp__bg
+    // Slides wrapper with overflow:hidden.
+    .pswp__scroll-wrap
+      //
+        Container that holds slides.
+        PhotoSwipe keeps only 3 of them in the DOM to save memory.
+        Don't modify these 3 pswp__item elements, data is added later on.
+      .pswp__container
+        .pswp__item
+        .pswp__item
+        .pswp__item
+      // Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed.
+      .pswp__ui.pswp__ui--hidden
+        .pswp__top-bar
+          // Controls are self-explanatory. Order can be changed.
+          .pswp__counter
+          button.pswp__button.pswp__button--close(title='Close (Esc)')
+          button.pswp__button.pswp__button--share(title='Share')
+          button.pswp__button.pswp__button--fs(title='Toggle fullscreen')
+          button.pswp__button.pswp__button--zoom(title='Zoom in/out')
+          // Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR
+          // element will get class pswp__preloader--active when preloader is running
+          .pswp__preloader
+            .pswp__preloader__icn
+              .pswp__preloader__cut
+                .pswp__preloader__donut
+        .pswp__share-modal.pswp__share-modal--hidden.pswp__single-tap
+          .pswp__share-tooltip
+        button.pswp__button.pswp__button--arrow--left(title='Previous (arrow left)')
+        button.pswp__button.pswp__button--arrow--right(title='Next (arrow right)')
+        .pswp__caption
+          .pswp__caption__center
