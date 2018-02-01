@@ -1,7 +1,9 @@
 .row
   .col-8
     a#logo(href=links.home())
-    #header-address= __('header_address_line1')
+    #header-address= __('address_info')
      br
-     = __('header_address_line2')
+     = __('tel')
+     |  
+     = config.telephones.join('; ')
   .col-4.text-right Cart

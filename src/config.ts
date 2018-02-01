@@ -7,6 +7,7 @@ export interface IConfig {
     languages: string[]
 
     email: string
+    telephones: string[],
 
     facebookPublisher?: string
     facebookId?: string
@@ -20,6 +21,7 @@ const config: IConfig = {
     languages: ["ro", "ru"],
 
     email: 'artoficiu@gmail.com',
+    telephones: ['069 224 224', '022 224 224'],
 
     facebookPublisher: "artoficiu.md",
     facebookId: ""

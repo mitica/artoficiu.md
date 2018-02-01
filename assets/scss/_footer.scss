@@ -1,7 +1,23 @@
 
 #page-footer {
     font-size: 90%;
-    margin: 40px 0px 10px 0px;
+    padding: 10px;
+    background: $accent-color;
+    color: darken($muted-color, 30%);
+
+    .c-page-menu {
+        text-align: center;
+        font-size: 80%;
+        padding: 5px;
+    }
+
+    .c-page-menu_list {
+        white-space: normal;
+    }
+
+    .c-page-menu_i {
+        margin-bottom: 4px;
+    }
 }
 
 .copyright {

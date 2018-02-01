@@ -1,2 +1,22 @@
 
 //- p.copyright= __('footer_copyright')
+
+include ./page-menu
+
+.row
+  .col-md-4.text-center
+    .c-group
+      h4= __('contact')
+      .c-group_content
+        = __('address_info')
+        br
+        = __('tel')
+        |  
+        = config.telephones.join('; ')
+        br
+        = __('email')
+        |  
+        = config.email
+  .col-md-8
+    br
+    = __('footer_info')

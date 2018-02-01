@@ -8,22 +8,24 @@ block main_content
   .row
     .col-md-4
       .c-group
-        h3.c-group_title= __('contact_col_address_title')
+        h3.c-group_title= __('our_address')
         .c-group_content
-          p= __('contact_col_address')
+          p= __('address_info')
+            |  
+            = __('address_info_details')
           h6= __('tel')
             |  
-            strong.text-primary 022-224-224; 069-224-224
+            strong.text-primary= config.telephones.join('; ')
     .col-md-4
       .c-group
-        h3.c-group_title= __('contact_col_program_title')
+        h3.c-group_title= __('contact_program_title')
         .c-group_content
-          p= __('contact_col_program')
+          p= __('contact_program')
           h6= __('email')
             |  
-            strong.text-primary artoficiu@gmail.com
+            strong.text-primary= config.email
     .col-md-4
       .c-group
-        h3.c-group_title= __('contact_col_contact_us_title')
+        h3.c-group_title= __('contact_contact_us_title')
         .c-group_content
-          p= __('contact_col_contact_us')
+          p= __('contact_contact_us')
