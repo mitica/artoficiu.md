@@ -6,4 +6,7 @@
      = __('tel')
      |  
      = config.telephones.join('; ')
-  .col-4.text-right Cart
+  .col-4.text-right
+    .c-ulangs
+      each item in config.languages
+        a(href=links.actions.setLanguage(item), class=item===culture.language?'selected':null)= item

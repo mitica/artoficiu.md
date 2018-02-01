@@ -531,6 +531,7 @@ function toShopCategory(entity: ContentfulEntity): ShopCategoryEntity {
     }
     if (entity.fields) {
         data.title = entity.fields.title;
+        data.shortTitle = entity.fields.shortTitle;
         data.slug = entity.fields.slug;
 
         if (entity.fields.parent) {

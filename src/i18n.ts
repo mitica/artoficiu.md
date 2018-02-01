@@ -10,6 +10,8 @@ i18n.configure({
         'ru_MD': 'ru'
     },
     defaultLocale: config.languages[0],
+    cookie: 'ul',
+    queryParameter: 'ul',
 });
 
 export default i18n.init as any

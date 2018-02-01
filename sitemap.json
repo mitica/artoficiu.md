@@ -8,5 +8,8 @@
     "$url": "/catalog",
     "category": "/catalog/${0}",
     "item": "/catalog/item/${0}"
+  },
+  "actions": {
+    "setLanguage": "/actions/set_language/${0}"
   }
 }

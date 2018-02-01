@@ -24,3 +24,25 @@ $header-height: 60px;
     font-weight: bold;
     padding: 5px 20px 0px 20px;
 }
+
+.c-ulangs {
+    height: 100%;
+    a {
+        display: inline-block;
+        text-transform: uppercase;
+        padding: 0px 15px;
+        padding-top: $header-height/3.5;
+        font-weight: bold;
+        font-size: 110%;
+        text-decoration: none;
+        margin-left: 2px;
+
+        height: 100%;
+        color: $layout-color;
+
+        &.selected, &:hover {
+            color: $primary-color;
+            background: $layout-color;
+        }
+    }
+}

@@ -3,6 +3,8 @@ $link-color: #111;
 $accent-color: #F6D200;
 $primary-color: #E30016;
 $muted-color: #868e96;
+$layout-color: #f1f1f1;
+$layout-dark-color: darken($layout-color, 5%);
 $theme-colors: (
   "accent": #F6D200,
   "primary": #E30016,
@@ -19,6 +21,5 @@ $theme-colors: (
 // $teal:    #20c997 !default;
 // $cyan:    #17a2b8 !default;
 
-$body-bg: #f1f1f1;
+$body-bg: $layout-color;
 $body-color: #373737;
-$layout-dark-color: darken(#f1f1f1, 5%);
