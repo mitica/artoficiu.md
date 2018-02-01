@@ -3,6 +3,7 @@ import { Router, Request, Response, NextFunction } from 'express';
 import { DataContainer, Data } from '../data';
 import links from '../links';
 import { canonical } from '../utils';
+import { ShopProductEntity } from '../content/entities';
 
 const route: Router = Router();
 
@@ -61,6 +62,36 @@ route.get('/catalog/:category', function (req: Request, res: Response, next: Nex
                     data.shopProducts = shopProducts;
                     res.render('catalog', data);
                 })
+        })
+        .catch(next);
+});
+
+//catalog/item
+
+route.get('/catalog/item/:slug', function (req: Request, res: Response, next: NextFunction) {
+
+    const slug = req.params.slug;
+    const culture = res.locals.culture;
+    // const __ = res.locals.__;
+
+    res.locals.currentPageLink = links.catalog.item(slug);
+    res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
+
+    const dc: DataContainer = res.locals.dataContainer;
+
+    dc.push('product', Data.shopProduct({ language: culture.language, slug: slug }));
+
+    dc.getData()
+        .then(data => {
+            const product:ShopProductEntity=data.product;
+            if (!product) {
+                const error: any = new Error(`Not found product ${slug}`)
+                error.statusCode = 404;
+                return next(error);
+            }
+            res.locals.site.head.title = product.title;
+
+            res.render('catalog-item', data);
         })
         .catch(next);
 });

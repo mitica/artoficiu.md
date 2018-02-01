@@ -32,5 +32,8 @@
 	"catalog_page_title": "catalog_page_title",
 	"catalog_page_description": "catalog_page_description",
 	"catalog_page_keywords": "catalog_page_keywords",
-	"footer_info": "Un fotoliu bun trebuie să fie comod, funcțional și ușor în utilizare, oriunde ați fi - în oficiu sau acasă. Important - fotoliul trebuie să ales după spatele vostru. Alegeți fotoliu perfect pentru Dvs. din colecția ARTOFICIU."
+	"footer_info": "Un fotoliu bun trebuie să fie comod, funcțional și ușor în utilizare, oriunde ați fi - în oficiu sau acasă. Important - fotoliul trebuie să ales după spatele vostru. Alegeți fotoliu perfect pentru Dvs. din colecția ARTOFICIU.",
+	"price": "Prețul",
+	"old_price": "Preț vechi",
+	"inclusive_tva": "inclusive_tva"
 }

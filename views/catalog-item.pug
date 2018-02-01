@@ -1,0 +1,29 @@
+extends ./layouts/layout
+
+block main_content
+  .row
+    .col-md-8
+      h1.product-title= product.title
+      if (product.categories)
+        each item in product.categories
+          a.product-cat(href=links.catalog.category(item.slug))= item.shortTitle || item.title
+    .col-md-4
+      .product-price
+        h3= __('price')
+          | :  
+          span.product-price_price= util.formatNumber(product.price, culture.language, 2)
+            | 
+            = __('lei')
+        if (product.oldPrice)
+          br
+          .product-price_oldPrice= __('old_price')
+            | :  
+            del.product-price_oldPrice= util.formatNumber(product.oldPrice, culture.language, 2)
+            | 
+            = __('lei')
+        .product-price_tva= __('inclusive_tva')
+          | :  
+          = util.formatNumber(product.price/6, culture.language, 1)
+          | 
+          = __('lei')
+    .row
