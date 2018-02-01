@@ -399,6 +399,7 @@ function toShopProductVariant(entity: ContentfulEntity): ShopProductVariantEntit
         isInStock: entity.fields.isInStock,
         price: entity.fields.price,
         oldPrice: entity.fields.oldPrice,
+        colorCode: entity.fields.colorCode,
         icon: entity.fields.icon && toImage(entity.fields.icon),
     }
 

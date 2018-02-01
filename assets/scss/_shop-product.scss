@@ -1,0 +1,130 @@
+.sp-title {
+    margin:0px 0px 6px 0px;
+}
+
+.sp-cat {
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 15px;
+    margin-bottom: 6px;
+    color: $primary-color;
+}
+
+.sp-var_title {
+    display: block;
+}
+.sp-val_icon {
+    float: left;
+    display: block;
+    margin-right: 10px;
+    height: 24px;
+    width: 24px;
+    text-align: center;
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.sp-var_inStock {
+    font-weight: bold;
+    color: $green;
+    display: block;
+}
+
+.sp-var_notInStock {
+    color: $primary-color;
+    display: block;
+}
+
+.sp-price_price {
+    color: $primary-color;
+    font-weight: bold;
+}
+
+.sp-price_tva {
+    color: $primary-color;
+}
+
+.sp-media_main-image {
+    background: $white;
+    padding: 5px;
+    height: 320px;
+    border-radius: $border-radius;
+    text-align: center;
+    display: block;
+    border: 2px solid $layout-dark-color;
+}
+.sp-media_main-pic {
+    max-width: 100%;
+    max-height: 100%;
+}
+.sp-media_images {
+    display: flex;
+    margin: 10px 0px;
+    overflow: hidden;
+}
+.sp-media_image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $white;
+    border-radius: $border-radius;
+    height: 50px;
+    width: 50px;
+    margin: 3px 3px 3px 0px;
+    text-align: center;
+    padding: 2px;
+    border: 2px solid $layout-dark-color;
+
+    &.selected {
+        border: 2px solid $accent-color;
+    }
+}
+.sp-media_pic {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.sp-count_add-btn,.sp-count_purchase-btn {
+    border-radius: 0;
+    font-weight: bold;
+}
+
+.sp-count_label {
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 110%;
+}
+.sp-count_ctrl {
+    display: inline-block;
+}
+
+#sp-count_input {
+    // background: $accent-color;
+    text-align: center;
+    font-weight: bold;
+    font-size: 120%;
+    // padding: 6px 10px;
+}
+
+.sp-prop {
+    margin-bottom: 10px;
+}
+
+.sp-prop_name {
+    display: inline-block;
+    font-size: 120%;
+    font-weight: bold;
+    border-bottom: 2px solid $layout-dark-color;
+    // padding-bottom: 2px;
+    margin-right: 15px;
+}
+.sp-prop_value {
+    font-size: 120%;
+    font-style: italic;
+}
+.sp-description {
+    padding: 10px;
+    background: $white;
+}

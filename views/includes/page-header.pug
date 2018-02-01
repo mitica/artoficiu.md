@@ -1,12 +1,12 @@
 .row
-  .col-8
+  .col-7
     a#logo(href=links.home())
     #header-address= __('address_info')
      br
      = __('tel')
      |  
      = config.telephones.join('; ')
-  .col-4.text-right
+  .col-5.text-right
     .c-ulangs
       each item in config.languages
         a(rel='noindex nofollow',href=links.actions.setLanguage(item), class=item===culture.language?'selected':null)= item

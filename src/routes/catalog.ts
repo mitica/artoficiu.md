@@ -89,7 +89,10 @@ route.get('/catalog/item/:slug', function (req: Request, res: Response, next: Ne
                 error.statusCode = 404;
                 return next(error);
             }
+
             res.locals.site.head.title = product.title;
+
+            // console.log(JSON.stringify(product))
 
             res.render('catalog-item', data);
         })

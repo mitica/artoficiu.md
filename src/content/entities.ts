@@ -59,6 +59,7 @@ export interface ShopProductVariantEntity extends Entity {
     oldPrice?: number
     isInStock?: boolean
     icon?: ImageEntity
+    colorCode?: string
 }
 
 export interface ShopProductPropertyEntity extends Entity {

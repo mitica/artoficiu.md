@@ -3,27 +3,96 @@ extends ./layouts/layout
 block main_content
   .row
     .col-md-8
-      h1.product-title= product.title
+      h1.sp-title= product.title
       if (product.categories)
         each item in product.categories
-          a.product-cat(href=links.catalog.category(item.slug))= item.shortTitle || item.title
+          a.sp-cat(href=links.catalog.category(item.slug))= item.shortTitle || item.title
     .col-md-4
-      .product-price
+      .sp-price
         h3= __('price')
           | :  
-          span.product-price_price= util.formatNumber(product.price, culture.language, 2)
+          em.sp-price_price= util.formatNumber(product.price, culture.language, 2)
             | 
             = __('lei')
-        if (product.oldPrice)
-          br
-          .product-price_oldPrice= __('old_price')
-            | :  
-            del.product-price_oldPrice= util.formatNumber(product.oldPrice, culture.language, 2)
-            | 
-            = __('lei')
-        .product-price_tva= __('inclusive_tva')
+        .sp-price_tva= __('inclusive_tva')
           | :  
           = util.formatNumber(product.price/6, culture.language, 1)
           | 
           = __('lei')
-    .row
+        if (product.oldPrice)
+          h5.sp-price_oldPrice= __('old_price')
+            | :  
+            em.sp-price_oldPrice= util.formatNumber(product.oldPrice, culture.language, 2)
+            | 
+            = __('lei')
+      br
+  .row
+    .col-md-5
+      .sp-media
+        .sp-media_main-image
+          img.sp-media_main-pic(src=product.images[0].url, alt=product.images[0].title)
+        .sp-media_images
+          each item, i in product.images
+            a.sp-media_image(class=i===0?'selected':null)
+              img.sp-media_pic(src=item.url+'?h=50', alt=item.title)
+
+    .col-md-7
+      if (product.variants && product.variants.length)
+        h5= __('product_variants')
+          | :
+        br
+        - var anyChecked=false
+        each item, i in product.variants
+          - var check = !anyChecked && product.isInStock;
+          - anyChecked = anyChecked || check
+          .row
+            .col-5
+              label(for=item.id).sp-var_title
+                i.sp-val_icon(style=item.colorCode?'background-color: #'+item.colorCode:null)
+                  if(item.icon)
+                    img(alt=item.icon.title, src=item.icon.url+'?w=32&h=32')
+
+                = item.title
+            .col-2
+              input.sp-var_check(type='radio', name='variant', value=item.id, id=item.id, checked=check, disabled=!product.isInStock)
+            .col-5
+              if (item.isInStock)
+                label(for=item.id).sp-var_inStock= __('in_stock')
+              else
+                label(for=item.id).sp-var_notInStock= __('not_in_stock')
+
+      br
+      .row.sp-count
+        .col-7
+          label(for='sp-count_input').sp-count_label= __('quantity')
+            | : 
+          .sp-count_ctrl
+            input#sp-count_input.form-control.form-control-lg(type='number', value=1, min=1, max=100, name='quentity')
+        .col-5
+          button(type='button').btn.btn-warning.btn-lg.sp-count_add-btn= __('add_to_cart')
+          button(type='button').btn.btn-warning.btn-lg.sp-count_purchase-btn.d-none= __('continue_purchase')
+
+      if (product.properties && product.properties.length)
+        br
+        br
+        .c-group
+          .c-group_title
+            h4= __('properties')
+          .c-group_content
+            each item in product.properties
+              .sp-prop
+                .col-9
+                  span.sp-prop_name= item.title
+                    | :
+                  span.sp-prop_value= item.value
+                .col-3
+                  if (item.icon)
+                    img.sp-prop_icon(src=item.icon.url+'?w=45&h=45', alt=item.icon.title)
+
+
+  br
+  if (product.description)
+    .c-group
+      .c-group_title
+        h3= __('product_description')
+      .c-group_content.sp-description!= util.renderArticle(product.description)
