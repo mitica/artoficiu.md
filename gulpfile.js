@@ -43,8 +43,7 @@ gulp.task('sass:watch', function () {
 const mainJsFiles = [
   './node_modules/bootstrap/js/dist/util.js',
   './node_modules/bootstrap/js/dist/carousel.js',
-  './node_modules/photoswipe/dist/photoswipe.js',
-  './assets/js/photoswipe.js',
+  // './node_modules/lightbox2/dist/js/lightbox.js',
   './assets/js/main.js',
 ];
 const jsDist = './public/static/js';

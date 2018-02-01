@@ -3994,6 +3994,10 @@ liftoff@^2.1.0:
     rechoir "^0.6.2"
     resolve "^1.1.7"
 
+lightbox2@^2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/lightbox2/-/lightbox2-2.10.0.tgz#06b3f7b7bd7c1332c20d037602d9657542fd7de4"
+
 load-bmfont@^1.2.3:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/load-bmfont/-/load-bmfont-1.3.0.tgz#bb7e7c710de6bcafcb13cb3b8c81e0c0131ecbc9"
