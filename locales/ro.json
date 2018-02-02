@@ -33,7 +33,7 @@
 	"catalog_page_description": "catalog_page_description",
 	"catalog_page_keywords": "catalog_page_keywords",
 	"footer_info": "Un fotoliu bun trebuie să fie comod, funcțional și ușor în utilizare, oriunde ați fi - în oficiu sau acasă. Important - fotoliul trebuie să ales după spatele vostru. Alegeți fotoliu perfect pentru Dvs. din colecția ARTOFICIU.",
-	"price": "Prețul",
+	"price": "Preț",
 	"old_price": "Preț vechi",
 	"inclusive_tva": "Inclusiv TVA",
 	"product_variants": "Specificații",
@@ -41,9 +41,14 @@
 	"in_stock": "În stoc",
 	"quantity": "Cantitate",
 	"add_to_cart": "Adaugă în coș",
-	"continue_purchase": "Continuă cumpărarea",
+	"finish_purchase": "Finalizează comanda",
 	"properties": "Caracteristici",
 	"product_description": "Descriere produs",
-	"shop_cart": "Coșul de cumpărături",
-	"empty_cart_info": "empty_cart_info"
+	"shop_cart": "Coșul cu cumpărături",
+	"empty_cart_info": "empty_cart_info",
+	"cart_error_invalid_input": "cart_error_invalid_input",
+	"product": "Produs",
+	"total": "Total",
+	"total_without_tva": "Fară TVA",
+	"tva": "TVA"
 }

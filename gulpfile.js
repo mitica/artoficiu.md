@@ -44,6 +44,7 @@ const mainJsFiles = [
   './node_modules/bootstrap/js/dist/util.js',
   './node_modules/bootstrap/js/dist/carousel.js',
   // './node_modules/lightbox2/dist/js/lightbox.js',
+  './assets/js/cart.js',
   './assets/js/main.js',
 ];
 const jsDist = './public/static/js';

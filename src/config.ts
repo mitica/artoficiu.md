@@ -11,6 +11,10 @@ export interface IConfig {
 
     facebookPublisher?: string
     facebookId?: string
+
+    googleAnalyticsId: string
+
+    TVA: number
 }
 
 const config: IConfig = {
@@ -24,7 +28,11 @@ const config: IConfig = {
     telephones: ['069 224 224', '022 224 224'],
 
     facebookPublisher: "artoficiu.md",
-    facebookId: ""
+    facebookId: "",
+
+    googleAnalyticsId: 'UA-55418815-1',
+
+    TVA: 6,
 };
 
 export default config;

@@ -3,22 +3,23 @@ import { ShopProductEntity, ShopProductVariantEntity } from "../content/entities
 export function createEmptyCartData(): CartData {
     return {
         items: [],
-        count: 0,
-        totalPrice: 0,
+        quantity: 0,
+        price: 0,
     }
 }
 
 export type CartData = {
     items: CartItemData[]
-    count: number
-    totalPrice: number
+    quantity: number
+    price: number
 }
 
 
 export type CartItemData = {
     id: string
-    item: ShopProductEntity
-    count: number
+    product: ShopProductEntity
+    quantity: number
     variant?: ShopProductVariantEntity
-    totalPrice: number
+    variantId?: string
+    price: number
 }
