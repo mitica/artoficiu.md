@@ -11,5 +11,7 @@
   },
   "actions": {
     "setLanguage": "/actions/set_language/${0}"
-  }
+  },
+  "cart":  "/cart",
+  "checkout":  "/checkout"
 }

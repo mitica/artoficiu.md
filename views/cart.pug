@@ -1,0 +1,33 @@
+extends ./layouts/layout
+
+block main_content
+  .page-title
+    h2.page-title_h2= __('shop_cart')
+
+  if (Cart.count === 0)
+    .c-alert(role="alert")= __('empty_cart_info')
+  else
+    table.table
+      thead
+        tr
+          th(scope="col") #
+          th(scope="col")= __('product')
+          th(scope="col")= __('quantity')
+          th(scope="col")= __('price')
+      tbody
+        each item, i in Cart.items
+          tr
+            td= (i+1)
+            td
+              .media
+                img(class="mr-3" src=util.imageIconUrl(item.images[0].url) alt=item.title)
+                .media-body
+                  h6
+                    a(href=links.catalog.item(item.slug))
+                  if (item.variant)
+                    .sp-var_title
+                      i.sp-val_icon(style=item.variant.colorCode?'background-color: #'+item.variant.colorCode:null)
+                        if(item.variant.icon)
+                          img(alt=item.variant.icon.title, src=item.variant.icon.url+'?w=32&h=32')
+            td= item.count
+            td= utl.formatNumber(item.totalPrice, culture.language)

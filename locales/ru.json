@@ -1,1 +1,25 @@
-{}
+{
+	"index": "index",
+	"catalog": "catalog",
+	"articles": "articles",
+	"contact": "contact",
+	"address_info": "address_info",
+	"tel": "tel",
+	"catalog_products": "catalog_products",
+	"weather_in_chisinau": "weather_in_chisinau",
+	"email": "email",
+	"footer_info": "footer_info",
+	"cart": "cart",
+	"price": "price",
+	"lei": "lei",
+	"inclusive_tva": "inclusive_tva",
+	"old_price": "old_price",
+	"product_variants": "product_variants",
+	"in_stock": "in_stock",
+	"not_in_stock": "not_in_stock",
+	"quantity": "quantity",
+	"add_to_cart": "add_to_cart",
+	"continue_purchase": "continue_purchase",
+	"properties": "properties",
+	"product_description": "product_description"
+}

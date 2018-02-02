@@ -17,3 +17,8 @@ export function formatNumber(n: number, lang: string, maximumFractionDigits: num
 
     return result;
 }
+
+export function imageIconUrl(url: string, size?: number) {
+    size = 60;
+    return `${url}?w=${size}&h=${size}`;
+}

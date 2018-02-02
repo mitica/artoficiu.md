@@ -43,5 +43,7 @@
 	"add_to_cart": "Adaugă în coș",
 	"continue_purchase": "Continuă cumpărarea",
 	"properties": "Caracteristici",
-	"product_description": "Descriere produs"
+	"product_description": "Descriere produs",
+	"shop_cart": "Coșul de cumpărături",
+	"empty_cart_info": "empty_cart_info"
 }

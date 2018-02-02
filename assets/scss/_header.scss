@@ -27,7 +27,8 @@ $header-height: 60px;
 }
 
 .c-ulangs {
-    height: 100%;
+    height: $header-height;
+    float: right;
     a {
         display: inline-block;
         text-transform: uppercase;
@@ -46,4 +47,30 @@ $header-height: 60px;
             background: $layout-color;
         }
     }
+}
+
+.c-cart-icon {
+    float: right;
+    display: block;
+    height: $header-height;
+    background: $accent-color;
+    color: $primary-color;
+    padding: 0px 15px;
+    padding-top: $header-height/3.5;
+}
+.c-cart-icon_img {
+    display: block;
+    float: left;
+    height: 24px;
+    width: 20px;
+    path {
+        fill: $primary-color;
+    }
+}
+.c-cart-icon_count {
+    display: inline-block;
+    padding-left: 6px;
+    font-size: 120%;
+    line-height: 22px;
+    font-weight: bold;
 }

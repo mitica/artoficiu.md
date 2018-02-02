@@ -9,13 +9,16 @@ import links from './links';
 import initi18n from './i18n';
 import catchError from './catch';
 import rootMiddleware from './middlewares/root';
+import catalogMiddleware from './middlewares/catalog';
 import homeRoute from './routes/home';
 import redirectRoute from './routes/redirect';
 import articlesRoute from './routes/articles';
 import catalogRoute from './routes/catalog';
 import actionsRoute from './routes/actions';
+import cartRoute from './routes/cart';
 import assets from './assets';
 import { Response } from 'express';
+import * as session from 'express-session';
 
 const ms = require('ms');
 
@@ -52,11 +55,21 @@ app.use(express.static(path.join(__dirname, '../public'), {
 app.use(redirectRoute);
 
 app.use(initi18n);
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {}
+}));
+
 app.use(rootMiddleware);
+app.use(catalogMiddleware);
+
 app.use(homeRoute);
 app.use(articlesRoute);
 app.use(catalogRoute);
 app.use(actionsRoute);
+app.use(cartRoute);
 
 app.use(function (error: any, req: any, res: Response, _next: any) {
     catchError(req, res, error);

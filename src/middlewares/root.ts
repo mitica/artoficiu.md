@@ -1,19 +1,21 @@
 
 const _package = require('../../package.json');
-const debug = require('debug')('artoficiu');
+const debug = require('debug')('artoficiu-web');
 import { format } from 'util';
-import { moment, formatNumber } from '../utils';
+import { moment, formatNumber, imageIconUrl } from '../utils';
 import renderArticle from '../renderArticle';
 import { Request, Response, NextFunction } from 'express';
 import config from '../config';
 import { DataContainer, Data } from '../data';
 import links from '../links';
+import { createEmptyCartData, CartData } from '../cart';
 
 const util = {
     moment: moment,
     format: format,
     renderArticle: renderArticle,
     formatNumber,
+    imageIconUrl
 };
 
 export default function (req: Request, res: Response, next: NextFunction) {
@@ -22,6 +24,13 @@ export default function (req: Request, res: Response, next: NextFunction) {
     const culture = res.locals.culture = {
         language: req.locale,
     }
+
+    if (!req.session.Cart) {
+        debug(`No cart in session`);
+        req.session.Cart = createEmptyCartData() as CartData;
+    }
+
+    res.locals.Cart = req.session.Cart;
 
     const localeCountry = 'MD';
 
@@ -41,32 +50,15 @@ export default function (req: Request, res: Response, next: NextFunction) {
     res.locals._events = [];
 
     const dc = res.locals.dataContainer = new DataContainer();
-    dc.push('shopCategories', Data.shopCategories({ limit: 10, language: culture.language }));
+
     dc.push('pageMenu', createPageMenu());
-    dc.push('latestArticles', Data.articles({ limit: 5, language: culture.language }));
     dc.push('settings', Data.appSettings({ language: culture.language }).then(settings => {
         if (!settings) {
             throw new Error(`WebAppSettings not created. Please, create one.`)
         }
-        debug('settings', settings.desktopHomepageSlider.items);
 
         return settings;
     }));
-
-    dc.push('promotedShopCategories',
-        Data.shopCategories({ limit: 3, language: culture.language, isPromoted: true })
-            .then(categories => {
-                if (categories && categories.items && categories.items.length) {
-                    const tasks: any[] = [];
-                    categories.items.forEach(item => tasks.push(Data.shopProducts({ limit: 4, language: culture.language, categoryId: item.id, order: '-createdAt' })));
-
-                    return Promise.all(tasks)
-                        .then(results => results.forEach((collection, i) => categories.items[i].topProducts = collection))
-                        .then(() => categories);
-                }
-                return categories;
-            })
-    );
 
     function createPageMenu() {
         let menu: { link: string, text: string, title?: string }[] = [{
