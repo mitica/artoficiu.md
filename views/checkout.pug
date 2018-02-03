@@ -3,15 +3,15 @@ extends ./layouts/layout
 block main_content
   .page-title
     h2.page-title_h2= __('finish_purchase')
-
+  if (alertMessage)
+      .c-alert=alertMessage
   if (Cart.quantity === 0)
-    .c-alert(role="alert")= __('empty_cart_info')
+    if (!alertMessage)
+      .c-alert(role="alert")= __('empty_cart_info')
     br
     include ./includes/promoted-categories-products
   else
-    if (alertMessage)
-      .alert=alertMessage
-    form#checkout-form(action=links.checkout(), method='post')
+    form#checkout-form(action=links.actions.checkout(), method='post')
       .form-check
         input#person-1.form-check-input(type='radio', name='personType', value=1, checked='')
         label.form-check-label(for='person-1')= __('person_type_1')
@@ -46,7 +46,7 @@ block main_content
           strong= __('idno')
             | *
         .col-sm-9
-          input#field-5.form-control(type='text', name='idno', required='', placeholder=__('idno'))
+          input#field-5.form-control(type='text', name='idno', placeholder=__('idno'))
       .form-group.row.d-none.js-op-field(data-person=2)
         label.col-sm-3.col-form-label(for='field-6')= __('tva_code')
         .col-sm-9
@@ -56,19 +56,19 @@ block main_content
           strong= __('the_bank')
             | *
         .col-sm-9
-          input#field-7.form-control(type='text', name='bank', required='', placeholder=__('the_bank'))
+          input#field-7.form-control(type='text', name='bank', placeholder=__('the_bank'))
       .form-group.row.d-none.js-op-field(data-person=2)
         label.col-sm-3.col-form-label(for='field-8')
           strong= __('bank_code')
             | *
         .col-sm-9
-          input#field-8.form-control(type='text', name='bankCode', required='', placeholder=__('bank_code'))
+          input#field-8.form-control(type='text', name='bankCode', placeholder=__('bank_code'))
       .form-group.row.d-none.js-op-field(data-person=2)
         label.col-sm-3.col-form-label(for='field-9')
           strong= __('current_bank_account')
             | *
         .col-sm-9
-          input#field-9.form-control(type='text', name='cba', required='', placeholder=__('current_bank_account'))
+          input#field-9.form-control(type='text', name='cba', placeholder=__('current_bank_account'))
       .form-group.row
         label.col-sm-3.col-form-label(for='field-10')= __('comments')
         .col-sm-9

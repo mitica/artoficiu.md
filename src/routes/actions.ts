@@ -120,3 +120,37 @@ route.post('/actions/email_us', function (req: Request, res: Response) {
 
     return res.redirect(links.contact({ message: QSMessage.SUCCESS }));
 });
+
+route.post('/actions/checkout', function (req: Request, res: Response) {
+
+    new Promise<any>((resolve, reject) => {
+        req.session.destroy(error => {
+            if (error) {
+                return reject(error);
+            }
+            resolve();
+        });
+    })
+        .catch(error => logger.error(error));
+
+    return res.redirect(links.checkout.success());
+
+    // const name = req.body.name;
+    // const contact = req.body.contact;
+    // const message = req.body.message;
+
+    // if (!name || !contact || !message) {
+    //     logger.error(`contact us invalid params`, { name, message, contact });
+    //     return res.redirect(links.contact({ message: QSMessage.INPUT_ERROR }));
+    // }
+
+    // sendEmail({
+    //     from: config.email,
+    //     to: config.email,
+    //     subject: `Message from ${contact}`,
+    //     text: message,
+    // })
+    //     .catch(error => logger.error(error));
+
+    // return res.redirect(links.contact({ message: QSMessage.SUCCESS }));
+});

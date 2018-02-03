@@ -3,6 +3,7 @@ import { Router, Request, Response, NextFunction } from 'express';
 import { DataContainer } from '../data';
 import links from '../links';
 import { canonical } from '../utils';
+import { QSMessage } from '../qsMessage';
 
 const route: Router = Router();
 
@@ -30,9 +31,10 @@ route.get('/cart', function (_req: Request, res: Response, next: NextFunction) {
 
 //checkout
 
-route.get('/checkout', function (_req: Request, res: Response, next: NextFunction) {
+route.get('/checkout', function (req: Request, res: Response, next: NextFunction) {
 
     const __ = res.locals.__;
+    const message = req.query.message;
 
     res.locals.site.head.title = __('finish_purchase');
 
@@ -41,9 +43,42 @@ route.get('/checkout', function (_req: Request, res: Response, next: NextFunctio
 
     const dc = res.locals.dataContainer as DataContainer;
 
+    if (message === QSMessage.INPUT_ERROR) {
+        res.locals.alertMessage = __('checkout_input_error');
+    } else if (message === QSMessage.SUCCESS) {
+        res.locals.alertMessage = __('checkout_success');
+    }
+
     dc.getData()
         .then(data => {
             res.render('checkout', data);
+        })
+        .catch(next);
+});
+
+//checkout/success
+
+route.get('/checkout/success', function (req: Request, res: Response, next: NextFunction) {
+
+    const __ = res.locals.__;
+    const message = req.query.message;
+
+    res.locals.site.head.title = __('checkout_success');
+
+    res.locals.currentPageLink = links.checkout.success();
+    res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
+
+    const dc = res.locals.dataContainer as DataContainer;
+
+    if (message === QSMessage.INPUT_ERROR) {
+        res.locals.alertMessage = __('checkout_input_error');
+    } else if (message === QSMessage.SUCCESS) {
+        res.locals.alertMessage = __('checkout_success');
+    }
+
+    dc.getData()
+        .then(data => {
+            res.render('checkout-success', data);
         })
         .catch(next);
 });

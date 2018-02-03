@@ -65,6 +65,9 @@
 	"email_or_telephone": "Telefon sau Email",
 	"message": "Mesaj",
 	"send": "Trimite",
-	"contact_input_error":"Eroare! Vă rugăm să completați toate câmpurile obligatorii.",
-	"contact_success": "Mesajul Dvs. a fost primit cu success. În curând că vom contacta."
+	"contact_input_error": "Eroare! Vă rugăm să completați toate câmpurile obligatorii.",
+	"contact_success": "Mesajul Dvs. a fost primit cu success. În curând că vom contacta.",
+	"checkout_success": "Am primit datele Dvs.",
+	"checkout_input_error": "Eroare! Vă rugăm să completați toate câmpurile obligatorii.",
+	"checkout_success_info": "În curând că vom contacta. Vă mulțumim pentru cumpărături!"
 }

@@ -46,5 +46,19 @@
 	"catalog_page_keywords": "catalog_page_keywords",
 	"home_page_title": "home_page_title",
 	"home_page_description": "home_page_description",
-	"home_page_keywords": "home_page_keywords"
+	"home_page_keywords": "home_page_keywords",
+	"name": "name",
+	"email_or_telephone": "email_or_telephone",
+	"message": "message",
+	"send": "send",
+	"person_type_1": "person_type_1",
+	"person_type_2": "person_type_2",
+	"telephone": "telephone",
+	"address": "address",
+	"idno": "idno",
+	"tva_code": "tva_code",
+	"the_bank": "the_bank",
+	"bank_code": "bank_code",
+	"current_bank_account": "current_bank_account",
+	"comments": "comments"
 }
