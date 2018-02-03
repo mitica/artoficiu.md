@@ -1,6 +1,6 @@
 
 import { Router, Request, Response, NextFunction } from 'express';
-import { DataContainer, Data } from '../data';
+import { DataContainer, ContentData } from '../data';
 import links from '../links';
 import { canonical } from '../utils';
 
@@ -26,7 +26,7 @@ route.get('/', function (_req: Request, res: Response, next: NextFunction) {
 
     // dc.push('articleCollection', Data.articles({ limit: 10, order: '-createdAt' }));
 
-    dc.push('shopProducts', Data.shopProducts({ limit: 8, language: culture.language, order: '-createdAt' }));
+    dc.push('shopProducts', ContentData.shopProducts({ limit: 8, language: culture.language, order: '-createdAt' }));
 
     dc.getData()
         .then(data => {

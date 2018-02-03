@@ -27,3 +27,23 @@ route.get('/cart', function (_req: Request, res: Response, next: NextFunction) {
         })
         .catch(next);
 });
+
+//checkout
+
+route.get('/checkout', function (_req: Request, res: Response, next: NextFunction) {
+
+    const __ = res.locals.__;
+
+    res.locals.site.head.title = __('finish_purchase');
+
+    res.locals.currentPageLink = links.checkout();
+    res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
+
+    const dc = res.locals.dataContainer as DataContainer;
+
+    dc.getData()
+        .then(data => {
+            res.render('checkout', data);
+        })
+        .catch(next);
+});

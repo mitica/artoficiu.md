@@ -1,7 +1,7 @@
 
 import { Router, Request, Response } from 'express';
 import config from '../config';
-import { Data } from '../data';
+import { ContentData } from '../data';
 import { CartData } from '../cart';
 import { ShopProductVariantEntity } from '../content/entities';
 import logger from '../logger';
@@ -44,7 +44,7 @@ route.post('/actions/cart/add', function (req: Request, res: Response) {
         return cartErrors(res, __('cart_error_invalid_input'));
     }
 
-    Data.shopProduct({ language: culture.language, id: productId })
+    ContentData.shopProduct({ language: culture.language, id: productId })
         .then(product => {
             if (!product) {
                 return cartErrors(res, __('cart_error_invalid_product'));

@@ -1,6 +1,6 @@
 
 import { Router, Request, Response, NextFunction } from 'express';
-import { DataContainer, Data } from '../data';
+import { DataContainer, ContentData } from '../data';
 import links from '../links';
 import { canonical } from '../utils';
 import { ShopProductEntity } from '../content/entities';
@@ -25,7 +25,7 @@ route.get('/catalog', function (_req: Request, res: Response, next: NextFunction
 
     const dc: DataContainer = res.locals.dataContainer;
 
-    dc.push('shopProducts', Data.shopProducts({ limit: 16, language: culture.language, order: '-createdAt' }));
+    dc.push('shopProducts', ContentData.shopProducts({ limit: 16, language: culture.language, order: '-createdAt' }));
 
     dc.getData()
         .then(data => {
@@ -47,7 +47,7 @@ route.get('/catalog/:category', function (req: Request, res: Response, next: Nex
 
     const dc: DataContainer = res.locals.dataContainer;
 
-    dc.push('selectedShopCategory', Data.shopCategory({ language: culture.language, slug: categorySlug }));
+    dc.push('selectedShopCategory', ContentData.shopCategory({ language: culture.language, slug: categorySlug }));
 
     dc.getData()
         .then(data => {
@@ -57,7 +57,7 @@ route.get('/catalog/:category', function (req: Request, res: Response, next: Nex
                 return next(error);
             }
             res.locals.site.head.title = __('catalog') + ' / ' + data.selectedShopCategory.title;
-            return Data.shopProducts({ limit: 16, language: culture.language, order: '-createdAt', categoryId: data.selectedShopCategory.id })
+            return ContentData.shopProducts({ limit: 16, language: culture.language, order: '-createdAt', categoryId: data.selectedShopCategory.id })
                 .then(shopProducts => {
                     data.shopProducts = shopProducts;
                     res.render('catalog', data);
@@ -79,7 +79,7 @@ route.get('/catalog/item/:slug', function (req: Request, res: Response, next: Ne
 
     const dc: DataContainer = res.locals.dataContainer;
 
-    dc.push('product', Data.shopProduct({ language: culture.language, slug: slug }));
+    dc.push('product', ContentData.shopProduct({ language: culture.language, slug: slug }));
 
     dc.getData()
         .then(data => {

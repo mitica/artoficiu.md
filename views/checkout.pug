@@ -1,0 +1,85 @@
+extends ./layouts/layout
+
+block main_content
+  .page-title
+    h2.page-title_h2= __('finish_purchase')
+
+  if (Cart.quantity === 0)
+    .c-alert(role="alert")= __('empty_cart_info')
+    br
+    include ./includes/promoted-categories-products
+  else
+    if (alertMessage)
+      .alert=alertMessage
+    form#checkout-form(action=links.checkout())
+      .form-check
+        input#person-1.form-check-input(type='radio', name='personType', value=1, checked='')
+        label.form-check-label(for='person-1')= __('person_type_1')
+      .form-check
+        input#person-2.form-check-input(type='radio', name='personType', value=2)
+        label.form-check-label(for='person-2')= __('person_type_2')
+      hr
+      .form-group.row
+        label.col-sm-3.col-form-label(for='field-1')
+          strong= __('name')
+            | *
+        .col-sm-9
+          input#field-1.form-control(type='text', name='name', required='', placeholder=__('name'))
+      .form-group.row
+        label.col-sm-3.col-form-label(for='field-2')
+          strong= __('telephone')
+            | *
+        .col-sm-9
+          input#field-2.form-control(type='text', name='telephone', required='', placeholder=__('telephone'))
+      .form-group.row
+        label.col-sm-3.col-form-label(for='field-3')
+          strong= __('address')
+            | *
+        .col-sm-9
+          input#field-3.form-control(type='text', name='address', required='', placeholder=__('address'))
+      .form-group.row
+        label.col-sm-3.col-form-label(for='field-4')= __('email')
+        .col-sm-9
+          input#field-4.form-control(type='email', name='email', placeholder=__('email'))
+      .form-group.row.d-none.js-op-field(data-person=2)
+        label.col-sm-3.col-form-label(for='field-5')
+          strong= __('idno')
+            | *
+        .col-sm-9
+          input#field-5.form-control(type='text', name='idno', required='', placeholder=__('idno'))
+      .form-group.row.d-none.js-op-field(data-person=2)
+        label.col-sm-3.col-form-label(for='field-6')= __('tva_code')
+        .col-sm-9
+          input#field-6.form-control(type='text', name='tvaCode', placeholder=__('tva_code'))
+      .form-group.row.d-none.js-op-field(data-person=2)
+        label.col-sm-3.col-form-label(for='field-7')
+          strong= __('the_bank')
+            | *
+        .col-sm-9
+          input#field-7.form-control(type='text', name='bank', required='', placeholder=__('the_bank'))
+      .form-group.row.d-none.js-op-field(data-person=2)
+        label.col-sm-3.col-form-label(for='field-8')
+          strong= __('bank_code')
+            | *
+        .col-sm-9
+          input#field-8.form-control(type='text', name='bankCode', required='', placeholder=__('bank_code'))
+      .form-group.row.d-none.js-op-field(data-person=2)
+        label.col-sm-3.col-form-label(for='field-9')
+          strong= __('current_bank_account')
+            | *
+        .col-sm-9
+          input#field-9.form-control(type='text', name='cba', required='', placeholder=__('current_bank_account'))
+      .form-group.row
+        label.col-sm-3.col-form-label(for='field-10')= __('comments')
+        .col-sm-9
+          textarea#field-10.form-control(cols="30", rows="3", name='comments', placeholder=__('comments'))
+      hr
+      .row.justify-content-end.text-right
+        .col-12.col-sm-7
+          include ./includes/cart-totals
+      hr
+      .text-right
+        button.btn.btn-warning.btn-lg.sp-count_purchase-btn(type='submit')= __('finish_purchase')
+    br
+    include ./includes/cart-table
+

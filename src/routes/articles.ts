@@ -1,6 +1,6 @@
 
 import { Router, Request, Response, NextFunction } from 'express';
-import { Data, DataContainer } from '../data';
+import { ContentData, DataContainer } from '../data';
 import links from '../links';
 import { canonical } from '../utils';
 
@@ -26,7 +26,7 @@ route.get('/articles', function (_req: Request, res: Response, next: NextFunctio
 
     const dc: DataContainer = res.locals.dataContainer;
 
-    dc.push('articles', Data.articles({ limit: 10, language: culture.language }));
+    dc.push('articles', ContentData.articles({ limit: 10, language: culture.language }));
 
     dc.getData()
         .then(data => {
@@ -42,7 +42,7 @@ route.get('/page/:slug', function (req: Request, res: Response, next: NextFuncti
 
     const dc: DataContainer = res.locals.dataContainer;
 
-    Data.page({ slug: slug, language: culture.language })
+    ContentData.page({ slug: slug, language: culture.language })
         .then(page => {
             if (!page) {
                 const error: any = new Error(`Not found page ${slug}`)
@@ -71,7 +71,7 @@ route.get('/article/:slug', function (req: Request, res: Response, next: NextFun
 
     const dc: DataContainer = res.locals.dataContainer;
 
-    Data.article({ slug: slug, language: culture.language })
+    ContentData.article({ slug: slug, language: culture.language })
         .then(article => {
             if (!article) {
                 const error: any = new Error(`Not found article ${slug}`)

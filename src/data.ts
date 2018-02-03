@@ -1,7 +1,7 @@
 import { ContentApi } from "./content/ContentApi";
 
 
-export const Data = new ContentApi({
+export const ContentData = new ContentApi({
     space: process.env.CONTENTFUL_SPACE,
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
 });

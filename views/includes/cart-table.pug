@@ -1,0 +1,33 @@
+table.table
+  thead
+    tr
+      th(scope="col").text-right #
+      th(scope="col")= __('product')
+      th(scope="col").text-right= __('price')
+      th(scope="col").text-right= __('quantity')
+      th(scope="col").text-right= __('total')
+  tbody
+    each item, i in Cart.items
+      tr
+        td.align-middle.text-right= (i+1)
+        td.align-middle
+          .media
+            img(class="mr-3" src=util.imageIconUrl(item.product.images[0].url) alt=item.product.title)
+            .media-body
+              h6
+                a(href=links.catalog.item(item.product.slug))= item.product.title
+              if (item.variant)
+                .sp-var_title
+                  i.sp-val_icon(style=item.variant.colorCode?'background-color: #'+item.variant.colorCode:null)
+                    if(item.variant.icon)
+                      img(alt=item.variant.icon.title, src=item.variant.icon.url+'?w=32&h=32')
+                  = item.variant.title
+                    
+        td.align-middle.text-right
+          strong= util.formatNumber(item.product.price, culture.language)
+        td.align-middle.text-right
+          strong= item.quantity
+        td.align-middle.text-right
+          strong.text-primary= util.formatNumber(item.price, culture.language)
+            |  
+            = __('lei')

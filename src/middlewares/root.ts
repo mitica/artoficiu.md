@@ -6,7 +6,7 @@ import { moment, formatNumber, imageIconUrl } from '../utils';
 import renderArticle from '../renderArticle';
 import { Request, Response, NextFunction } from 'express';
 import config from '../config';
-import { DataContainer, Data } from '../data';
+import { DataContainer, ContentData } from '../data';
 import links from '../links';
 import { createEmptyCartData, CartData } from '../cart';
 
@@ -52,7 +52,7 @@ export default function (req: Request, res: Response, next: NextFunction) {
     const dc = res.locals.dataContainer = new DataContainer();
 
     dc.push('pageMenu', createPageMenu());
-    dc.push('settings', Data.appSettings({ language: culture.language }).then(settings => {
+    dc.push('settings', ContentData.appSettings({ language: culture.language }).then(settings => {
         if (!settings) {
             throw new Error(`WebAppSettings not created. Please, create one.`)
         }
@@ -68,7 +68,7 @@ export default function (req: Request, res: Response, next: NextFunction) {
             link: links.catalog(),
             text: __('catalog'),
         }];
-        return Data.pages({ limit: 10, language: culture.language }).then(pages => {
+        return ContentData.pages({ limit: 10, language: culture.language }).then(pages => {
             menu = menu.concat(pages && pages.items && pages.items.map(item => {
                 return {
                     link: links.page(item.slug),

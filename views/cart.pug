@@ -9,67 +9,11 @@ block main_content
     include ./includes/promoted-categories-products
   else
     br
-    table.table
-      thead
-        tr
-          th(scope="col").text-right #
-          th(scope="col")= __('product')
-          th(scope="col").text-right= __('price')
-          th(scope="col").text-right= __('quantity')
-          th(scope="col").text-right= __('total')
-      tbody
-        each item, i in Cart.items
-          tr
-            td.align-middle.text-right= (i+1)
-            td.align-middle
-              .media
-                img(class="mr-3" src=util.imageIconUrl(item.product.images[0].url) alt=item.product.title)
-                .media-body
-                  h6
-                    a(href=links.catalog.item(item.product.slug))= item.product.title
-                  if (item.variant)
-                    .sp-var_title
-                      i.sp-val_icon(style=item.variant.colorCode?'background-color: #'+item.variant.colorCode:null)
-                        if(item.variant.icon)
-                          img(alt=item.variant.icon.title, src=item.variant.icon.url+'?w=32&h=32')
-                      = item.variant.title
-                        
-            td.align-middle.text-right
-              strong= util.formatNumber(item.product.price, culture.language)
-            td.align-middle.text-right
-              strong= item.quantity
-            td.align-middle.text-right
-              strong.text-primary= util.formatNumber(item.price, culture.language)
-                |  
-                = __('lei')
+    include ./includes/cart-table
     hr
     .row.justify-content-end.text-right
       .col-12.col-sm-7
-        .row
-          .col-5
-            h5= __('total_without_tva')
-              | :
-          .col-7
-            h5.text-primary= util.formatNumber(Cart.price - Cart.price/config.TVA, culture.language, 1)
-              |  
-              = __('lei')
-        .row
-          .col-5
-            h5= __('tva')
-              | :
-          .col-7
-            h5.text-primary= util.formatNumber(Cart.price/config.TVA, culture.language, 1)
-              |  
-              = __('lei')
-        hr
-        .row
-          .col-5
-            h3= __('total')
-              | :
-          .col-7
-            h3.text-primary= util.formatNumber(Cart.price, culture.language)
-              |  
-              = __('lei')
+        include ./includes/cart-totals
     br
     .text-right
       a.btn.btn-warning.btn-lg.sp-count_purchase-btn(href=links.checkout())= __('finish_purchase')
