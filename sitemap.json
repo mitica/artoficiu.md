@@ -10,7 +10,8 @@
     "item": "/catalog/item/${0}"
   },
   "actions": {
-    "setLanguage": "/actions/set_language/${0}"
+    "setLanguage": "/actions/set_language/${0}",
+    "emailUs": "/actions/email_us"
   },
   "cart":  "/cart",
   "checkout":  "/checkout"

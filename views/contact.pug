@@ -29,3 +29,32 @@ block main_content
         h3.c-group_title= __('contact_contact_us_title')
         .c-group_content
           p= __('contact_contact_us')
+  hr
+  .row
+    .col-lg-1
+    .col-lg-10
+      if (alertMessage)
+        .alert=alertMessage
+      form(action=links.actions.emailUs())
+        .form-group.row
+          label.col-sm-3.col-form-label(for='field-1')
+            strong= __('name')
+              | *
+          .col-sm-9
+            input#field-1.form-control(type='text', name='name', required='', placeholder=__('name'))
+        .form-group.row
+          label.col-sm-3.col-form-label(for='field-2')
+            strong= __('email_or_telephone')
+              | *
+          .col-sm-9
+            input#field-2.form-control(type='text', name='contact', required='', placeholder=__('email_or_telephone'))
+        .form-group.row
+          label.col-sm-3.col-form-label(for='field-10')
+            strong= __('message')
+              | *
+          .col-sm-9
+            textarea#field-10.form-control(cols="30", required='', rows="3", name='message', placeholder=__('message'))
+        hr
+        .text-right
+          button.btn.btn-warning.btn-lg.rounded-0(type='submit')= __('send')
+    .col-lg-1

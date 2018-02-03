@@ -61,5 +61,8 @@
 	"the_bank": "Banca",
 	"bank_code": "Codul băncii",
 	"current_bank_account": "c/d",
-	"comments": "Comentarii"
+	"comments": "Comentarii",
+	"email_or_telephone": "Telefon sau Email",
+	"message": "Mesaj",
+	"send": "Trimite"
 }
