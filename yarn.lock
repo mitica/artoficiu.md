@@ -75,6 +75,10 @@
     "@types/express" "*"
     "@types/node" "*"
 
+"@types/events@*":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@types/events/-/events-1.1.0.tgz#93b1be91f63c184450385272c47b6496fd028e02"
+
 "@types/express-serve-static-core@*":
   version "4.11.0"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.11.0.tgz#aaaf472777191c3e56ec7aa160034c6b55ebdd59"
@@ -123,6 +127,13 @@
 "@types/node@^6.x.x":
   version "6.0.96"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.96.tgz#7bf0bf40d6ce51e93762cc47d010c8cc5ebb2179"
+
+"@types/nodemailer@^4.3.2":
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/@types/nodemailer/-/nodemailer-4.3.2.tgz#e7c303d7106b6697ede2a28e269140d92710a8d5"
+  dependencies:
+    "@types/events" "*"
+    "@types/node" "*"
 
 "@types/serve-static@*":
   version "1.13.1"
@@ -4761,6 +4772,10 @@ node-status-codes@^1.0.0:
 node-uuid@~1.4.7:
   version "1.4.8"
   resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.8.tgz#b040eb0923968afabf8d32fb1f17f1167fdab907"
+
+nodemailer@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-4.4.2.tgz#f215fb88e8a1052f9f93083909e116d2b79fc8de"
 
 "nopt@2 || 3", nopt@~3.0.6:
   version "3.0.6"

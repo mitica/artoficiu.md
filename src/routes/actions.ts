@@ -6,6 +6,9 @@ import { CartData } from '../cart';
 import { ShopProductVariantEntity } from '../content/entities';
 import logger from '../logger';
 import { CartHelpers } from '../cart/cartHelpers';
+import links from '../links';
+import { sendEmail } from '../emailSender';
+import { QSMessage } from '../qsMessage';
 const ms = require('ms');
 
 const route: Router = Router();
@@ -95,3 +98,25 @@ function cartErrors(res: Response, errors: string | string[]) {
         errors: errors
     });
 }
+
+route.post('/actions/email_us', function (req: Request, res: Response) {
+
+    const name = req.body.name;
+    const contact = req.body.contact;
+    const message = req.body.message;
+
+    if (!name || !contact || !message) {
+        logger.error(`contact us invalid params`, { name, message, contact });
+        return res.redirect(links.contact({ message: QSMessage.INPUT_ERROR }));
+    }
+
+    sendEmail({
+        from: config.email,
+        to: config.email,
+        subject: `Message from ${contact}`,
+        text: message,
+    })
+        .catch(error => logger.error(error));
+
+    return res.redirect(links.contact({ message: QSMessage.SUCCESS }));
+});

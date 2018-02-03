@@ -45,7 +45,7 @@
 	"properties": "Caracteristici",
 	"product_description": "Descriere produs",
 	"shop_cart": "Coșul cu cumpărături",
-	"empty_cart_info": "empty_cart_info",
+	"empty_cart_info": "Coșul cu cumpărături este gol!",
 	"cart_error_invalid_input": "cart_error_invalid_input",
 	"product": "Produs",
 	"total": "Total",
@@ -64,5 +64,7 @@
 	"comments": "Comentarii",
 	"email_or_telephone": "Telefon sau Email",
 	"message": "Mesaj",
-	"send": "Trimite"
+	"send": "Trimite",
+	"contact_input_error":"Eroare! Vă rugăm să completați toate câmpurile obligatorii.",
+	"contact_success": "Mesajul Dvs. a fost primit cu success. În curând că vom contacta."
 }

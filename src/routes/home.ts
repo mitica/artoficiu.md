@@ -3,6 +3,7 @@ import { Router, Request, Response, NextFunction } from 'express';
 import { DataContainer, ContentData } from '../data';
 import links from '../links';
 import { canonical } from '../utils';
+import { QSMessage } from '../qsMessage';
 
 const route: Router = Router();
 
@@ -37,9 +38,10 @@ route.get('/', function (_req: Request, res: Response, next: NextFunction) {
 
 //contact
 
-route.get('/contact', function (_req: Request, res: Response, next: NextFunction) {
+route.get('/contact', function (req: Request, res: Response, next: NextFunction) {
 
     const __ = res.locals.__;
+    const message = req.query.message;
 
     res.locals.site.head.title = __('contact_page_title');
     res.locals.site.head.description = __('contact_page_description');
@@ -49,6 +51,12 @@ route.get('/contact', function (_req: Request, res: Response, next: NextFunction
     res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
 
     const dc: DataContainer = res.locals.dataContainer;
+
+    if (message === QSMessage.INPUT_ERROR) {
+        res.locals.alertMessage = __('contact_input_error');
+    } else if (message === QSMessage.SUCCESS) {
+        res.locals.alertMessage = __('contact_success');
+    }
 
     dc.getData()
         .then(data => {

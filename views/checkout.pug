@@ -11,7 +11,7 @@ block main_content
   else
     if (alertMessage)
       .alert=alertMessage
-    form#checkout-form(action=links.checkout())
+    form#checkout-form(action=links.checkout(), method='post')
       .form-check
         input#person-1.form-check-input(type='radio', name='personType', value=1, checked='')
         label.form-check-label(for='person-1')= __('person_type_1')

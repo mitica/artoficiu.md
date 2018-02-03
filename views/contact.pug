@@ -34,8 +34,8 @@ block main_content
     .col-lg-1
     .col-lg-10
       if (alertMessage)
-        .alert=alertMessage
-      form(action=links.actions.emailUs())
+        .c-alert=alertMessage
+      form(action=links.actions.emailUs(), method='post')
         .form-group.row
           label.col-sm-3.col-form-label(for='field-1')
             strong= __('name')
