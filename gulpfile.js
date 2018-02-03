@@ -13,7 +13,11 @@ const uglify = require('gulp-uglify');
 // const ico = require('gulp-to-ico');
 // const sourcemaps = require('gulp-sourcemaps');
 
-const mainSassFiles = ['./assets/scss/main.scss'];
+const mainSassFiles = [
+  './assets/scss/main.scss',
+  './assets/scss/error-page.scss'
+];
+
 const cssDist = './public/static/css';
 
 gulp.task('sass-dev', function () {

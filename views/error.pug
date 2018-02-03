@@ -1,5 +1,11 @@
 extends ./layouts/root
 
+block styles
+  if (NODE_ENV === 'production')
+    link(rel="stylesheet", media="all", href="/static/css/" + assets.getName('error-page.css'))
+  else
+    link(rel="stylesheet", media="all", href="/static/css/error-page.css")
+
 block page_header
   .container
     include ./includes/page-header
