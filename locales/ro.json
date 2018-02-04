@@ -69,5 +69,6 @@
 	"contact_success": "Mesajul Dvs. a fost primit cu success. În curând că vom contacta.",
 	"checkout_success": "Am primit datele Dvs.",
 	"checkout_input_error": "Eroare! Vă rugăm să completați toate câmpurile obligatorii.",
-	"checkout_success_info": "În curând că vom contacta. Vă mulțumim pentru cumpărături!"
+	"checkout_success_info": "În curând că vom contacta. Vă mulțumim pentru cumpărături!",
+	"message_from_format": "Mesaj de la $s"
 }

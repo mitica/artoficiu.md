@@ -9,6 +9,7 @@ import { CartHelpers } from '../cart/cartHelpers';
 import links from '../links';
 import { sendEmail } from '../emailSender';
 import { QSMessage } from '../qsMessage';
+import * as util from 'util';
 const ms = require('ms');
 
 const route: Router = Router();
@@ -105,15 +106,18 @@ route.post('/actions/email_us', function (req: Request, res: Response) {
     const contact = req.body.contact;
     const message = req.body.message;
 
+
     if (!name || !contact || !message) {
         logger.error(`contact us invalid params`, { name, message, contact });
         return res.redirect(links.contact({ message: QSMessage.INPUT_ERROR }));
     }
 
+    const __ = res.locals.__;
+
     sendEmail({
         from: config.email,
         to: config.email,
-        subject: `Message from ${contact}`,
+        subject: util.format(__('message_from_format'), contact),
         text: message,
     })
         .catch(error => logger.error(error));
