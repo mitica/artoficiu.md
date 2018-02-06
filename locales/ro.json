@@ -70,5 +70,5 @@
 	"checkout_success": "Am primit datele Dvs.",
 	"checkout_input_error": "Eroare! Vă rugăm să completați toate câmpurile obligatorii.",
 	"checkout_success_info": "În curând că vom contacta. Vă mulțumim pentru cumpărături!",
-	"message_from_format": "Mesaj de la $s"
+	"message_from_format": "Mesaj de la %s"
 }

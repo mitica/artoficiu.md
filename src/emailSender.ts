@@ -8,6 +8,7 @@ const transporter = createTransport({
         user: config.email,
         pass: process.env.EMAIL_PASSWORD,
     },
+    tls: { rejectUnauthorized: false }
 });
 
 export function sendEmail(message: SendMailOptions) {
