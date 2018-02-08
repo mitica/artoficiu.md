@@ -12,8 +12,8 @@ import { QSMessage } from '../qsMessage';
 import * as util from 'util';
 import recaptchaValidate from '../recaptcha';
 import { remoteIp } from '../utils';
-import { createOrderFromCartData, Order } from '../storage/order';
-import { createCustomerFromPostData, Customer } from '../storage/customer';
+import { createOrderFromCartData, Order } from '../orders/order';
+import { createCustomerFromPostData, Customer } from '../orders/customer';
 const ms = require('ms');
 
 const route: Router = Router();
@@ -161,18 +161,18 @@ route.post('/actions/checkout', function (req: Request, res: Response) {
         return res.redirect(links.checkout({ message: QSMessage.INPUT_ERROR }));
     }
 
-    new Promise<any>((resolve, reject) => {
-        req.session.destroy(error => {
-            if (error) {
-                return reject(error);
-            }
-            resolve();
-        });
-    })
-        .catch(error => logger.error(error));
-
     OrdersRepository.create(order)
         .then(_ => {
+            new Promise<any>((resolve, reject) => {
+                req.session.destroy(error => {
+                    if (error) {
+                        return reject(error);
+                    }
+                    resolve();
+                });
+            })
+                .catch(error => logger.error(error));
+
             return res.redirect(links.checkout.success());
         })
         .catch(error => {

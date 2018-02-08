@@ -1,5 +1,5 @@
 import { ContentApi } from "./content/ContentApi";
-import { IOrdersRepository, DynamoOrdersRepository, createDbTables } from './storage';
+import { IOrdersRepository, DynamoOrdersRepository, createDbTables } from './orders';
 import logger from "./logger";
 
 createDbTables().catch(error => logger.error(error));
