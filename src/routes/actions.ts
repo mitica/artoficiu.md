@@ -10,6 +10,8 @@ import links from '../links';
 import { sendEmail } from '../emailSender';
 import { QSMessage } from '../qsMessage';
 import * as util from 'util';
+import recaptchaValidate from '../recaptcha';
+import { remoteIp } from '../utils';
 const ms = require('ms');
 
 const route: Router = Router();
@@ -105,24 +107,43 @@ route.post('/actions/email_us', function (req: Request, res: Response) {
     const name = req.body.name;
     const contact = req.body.contact;
     const message = req.body.message;
+    const recaptchaValue = req.body['g-recaptcha-response'];
 
 
-    if (!name || !contact || !message) {
+    if (!name || !contact || !message || !recaptchaValue) {
         logger.error(`contact us invalid params`, { name, message, contact });
         return res.redirect(links.contact({ message: QSMessage.INPUT_ERROR }));
     }
 
-    const __ = res.locals.__;
+    const ip = remoteIp(req);
 
-    sendEmail({
-        from: config.email,
-        to: config.email,
-        subject: util.format(__('message_from_format'), contact),
-        text: message,
+    recaptchaValidate(recaptchaValue, ip).then(isHuman => {
+        if (!isHuman) {
+            logger.error(`A robbot tries to contact you ${ip}`);
+            return false;
+        }
+
+        const __ = res.locals.__;
+
+        sendEmail({
+            from: config.email,
+            to: config.email,
+            subject: util.format(__('message_from_format'), contact),
+            text: message,
+        }).catch(error => logger.error(error));
+
+        return true;
     })
-        .catch(error => logger.error(error));
-
-    return res.redirect(links.contact({ message: QSMessage.SUCCESS }));
+        .then(result => {
+            if (result) {
+                return res.redirect(links.contact({ message: QSMessage.SUCCESS }))
+            }
+            return res.redirect(links.contact({ message: QSMessage.INPUT_ERROR }));
+        })
+        .catch(error => {
+            logger.error(error)
+            res.redirect(links.contact({ message: QSMessage.SUCCESS }))
+        });
 });
 
 route.post('/actions/checkout', function (req: Request, res: Response) {

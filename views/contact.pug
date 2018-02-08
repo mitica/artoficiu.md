@@ -1,5 +1,8 @@
 extends ./layouts/layout
 
+block head
+  script(async, src='https://www.google.com/recaptcha/api.js')
+
 block main_content
   .page-title
     h2.page-title_h2= __('contact')
@@ -54,6 +57,11 @@ block main_content
               | *
           .col-sm-9
             textarea#field-10.form-control(cols="30", required='', rows="3", name='message', placeholder=__('message'))
+        hr
+        .form-group.row
+          .col-sm-3
+          .col-sm-9
+            .g-recaptcha(data-sitekey="6LciIkUUAAAAADHEqR2DCLYNdI2TQjusBzZjvW1W")
         hr
         .text-right
           button.btn.btn-warning.btn-lg.rounded-0(type='submit')= __('send')
