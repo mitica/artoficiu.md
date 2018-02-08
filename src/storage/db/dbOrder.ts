@@ -30,14 +30,14 @@ export function convertOrderToDbOrder(order: Order): DbOrder {
         comments: order.comments,
         countItems: order.countItems,
         createdAt: order.createdAt,
-        customer: order.customer,
+        customer: clearObject(order.customer),
         items: JSON.stringify(order.items),
         quantity: order.quantity,
         status: order.status,
         total: order.total,
     }
 
-    return dbOrder;
+    return clearObject(dbOrder);
 }
 
 export function convertDbOrderToOrder(dbOrder: DbOrder): Order {
@@ -63,4 +63,13 @@ export function createDbOrderId(id: number): DbOrderId {
         id: id,
         year: yearFromOrderId(id)
     }
+}
+
+function clearObject<T>(obj: any): T {
+    for (var prop in obj) {
+        if (~[null, '', undefined].indexOf(obj[prop])) {
+            delete obj[prop];
+        }
+    }
+    return obj as T;
 }

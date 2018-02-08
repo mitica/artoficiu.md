@@ -18,7 +18,7 @@ export interface Customer {
     bankAccount?: string
 }
 
-export function createFromPostData(data: any): Customer {
+export function createCustomerFromPostData(data: any): Customer {
     const customer: Customer = {
         type: parseInt(data.personType || data.person_type || data.customerType || data.customer_type) as CustomerType,
         name: data.name,

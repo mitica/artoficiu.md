@@ -1,7 +1,7 @@
 
 import { Router, Request, Response } from 'express';
 import config from '../config';
-import { ContentData } from '../data';
+import { ContentData, OrdersRepository } from '../data';
 import { CartData } from '../cart';
 import { ShopProductVariantEntity } from '../content/entities';
 import logger from '../logger';
@@ -12,6 +12,8 @@ import { QSMessage } from '../qsMessage';
 import * as util from 'util';
 import recaptchaValidate from '../recaptcha';
 import { remoteIp } from '../utils';
+import { createOrderFromCartData, Order } from '../storage/order';
+import { createCustomerFromPostData, Customer } from '../storage/customer';
 const ms = require('ms');
 
 const route: Router = Router();
@@ -148,6 +150,17 @@ route.post('/actions/email_us', function (req: Request, res: Response) {
 
 route.post('/actions/checkout', function (req: Request, res: Response) {
 
+    let customer: Customer;
+    let order: Order;
+    const cart = req.session.Cart as CartData;
+    try {
+        customer = createCustomerFromPostData(req.body);
+        order = createOrderFromCartData(cart, customer, req.body.comments);
+    } catch (error) {
+        logger.error(error);
+        return res.redirect(links.checkout({ message: QSMessage.INPUT_ERROR }));
+    }
+
     new Promise<any>((resolve, reject) => {
         req.session.destroy(error => {
             if (error) {
@@ -158,24 +171,12 @@ route.post('/actions/checkout', function (req: Request, res: Response) {
     })
         .catch(error => logger.error(error));
 
-    return res.redirect(links.checkout.success());
-
-    // const name = req.body.name;
-    // const contact = req.body.contact;
-    // const message = req.body.message;
-
-    // if (!name || !contact || !message) {
-    //     logger.error(`contact us invalid params`, { name, message, contact });
-    //     return res.redirect(links.contact({ message: QSMessage.INPUT_ERROR }));
-    // }
-
-    // sendEmail({
-    //     from: config.email,
-    //     to: config.email,
-    //     subject: `Message from ${contact}`,
-    //     text: message,
-    // })
-    //     .catch(error => logger.error(error));
-
-    // return res.redirect(links.contact({ message: QSMessage.SUCCESS }));
+    OrdersRepository.create(order)
+        .then(_ => {
+            return res.redirect(links.checkout.success());
+        })
+        .catch(error => {
+            logger.error(error);
+            return res.redirect(links.checkout({ message: QSMessage.SYSTEM_ERROR }));
+        })
 });

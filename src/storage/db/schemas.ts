@@ -19,7 +19,7 @@ export const OrderSchema = Joi.object().keys({
         bankAccount: Joi.string(),
     }).required(),
     comments: Joi.string(),
-    countItems: Joi.number().integet().required(),
+    countItems: Joi.number().integer().required(),
     quantity: Joi.number().integer().required(),
     items: Joi.string().required(),
 

@@ -1,5 +1,10 @@
 import { ContentApi } from "./content/ContentApi";
+import { IOrdersRepository, DynamoOrdersRepository, createDbTables } from './storage';
+import logger from "./logger";
 
+createDbTables().catch(error => logger.error(error));
+
+export const OrdersRepository: IOrdersRepository = new DynamoOrdersRepository();
 
 export const ContentData = new ContentApi({
     space: process.env.CONTENTFUL_SPACE,
