@@ -2,7 +2,7 @@
 const _package = require('../../package.json');
 const debug = require('debug')('artoficiu-web');
 import { format } from 'util';
-import { moment, formatNumber, imageIconUrl } from '../utils';
+import { moment, formatNumber, imageIconUrl, selfCanonical } from '../utils';
 import renderArticle from '../renderArticle';
 import { Request, Response, NextFunction } from 'express';
 import config from '../config';
@@ -15,7 +15,8 @@ const util = {
     format: format,
     renderArticle: renderArticle,
     formatNumber,
-    imageIconUrl
+    imageIconUrl,
+    selfCanonical,
 };
 
 export default function (req: Request, res: Response, next: NextFunction) {

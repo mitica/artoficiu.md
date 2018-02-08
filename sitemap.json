@@ -18,5 +18,9 @@
   "checkout": {
     "$url": "/checkout",
     "success": "/checkout/success"
+  },
+  "invoices": {
+    "invoice": "/invoices/${0}.html",
+    "invoicePdf": "/orders/invoice/${0}.pdf"
   }
 }

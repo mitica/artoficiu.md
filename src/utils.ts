@@ -2,11 +2,19 @@
 import config from './config';
 import { Request } from 'express';
 const moment = require('moment-timezone');
+const isProd = process.env.NODE_ENV === 'production';
 
 export { moment }
 
 export function canonical(url: string) {
     return `${config.schema}//${config.host}${url}`;
+}
+
+export function selfCanonical(url: string) {
+    if (isProd) {
+        return canonical(url);
+    }
+    return `http://localhost:${process.env.PORT}${url}`;
 }
 
 export function formatNumber(n: number, lang: string, maximumFractionDigits: number = 2): string {

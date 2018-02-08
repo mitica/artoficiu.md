@@ -1,0 +1,95 @@
+doctype html
+html(lang=culture.language)
+
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    title= __('invoice')
+    link(rel='icon', type='image/png', href=util.selfCanonical('/static/img/favicon-32x32.png'), sizes='32x32')
+    meta(property='og:site_name', content=config.name)
+    link(rel="stylesheet", media="all", href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+
+  body
+    .container
+      img(src=util.selfCanonical('/static/img/logo.png'), alt='ArtOficiu')
+      br
+      br
+      .row
+        .col-xs-6
+          p
+            strong SRL "ARTOFICIU"
+          p Adresa juridica: str. Albioara 78/1, ap 107, mun. Chisinau
+            br
+            | c/f 1012600000033
+            br
+            | TVA 0608189
+            br
+            | BC "ProCreditBank" S.A.
+            br
+            | PRCBMD22
+            br
+            | c/d 2251128903001498
+        .col-xs-6.text-right
+          h2= __('invoice_no')
+            | 
+            = order.id
+          h3 din 
+            = util.moment(order.createdAt).locale('ro').format('LL')
+      br
+      .row
+        .col-xs-4 tel./fax.:/+373 22/59-52-16
+        .col-xs-4= config.email
+        .col-xs-4 www.
+          = config.domain
+      br
+
+      h2= __('payer')
+        | : 
+        = order.customer.name
+      table.table
+        thead
+          tr
+            th.text-right #
+            th= __('name')
+            th.text-right= __('quantity')
+            th.text-right= __('price')
+            th.text-right= __('sum')
+        tbody
+          each item, i in order.items
+            tr
+              td.text-right= i + 1
+              td
+                strong= item.product.title
+                if (item.variant)
+                  |  
+                  em=item.variant.title
+              td.text-right= item.quantity
+                |  
+                = __('units')
+              td.text-right= util.formatNumber(item.product.price, culture.language, 2)
+                |  
+                = __('lei')
+              td.text-right= util.formatNumber(item.product.price * item.quantity, culture.language, 2)
+                |  
+                = __('lei')
+        tfoot
+          tr
+            td(colspan=5).text-right
+              .row
+                .col-xs-9
+                  h4= __('total_to_pay')
+                    | :
+                .col-xs-3
+                  h4= util.formatNumber(order.total, culture.language, 2)
+                    |  
+                    = __('lei')
+              .row
+                .col-xs-9
+                  h4= __('including_vat')
+                    | :
+                .col-xs-3
+                  h4= util.formatNumber(order.total/config.TVA, culture.language, 2)
+                    |  
+                    = __('lei')
+

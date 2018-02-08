@@ -16,6 +16,7 @@ import articlesRoute from './routes/articles';
 import catalogRoute from './routes/catalog';
 import actionsRoute from './routes/actions';
 import cartRoute from './routes/cart';
+import invoicesRoute from './routes/invoices';
 import assets from './assets';
 import { Response } from 'express';
 import * as session from 'express-session';
@@ -67,6 +68,9 @@ app.use(session({
 }));
 
 app.use(rootMiddleware);
+
+app.use(invoicesRoute);
+
 app.use(catalogMiddleware);
 
 app.use(homeRoute);
