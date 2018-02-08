@@ -51,7 +51,7 @@ export class CacheContentfulApi extends ContentfulApi {
         if (cache) {
             const value = cache.get(key) as ContentfulEntityCollection<T>;
             if (value !== undefined) {
-                debug(`got from cache: ${key}=${query}`);
+                debug(`got from cache: ${key}=${JSON.stringify(query)}`);
                 return Promise.resolve(value);
             }
         }
@@ -59,7 +59,7 @@ export class CacheContentfulApi extends ContentfulApi {
         return super.getEntries(query)
             .then(collection => {
                 if (cache) {
-                    debug(`put to cache: ${key}=${query}`);
+                    // debug(`put to cache: ${key}=${query}`);
                     cache.set(key, collection);
                 }
                 return collection;

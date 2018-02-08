@@ -1,4 +1,5 @@
 
+const debug = require('debug')('artoficiu-content');
 import { CacheContentfulApi } from './CacheContentfulApi';
 import { ContentfulEntity, ContentfulEntityCollection, ApiQuery } from './ContentfulApi';
 import {
@@ -122,13 +123,15 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
         if (!params) {
             return Promise.reject(new Error(`parameter filter is invalid`));
         }
+
         const query: ApiQuery = {
             locale: formatLocale(params),
             limit: params.limit,
             content_type: ContentTypes.SHOP_PRODUCT,
-            include: 2,
-        };
-        // query.select = 'sys.id,sys.createdAt,sys.updatedAt,fields.title,fields.slug,fields.summary,fields.image,fields.category';
+            include: 1,
+        }
+
+        query.select = 'sys,fields.title,fields.slug,fields.price,fields.images,fields.oldPrice,fields.isInStock';
 
         switch (params.order) {
             case 'createdAt':
@@ -185,7 +188,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             content_type: ContentTypes.ARTICLE,
             order: '-sys.createdAt'
         };
-        // query.select = 'sys.id,sys.createdAt,sys.updatedAt,fields.title,fields.slug,fields.summary,fields.image,fields.category';
+        query.select = 'sys,fields.title,fields.slug,fields.summary,fields.image';
 
         return this.getArticles(query);
     }
@@ -219,7 +222,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             content_type: ContentTypes.PAGE,
             order: '-sys.createdAt'
         };
-        // query.select = 'sys.id,sys.createdAt,sys.updatedAt,fields.title,fields.slug,fields.summary,fields.image,fields.category';
+        query.select = 'sys,fields.title,fields.slug,fields.summary,fields.image,fields.shortTitle';
 
         return this.getPages(query);
     }
@@ -454,6 +457,8 @@ function toArticle(entity: ContentfulEntity): ArticleEntity {
 
     if (entity.fields.text) {
         data.text = entity.fields.text;
+    } else {
+        debug(`article no field: text!`);
     }
 
     if (entity.fields.image) {
@@ -495,6 +500,8 @@ function toPage(entity: ContentfulEntity): PageEntity {
 
     if (entity.fields.text) {
         data.text = entity.fields.text;
+    } else {
+        debug(`page no field text`);
     }
 
     if (entity.fields.image) {

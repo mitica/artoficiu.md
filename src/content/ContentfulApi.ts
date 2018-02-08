@@ -1,5 +1,5 @@
 
-const debug = require('debug')('artoficiu-content');
+// const debug = require('debug')('artoficiu-content');
 import { createClient, ContentfulClientApi } from 'contentful'
 
 export interface ApiOptions {
@@ -53,7 +53,7 @@ export class ContentfulApi {
     protected getEntries(query: ApiQuery): Promise<ContentfulEntityCollection<ContentfulEntity>> {
         return this.client.getEntries(query)
             .then(data => {
-                debug(`for getEntries ${query} got: `, JSON.stringify(data));
+                // debug(`for getEntries ${query} got: `, JSON.stringify(data));
                 return (this.client as any).parseEntries(data) as ContentfulEntityCollection<ContentfulEntity>;
             });
     }
