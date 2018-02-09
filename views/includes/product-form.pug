@@ -1,25 +1,26 @@
-h5= __('product_variants')
-  | :
-br
-- var anyChecked=false
-each item, i in product.variants
-  - var check = !anyChecked && item.isInStock;
-  - anyChecked = anyChecked || check
-  .row
-    .col-5
-      label(for=item.id).sp-var_title
-        i.sp-var_icon(style=item.colorCode?'background-color: #'+item.colorCode:null)
-          if(item.icon)
-            img(alt=item.icon.title, src=item.icon.url+'?w=32&h=32')
+if (product.variants)
+  h5= __('product_variants')
+    | :
+  br
+  - var anyChecked=false
+  each item, i in product.variants
+    - var check = !anyChecked && item.isInStock;
+    - anyChecked = anyChecked || check
+    .row
+      .col-5
+        label(for=item.id).sp-var_title
+          i.sp-var_icon(style=item.colorCode?'background-color: #'+item.colorCode:null)
+            if(item.icon)
+              img(alt=item.icon.title, src=item.icon.url+'?w=32&h=32')
 
-        = item.title
-    .col-2
-      input.sp-var_check.js-sp-param(type='radio', name='variantId', value=item.id, id=item.id, checked=check, disabled=!item.isInStock)
-    .col-5
-      if (item.isInStock)
-        label(for=item.id).sp-var_inStock= __('in_stock')
-      else
-        label(for=item.id).sp-var_notInStock= __('not_in_stock')
+          = item.title
+      .col-2
+        input.sp-var_check.js-sp-param(type='radio', name='variantId', value=item.id, id=item.id, checked=check, disabled=!item.isInStock)
+      .col-5
+        if (item.isInStock)
+          label(for=item.id).sp-var_inStock= __('in_stock')
+        else
+          label(for=item.id).sp-var_notInStock= __('not_in_stock')
 
 .c-alert.js-sp-alert.d-none
 br

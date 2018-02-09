@@ -67,7 +67,7 @@ export function createOrderFromCartData(cart: CartData, customer: Customer, comm
                 imageUrl: item.product.images && item.product.images.length && item.product.images[0].url,
             },
             quantity: item.quantity,
-            variant: {
+            variant: item.variant && {
                 id: item.variant.id,
                 title: item.variant.title,
             }

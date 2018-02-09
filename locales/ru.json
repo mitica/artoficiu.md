@@ -60,5 +60,14 @@
 	"the_bank": "the_bank",
 	"bank_code": "bank_code",
 	"current_bank_account": "current_bank_account",
-	"comments": "comments"
+	"comments": "comments",
+	"empty_cart_info": "empty_cart_info",
+	"error_page_title": "error_page_title",
+	"error_page_description": "error_page_description",
+	"home": "home",
+	"checkout_input_error": "checkout_input_error",
+	"invoice_email_subject": "invoice_email_subject",
+	"invoice_email_body": "invoice_email_body",
+	"checkout_success": "checkout_success",
+	"checkout_success_info": "checkout_success_info"
 }

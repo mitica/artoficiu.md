@@ -47,6 +47,8 @@ route.get('/checkout', function (req: Request, res: Response, next: NextFunction
         res.locals.alertMessage = __('checkout_input_error');
     } else if (message === QSMessage.SUCCESS) {
         res.locals.alertMessage = __('checkout_success');
+    } else if (message === QSMessage.SYSTEM_ERROR) {
+        res.locals.alertMessage = __('server_error');
     }
 
     dc.getData()
