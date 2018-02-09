@@ -101,6 +101,8 @@ export interface WebAppSettingsEntity extends Entity {
 export interface EntityCollection<T extends Entity> {
     items: T[]
     total: number
+    limit: number
+    skip: number
 }
 
 export interface PageCollection extends EntityCollection<PageEntity> { }

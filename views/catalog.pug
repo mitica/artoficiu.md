@@ -13,3 +13,7 @@ block main_content
   .c-catalog-menu_inline.d-lg-none
     include ./includes/catalog-categories
   +productListBlock(shopProducts.items, {itemClass: 'col-6 col-md-3'})
+  if (selectedShopCategory)
+    +catalogCategoryPager(shopProducts, selectedShopCategory)
+  else
+    +catalogPager(shopProducts)

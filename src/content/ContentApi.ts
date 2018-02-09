@@ -29,6 +29,7 @@ export interface BaseFilterParams {
 
 export interface ListFilterParams extends BaseFilterParams {
     limit: number
+    skip?: number
 }
 
 export interface ShopCategoryFilterParams extends ListFilterParams {
@@ -131,6 +132,10 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             include: 1,
         }
 
+        if (params.skip) {
+            query.skip = params.skip;
+        }
+
         query.select = 'sys,fields.title,fields.slug,fields.price,fields.images,fields.oldPrice,fields.isInStock';
 
         switch (params.order) {
@@ -188,6 +193,11 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             content_type: ContentTypes.ARTICLE,
             order: '-sys.createdAt'
         };
+
+        if (params.skip) {
+            query.skip = params.skip;
+        }
+
         query.select = 'sys,fields.title,fields.slug,fields.summary,fields.image';
 
         return this.getArticles(query);
@@ -222,6 +232,11 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             content_type: ContentTypes.PAGE,
             order: '-sys.createdAt'
         };
+
+        if (params.skip) {
+            query.skip = params.skip;
+        }
+
         query.select = 'sys,fields.title,fields.slug,fields.summary,fields.image,fields.shortTitle';
 
         return this.getPages(query);
@@ -340,7 +355,13 @@ function convertSlider(item: ContentfulEntity): SliderEntity {
 }
 
 function toShopProducts(collection: ContentfulEntityCollection<ContentfulEntity>): ShopProductCollection {
-    const data: ShopProductCollection = { total: 0, items: [] };
+    const data: ShopProductCollection = {
+        items: [],
+        total: collection.total,
+        skip: collection.skip,
+        limit: collection.limit
+    }
+
     if (!collection) {
         return data;
     }
@@ -426,13 +447,17 @@ function toShopProductProperty(entity: ContentfulEntity): ShopProductPropertyEnt
 }
 
 function toArticles(collection: ContentfulEntityCollection<ContentfulEntity>): ArticleCollection {
-    const data: ArticleCollection = { total: 0, items: [] };
+    const data: ArticleCollection = {
+        items: [],
+        total: collection.total,
+        skip: collection.skip,
+        limit: collection.limit
+    };
     if (!collection) {
         return data;
     }
 
     if (!collection.items) {
-        data.total = collection.total || data.total;
         return data;
     }
 
@@ -469,13 +494,18 @@ function toArticle(entity: ContentfulEntity): ArticleEntity {
 }
 
 function toPages(collection: ContentfulEntityCollection<ContentfulEntity>): PageCollection {
-    const data: PageCollection = { total: 0, items: [] };
+    const data: PageCollection = {
+        items: [],
+        total: collection.total,
+        skip: collection.skip,
+        limit: collection.limit
+    }
+
     if (!collection) {
         return data;
     }
 
     if (!collection.items) {
-        data.total = collection.total || data.total;
         return data;
     }
 
@@ -513,13 +543,18 @@ function toPage(entity: ContentfulEntity): PageEntity {
 
 
 function toShopCategories(collection: ContentfulEntityCollection<ContentfulEntity>): ShopCategoryCollection {
-    const data: ShopCategoryCollection = { total: 0, items: [] };
+    const data: ShopCategoryCollection = {
+        items: [],
+        total: collection.total,
+        skip: collection.skip,
+        limit: collection.limit
+    }
+
     if (!collection) {
         return data;
     }
 
     if (!collection.items) {
-        data.total = collection.total || data.total;
         return data;
     }
 

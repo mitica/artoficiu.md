@@ -21,6 +21,7 @@ export interface ContentfulEntity {
 
 export interface ApiQuery {
     limit: number
+    skip?: number
     content_type: string
     select?: string
     [index: string]: string | number | boolean
