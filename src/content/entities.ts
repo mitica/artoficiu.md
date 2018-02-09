@@ -94,8 +94,7 @@ export interface SliderEntity extends Entity {
 
 export interface WebAppSettingsEntity extends Entity {
     title?: string
-    desktopHomepageSlider?: SliderEntity
-    mobileHomepageSlider?: SliderEntity
+    homepageSlider?: SliderEntity
 }
 
 export interface EntityCollection<T extends Entity> {

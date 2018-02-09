@@ -1,0 +1,99 @@
+{
+    "id": "shop_product_variant",
+    "data": {
+        "name": "Shop Product Variant",
+        "description": "O vaianta de product",
+        "displayField": "title",
+        "fields": [
+            {
+                "id": "title",
+                "name": "Title",
+                "type": "Symbol",
+                "localized": true,
+                "required": true,
+                "validations": [],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "price",
+                "name": "Price",
+                "type": "Number",
+                "localized": false,
+                "required": false,
+                "validations": [
+                    {
+                        "range": {
+                            "min": 0,
+                            "max": null
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "oldPrice",
+                "name": "Old Price",
+                "type": "Number",
+                "localized": false,
+                "required": false,
+                "validations": [
+                    {
+                        "range": {
+                            "min": 0,
+                            "max": null
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "isInStock",
+                "name": "Is in stock",
+                "type": "Boolean",
+                "localized": false,
+                "required": true,
+                "validations": [],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "colorCode",
+                "name": "Color Code",
+                "type": "Symbol",
+                "localized": false,
+                "required": false,
+                "validations": [
+                    {
+                        "regexp": {
+                            "pattern": "^[a-f0-9]{6}$",
+                            "flags": null
+                        },
+                        "message": "6 caractere. Exemplu: 9a9a9a (sur)"
+                    }
+                ],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "icon",
+                "name": "Icon",
+                "type": "Link",
+                "localized": false,
+                "required": false,
+                "validations": [
+                    {
+                        "linkMimetypeGroup": [
+                            "image"
+                        ]
+                    }
+                ],
+                "disabled": false,
+                "omitted": false,
+                "linkType": "Asset"
+            }
+        ]
+    }
+}

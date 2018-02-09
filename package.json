@@ -18,7 +18,9 @@
     "postversion": "git push --follow-tags",
     "prepublish": "npm run tsc && npm run clean-test-code",
     "clean": "rm -fr ./lib && rm -fr ./types",
-    "clean-test-code": "rm -fr ./lib/**/*.test.js && rm -fr ./lib/*.test.js && rm -fr ./types/**/*.test.d.ts && rm -fr ./types/*.test.d.ts"
+    "clean-test-code": "rm -fr ./lib/**/*.test.js && rm -fr ./lib/*.test.js && rm -fr ./types/**/*.test.d.ts && rm -fr ./types/*.test.d.ts",
+
+    "create-content-types": "node ./scripts/createContentTypes.js"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -74,6 +76,7 @@
     "@types/node-fetch": "^1.6.7",
     "@types/nodemailer": "^4.3.2",
     "ava": "^0.23.0",
+    "contentful-management": "^4.2.0",
     "debug": "^3.1.0",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.9.2",

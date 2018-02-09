@@ -1,0 +1,199 @@
+{
+    "id": "shop_product",
+    "data": {
+        "name": "Shop Product",
+        "description": "",
+        "displayField": "title",
+        "fields": [
+            {
+                "id": "title",
+                "name": "Title",
+                "type": "Symbol",
+                "localized": true,
+                "required": true,
+                "validations": [
+                    {
+                        "size": {
+                            "min": 2,
+                            "max": 255
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "slug",
+                "name": "Slug",
+                "type": "Symbol",
+                "localized": false,
+                "required": true,
+                "validations": [
+                    {
+                        "unique": true
+                    },
+                    {
+                        "size": {
+                            "min": 2,
+                            "max": 255
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "price",
+                "name": "Price",
+                "type": "Number",
+                "localized": false,
+                "required": true,
+                "validations": [
+                    {
+                        "range": {
+                            "min": 0,
+                            "max": null
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "oldPrice",
+                "name": "Old Price",
+                "type": "Number",
+                "localized": false,
+                "required": false,
+                "validations": [
+                    {
+                        "range": {
+                            "min": 0,
+                            "max": null
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "isInStock",
+                "name": "Is in stock",
+                "type": "Boolean",
+                "localized": false,
+                "required": true,
+                "validations": [],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "description",
+                "name": "Description",
+                "type": "Text",
+                "localized": true,
+                "required": false,
+                "validations": [],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "variants",
+                "name": "Variants",
+                "type": "Array",
+                "localized": false,
+                "required": false,
+                "validations": [],
+                "disabled": false,
+                "omitted": false,
+                "items": {
+                    "type": "Link",
+                    "validations": [
+                        {
+                            "linkContentType": [
+                                "shopProductVariant"
+                            ]
+                        }
+                    ],
+                    "linkType": "Entry"
+                }
+            },
+            {
+                "id": "categories",
+                "name": "Categories",
+                "type": "Array",
+                "localized": false,
+                "required": true,
+                "validations": [
+                    {
+                        "size": {
+                            "min": 1,
+                            "max": 5
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false,
+                "items": {
+                    "type": "Link",
+                    "validations": [
+                        {
+                            "linkContentType": [
+                                "shop_category"
+                            ]
+                        }
+                    ],
+                    "linkType": "Entry"
+                }
+            },
+            {
+                "id": "images",
+                "name": "Images",
+                "type": "Array",
+                "localized": false,
+                "required": true,
+                "validations": [
+                    {
+                        "size": {
+                            "min": 1,
+                            "max": 10
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false,
+                "items": {
+                    "type": "Link",
+                    "validations": [
+                        {
+                            "linkMimetypeGroup": [
+                                "image"
+                            ]
+                        }
+                    ],
+                    "linkType": "Asset"
+                }
+            },
+            {
+                "id": "properties",
+                "name": "Properties",
+                "type": "Array",
+                "localized": false,
+                "required": false,
+                "validations": [],
+                "disabled": false,
+                "omitted": false,
+                "items": {
+                    "type": "Link",
+                    "validations": [
+                        {
+                            "linkContentType": [
+                                "shop_product_property"
+                            ]
+                        }
+                    ],
+                    "linkType": "Entry"
+                }
+            }
+        ]
+    }
+}

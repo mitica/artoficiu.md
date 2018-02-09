@@ -1,0 +1,59 @@
+{
+    "id": "slider_item",
+    "data": {
+        "name": "Slider Item",
+        "description": "",
+        "displayField": "title",
+        "fields": [
+            {
+                "id": "title",
+                "name": "Title",
+                "type": "Symbol",
+                "localized": true,
+                "required": true,
+                "validations": [],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "image",
+                "name": "Image",
+                "type": "Link",
+                "localized": false,
+                "required": true,
+                "validations": [
+                    {
+                        "linkMimetypeGroup": [
+                            "image"
+                        ]
+                    },
+                    {
+                        "assetImageDimensions": {
+                            "width": {
+                                "min": 900,
+                                "max": null
+                            },
+                            "height": {
+                                "min": 200,
+                                "max": null
+                            }
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false,
+                "linkType": "Asset"
+            },
+            {
+                "id": "link",
+                "name": "Link",
+                "type": "Symbol",
+                "localized": false,
+                "required": false,
+                "validations": [],
+                "disabled": false,
+                "omitted": false
+            }
+        ]
+    }
+}

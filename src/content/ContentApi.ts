@@ -265,8 +265,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             return {
                 id: item.sys.id,
                 createdAt: item.sys.createdAt,
-                desktopHomepageSlider: convertSlider(item.fields.desktopHomepageSlider),
-                mobileHomepageSlider: convertSlider(item.fields.mobileHomepageSlider),
+                homepageSlider: convertSlider(item.fields.homepageSlider),
             }
         });
     }

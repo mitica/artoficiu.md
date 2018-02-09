@@ -1,0 +1,138 @@
+{
+    "id": "shop_category",
+    "data": {
+        "name": "Shop Category",
+        "description": "",
+        "displayField": "title",
+        "fields": [
+            {
+                "id": "title",
+                "name": "Title",
+                "type": "Symbol",
+                "localized": true,
+                "required": true,
+                "validations": [
+                    {
+                        "unique": true
+                    },
+                    {
+                        "size": {
+                            "min": 2,
+                            "max": 255
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "slug",
+                "name": "Slug",
+                "type": "Symbol",
+                "localized": false,
+                "required": true,
+                "validations": [
+                    {
+                        "unique": true
+                    },
+                    {
+                        "size": {
+                            "min": 2,
+                            "max": 255
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "shortTitle",
+                "name": "Short title",
+                "type": "Symbol",
+                "localized": true,
+                "required": false,
+                "validations": [
+                    {
+                        "size": {
+                            "min": 2,
+                            "max": 100
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "order",
+                "name": "Order",
+                "type": "Integer",
+                "localized": false,
+                "required": false,
+                "validations": [
+                    {
+                        "range": {
+                            "min": 0,
+                            "max": null
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "isPromoted",
+                "name": "Is Promoted",
+                "type": "Boolean",
+                "localized": false,
+                "required": false,
+                "validations": [],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "parent",
+                "name": "Parent Category",
+                "type": "Link",
+                "localized": false,
+                "required": false,
+                "validations": [
+                    {
+                        "linkContentType": [
+                            "shop_category"
+                        ]
+                    }
+                ],
+                "disabled": false,
+                "omitted": false,
+                "linkType": "Entry"
+            },
+            {
+                "id": "icon",
+                "name": "Icon",
+                "type": "Link",
+                "localized": false,
+                "required": false,
+                "validations": [
+                    {
+                        "linkMimetypeGroup": [
+                            "image"
+                        ]
+                    }
+                ],
+                "disabled": false,
+                "omitted": false,
+                "linkType": "Asset"
+            },
+            {
+                "id": "description",
+                "name": "Description",
+                "type": "Text",
+                "localized": true,
+                "required": false,
+                "validations": [],
+                "disabled": false,
+                "omitted": false
+            }
+        ]
+    }
+}

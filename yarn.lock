@@ -1518,7 +1518,15 @@ content-type@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.4.tgz#e138cc75e040c727b1966fe5e5f8c9aee256fe3b"
 
-contentful-sdk-core@^5.0.1:
+contentful-management@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/contentful-management/-/contentful-management-4.2.0.tgz#58225f32904a91325dc54c28cfa394daca5130b9"
+  dependencies:
+    "@contentful/axios" "^0.18.0"
+    contentful-sdk-core "^5.0.0"
+    lodash "^4.17.4"
+
+contentful-sdk-core@^5.0.0, contentful-sdk-core@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/contentful-sdk-core/-/contentful-sdk-core-5.0.1.tgz#8742b90548310b7088ce43dcd4e87fdb30f9ec03"
   dependencies:

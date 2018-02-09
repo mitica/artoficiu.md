@@ -1,0 +1,37 @@
+{
+    "id": "web_app_settings",
+    "data": {
+        "name": "Web App Settings",
+        "description": "Setarile aplicatiei web",
+        "displayField": "title",
+        "fields": [
+            {
+                "id": "title",
+                "name": "Title",
+                "type": "Symbol",
+                "localized": false,
+                "required": true,
+                "validations": [],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "homepageSlider",
+                "name": "Homepage Slider",
+                "type": "Link",
+                "localized": false,
+                "required": false,
+                "validations": [
+                    {
+                        "linkContentType": [
+                            "slider_item"
+                        ]
+                    }
+                ],
+                "disabled": false,
+                "omitted": false,
+                "linkType": "Entry"
+            }
+        ]
+    }
+}
