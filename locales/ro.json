@@ -77,5 +77,6 @@
 	"sum": "Suma",
 	"units": "bucăți",
 	"total_to_pay": "Total spre achitare",
-	"invoice_no": "Factura nr."
+	"invoice_no": "Factura nr.",
+	"product_not_in_stock": "Produsul nu este în stoc"
 }

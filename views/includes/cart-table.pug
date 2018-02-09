@@ -18,7 +18,7 @@ table.table
                 a(href=links.catalog.item(item.product.slug))= item.product.title
               if (item.variant)
                 .sp-var_title
-                  i.sp-val_icon(style=item.variant.colorCode?'background-color: #'+item.variant.colorCode:null)
+                  i.sp-var_icon(style=item.variant.colorCode?'background-color: #'+item.variant.colorCode:null)
                     if(item.variant.icon)
                       img(alt=item.variant.icon.title, src=item.variant.icon.url+'?w=32&h=32')
                   = item.variant.title

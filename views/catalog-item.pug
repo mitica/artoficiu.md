@@ -38,45 +38,10 @@ block main_content
               img.sp-media_pic(src=item.url+'?h=50', alt=item.title)
 
     .col-md-7.js-sp-form
-      if (product.variants && product.variants.length)
-        h5= __('product_variants')
-          | :
-        br
-        - var anyChecked=false
-        each item, i in product.variants
-          - var check = !anyChecked && item.isInStock;
-          - anyChecked = anyChecked || check
-          .row
-            .col-5
-              label(for=item.id).sp-var_title
-                i.sp-val_icon(style=item.colorCode?'background-color: #'+item.colorCode:null)
-                  if(item.icon)
-                    img(alt=item.icon.title, src=item.icon.url+'?w=32&h=32')
-
-                = item.title
-            .col-2
-              input.sp-var_check.js-sp-param(type='radio', name='variantId', value=item.id, id=item.id, checked=check, disabled=!item.isInStock)
-            .col-5
-              if (item.isInStock)
-                label(for=item.id).sp-var_inStock= __('in_stock')
-              else
-                label(for=item.id).sp-var_notInStock= __('not_in_stock')
-
-      .c-alert.js-sp-alert.d-none
-      br
-      .row.sp-count
-        .col-7
-          label(for='sp-count_input').sp-count_label= __('quantity')
-            | : 
-          .sp-count_ctrl
-            input#sp-count_input.form-control.form-control-lg.js-sp-param(type='number', value=1, min=1, max=100, name='quantity')
-        .col-5.text-right
-          input.js-sp-param(type='hidden', value=product.id, name='productId')
-          button(type='button').btn.btn-warning.btn-lg.sp-count_add-btn.js-sp-add= __('add_to_cart')
-      .row
-        .col-12.text-right
-          br
-          a.btn.btn-warning.btn-lg.sp-count_purchase-btn.d-none.js-sp-purchase(href=links.checkout())= __('finish_purchase')
+      if (!product.isInStock)
+        .c-alert= __('product_not_in_stock')
+      else
+        include ./includes/product-form
 
       if (product.properties && product.properties.length)
         br
