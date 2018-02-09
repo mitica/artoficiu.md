@@ -12,5 +12,6 @@ const transporter = createTransport({
 });
 
 export function sendEmail(message: SendMailOptions) {
+    message.from = message.from || config.email;
     return transporter.sendMail(message);
 }

@@ -11,7 +11,7 @@ import { sendEmail } from '../emailSender';
 import { QSMessage } from '../qsMessage';
 import * as util from 'util';
 import recaptchaValidate from '../recaptcha';
-import { remoteIp } from '../utils';
+import { remoteIp, canonical } from '../utils';
 import { createOrderFromCartData, Order } from '../orders/order';
 import { createCustomerFromPostData, Customer } from '../orders/customer';
 const ms = require('ms');
@@ -150,6 +150,7 @@ route.post('/actions/email_us', function (req: Request, res: Response) {
 
 route.post('/actions/checkout', function (req: Request, res: Response) {
 
+    const __ = res.locals.__;
     let customer: Customer;
     let order: Order;
     const cart = req.session.Cart as CartData;
@@ -162,7 +163,7 @@ route.post('/actions/checkout', function (req: Request, res: Response) {
     }
 
     OrdersRepository.create(order)
-        .then(_ => {
+        .then(createdOrder => {
             new Promise<any>((resolve, reject) => {
                 req.session.destroy(error => {
                     if (error) {
@@ -172,6 +173,19 @@ route.post('/actions/checkout', function (req: Request, res: Response) {
                 });
             })
                 .catch(error => logger.error(error));
+
+            if (!createdOrder) {
+                throw new Error(`Not created db order!`);
+            }
+
+            const emailSubject = __('invoice_email_subject');
+            const emailBody = __('invoice_email_body').replace('${invoice_pdf_link}', canonical(links.invoices.invoicePdf(createdOrder.id)));
+
+            sendEmail({
+                to: [createdOrder.customer.email],
+                subject: emailSubject,
+                text: emailBody,
+            }).catch(error => logger.error(error))
 
             return res.redirect(links.checkout.success());
         })

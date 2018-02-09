@@ -21,6 +21,6 @@
   },
   "invoices": {
     "invoice": "/invoices/${0}.html",
-    "invoicePdf": "/orders/invoice/${0}.pdf"
+    "invoicePdf": "/invoices/${0}.pdf"
   }
 }
