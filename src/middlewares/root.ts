@@ -55,7 +55,8 @@ export default function (req: Request, res: Response, next: NextFunction) {
     dc.push('pageMenu', createPageMenu());
     dc.push('settings', ContentData.appSettings({ language: culture.language }).then(settings => {
         if (!settings) {
-            throw new Error(`WebAppSettings not created. Please, create one.`)
+            // throw new Error(`WebAppSettings not created. Please, create one.`)
+            settings = {id: null}
         }
 
         return settings;

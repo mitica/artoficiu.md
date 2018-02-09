@@ -297,7 +297,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
 
 
 function formatLocale(params: BaseFilterParams) {
-    return `${params.language.toLowerCase()}-${params.language.toUpperCase()}`;
+    return params.language.toLowerCase();
 }
 
 const CACHE_OPTIONS: { [type: string]: any } = {};

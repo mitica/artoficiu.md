@@ -2,4 +2,4 @@ if(shopCategories && shopCategories.items)
   ul.c-catalog-menu
     each item in shopCategories.items
       li.c-catalog-menu_i(class= currentPageLink.indexOf(links.catalog.category(item.slug))===0 ? 'selected' : null)
-        a(href=links.catalog.category(item.slug))= item.title
+        a(href=links.catalog.category(item.slug))= item.shortTitle || item.title
