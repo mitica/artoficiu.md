@@ -193,6 +193,40 @@
                     ],
                     "linkType": "Entry"
                 }
+            },
+            {
+                "id": "metaTitle",
+                "name": "Meta Title",
+                "type": "Symbol",
+                "localized": true,
+                "required": true,
+                "validations": [
+                    {
+                        "size": {
+                            "min": 2,
+                            "max": 255
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "metaDescription",
+                "name": "Meta Description",
+                "type": "Symbol",
+                "localized": true,
+                "required": true,
+                "validations": [
+                    {
+                        "size": {
+                            "min": 2,
+                            "max": 255
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false
             }
         ]
     }
