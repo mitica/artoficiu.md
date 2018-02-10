@@ -26,16 +26,16 @@ const client = createClient({
 
 client.getSpace(spaceId)
     .then(space => {
-        return helpers.syncPromise(getData(), item => createEntities(space, item))
+        return helpers.syncPromise(getData(), items => createEntities(space, items))
     })
     .then(_ => console.log('DONE!'))
     .catch(error => console.error(error))
 
-function createEntities(space, data) {
-    return helpers.syncPromise(Object.keys(data),
-        id => space.createEntryWithId(data[id].contentType, id, { fields: data[id].fields })
+function createEntities(space, items) {
+    return helpers.syncPromise(items,
+        item => space.createEntryWithId(item.contentType, item.id, { fields: item.fields })
             .then(ce => ce.publish())
-            .then(_ => console.log(`created entry ${data[id].contentType}, ${id}`)));
+            .then(_ => console.log(`created entry ${item.contentType}, ${item.id}`)));
 }
 
 function getData() {

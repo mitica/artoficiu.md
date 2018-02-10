@@ -4,19 +4,21 @@ const fetch = require('node-fetch')
 const cheerio = require('cheerio')
 const helpers = require('./helpers');
 
-module.exports = function importCategories(space, headers) {
+module.exports = function downloadCategories(space, headers) {
 
-    const categories = {};
+    const categories = [];
 
     const tasks = getIds().map(id => getCategory(id, headers)
         .then(category => {
-            categories[category.id] = category;
+            if (category) {
+                categories.push(category)
+            }
         })
         .catch(error => console.log(error.message))
     )
 
     return Promise.all(tasks).then(() => {
-        if (Object.keys(categories) === 0) {
+        if (categories.length === 0) {
             throw new Error(`No category explored!`)
         }
         return helpers.saveData('categories', categories)
