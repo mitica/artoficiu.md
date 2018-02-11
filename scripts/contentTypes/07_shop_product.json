@@ -3,11 +3,11 @@
     "data": {
         "name": "Shop Product",
         "description": "",
-        "displayField": "title",
+        "displayField": "name",
         "fields": [
             {
-                "id": "title",
-                "name": "Title",
+                "id": "name",
+                "name": "Name",
                 "type": "Symbol",
                 "localized": true,
                 "required": true,
@@ -195,11 +195,28 @@
                 }
             },
             {
+                "id": "title",
+                "name": "Title",
+                "type": "Symbol",
+                "localized": true,
+                "required": false,
+                "validations": [
+                    {
+                        "size": {
+                            "min": 2,
+                            "max": 255
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false
+            },
+            {
                 "id": "metaTitle",
                 "name": "Meta Title",
                 "type": "Symbol",
                 "localized": true,
-                "required": true,
+                "required": false,
                 "validations": [
                     {
                         "size": {
@@ -216,7 +233,7 @@
                 "name": "Meta Description",
                 "type": "Symbol",
                 "localized": true,
-                "required": true,
+                "required": false,
                 "validations": [
                     {
                         "size": {

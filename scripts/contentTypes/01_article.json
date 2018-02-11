@@ -81,6 +81,16 @@
         "disabled": false,
         "omitted": false,
         "linkType": "Asset"
+      },
+      {
+        "id": "createdAt",
+        "name": "createdAt",
+        "type": "Date",
+        "localized": false,
+        "required": false,
+        "validations": [],
+        "disabled": false,
+        "omitted": false
       }
     ]
   }

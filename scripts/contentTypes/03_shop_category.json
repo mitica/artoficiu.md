@@ -3,11 +3,11 @@
     "data": {
         "name": "Shop Category",
         "description": "",
-        "displayField": "title",
+        "displayField": "name",
         "fields": [
             {
-                "id": "title",
-                "name": "Title",
+                "id": "name",
+                "name": "Name",
                 "type": "Symbol",
                 "localized": true,
                 "required": true,
@@ -46,8 +46,8 @@
                 "omitted": false
             },
             {
-                "id": "shortTitle",
-                "name": "Short title",
+                "id": "title",
+                "name": "Title",
                 "type": "Symbol",
                 "localized": true,
                 "required": false,
@@ -124,8 +124,25 @@
                 "linkType": "Asset"
             },
             {
-                "id": "description",
-                "name": "Description",
+                "id": "metaTitle",
+                "name": "Meta Title",
+                "type": "Symbol",
+                "localized": true,
+                "required": false,
+                "validations": [
+                    {
+                        "size": {
+                            "min": 2,
+                            "max": 255
+                        }
+                    }
+                ],
+                "disabled": false,
+                "omitted": false
+            },
+            {
+                "id": "metaDescription",
+                "name": "Meta Description",
                 "type": "Text",
                 "localized": true,
                 "required": false,

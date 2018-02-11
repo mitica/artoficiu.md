@@ -1,25 +1,26 @@
 {
-    "id": "shop_product_property",
+    "id": "property_value",
     "data": {
-        "name": "Shop Product Property",
-        "description": "",
-        "displayField": "title",
+        "name": "Property Value",
+        "description": "A property value: Color = green",
+        "displayField": "value",
         "fields": [
             {
-                "id": "title",
-                "name": "Title",
-                "type": "Symbol",
-                "localized": true,
+                "id": "name",
+                "name": "Name",
+                "type": "Link",
+                "localized": false,
                 "required": true,
                 "validations": [
                     {
-                        "size": {
-                            "min": 2
-                        }
+                        "linkContentType": [
+                            "property"
+                        ]
                     }
                 ],
                 "disabled": false,
-                "omitted": false
+                "omitted": false,
+                "linkType": "Entry"
             },
             {
                 "id": "value",
@@ -47,6 +48,16 @@
                 "disabled": false,
                 "omitted": false,
                 "linkType": "Asset"
+            },
+            {
+                "id": "identifier",
+                "name": "Identifier",
+                "type": "Symbol",
+                "localized": false,
+                "required": false,
+                "validations": [],
+                "disabled": false,
+                "omitted": false
             }
         ]
     }

@@ -3,11 +3,11 @@
     "data": {
         "name": "Slider",
         "description": "",
-        "displayField": "title",
+        "displayField": "name",
         "fields": [
             {
-                "id": "title",
-                "name": "Title",
+                "id": "name",
+                "name": "Name",
                 "type": "Symbol",
                 "localized": false,
                 "required": false,

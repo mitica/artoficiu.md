@@ -3,11 +3,11 @@
     "data": {
         "name": "Shop Product Variant",
         "description": "O vaianta de product",
-        "displayField": "title",
+        "displayField": "name",
         "fields": [
             {
-                "id": "title",
-                "name": "Title",
+                "id": "name",
+                "name": "Name",
                 "type": "Symbol",
                 "localized": true,
                 "required": true,
@@ -60,22 +60,25 @@
                 "omitted": false
             },
             {
-                "id": "colorCode",
-                "name": "Color Code",
-                "type": "Symbol",
+                "id": "properties",
+                "name": "Properties",
+                "type": "Array",
                 "localized": false,
                 "required": false,
-                "validations": [
-                    {
-                        "regexp": {
-                            "pattern": "^[a-f0-9]{6}$",
-                            "flags": null
-                        },
-                        "message": "6 caractere. Exemplu: 9a9a9a (sur)"
-                    }
-                ],
+                "validations": [],
                 "disabled": false,
-                "omitted": false
+                "omitted": false,
+                "items": {
+                    "type": "Link",
+                    "validations": [
+                        {
+                            "linkContentType": [
+                                "property_value"
+                            ]
+                        }
+                    ],
+                    "linkType": "Entry"
+                }
             },
             {
                 "id": "icon",
