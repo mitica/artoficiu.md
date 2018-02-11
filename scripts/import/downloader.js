@@ -4,6 +4,7 @@ require('dotenv').config()
 const downloadCategories = require('./downloadCategories');
 const downloadProperties = require('./downloadProperties');
 const downloadPropertyValues = require('./downloadPropertyValues');
+const downloadProducts = require('./downloadProducts');
 const createClient = require('contentful-management').createClient
 
 console.log(`Start script: downloader`)
@@ -31,9 +32,10 @@ const headers = {
 client.getSpace(spaceId)
     .then(space => {
         const tasks = [
-            downloadCategories(space, headers),
-            downloadProperties(space, headers),
-            downloadPropertyValues(space, headers),
+            // downloadCategories(space, headers),
+            // downloadProperties(space, headers),
+            // downloadPropertyValues(space, headers),
+            downloadProducts(space, headers),
         ]
 
         return Promise.all(tasks)

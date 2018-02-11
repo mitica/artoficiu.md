@@ -41,9 +41,7 @@ function parseItem($, id) {
         id: `property_value${id}`,
         contentType: 'property_value',
         fields: {
-            name: {
-                ru: `property${propertyId}`,
-            },
+            name: { ru: {sys:{"type": "Link", "linkType": "Entry", "id": `property${propertyId}`} }},
             value: {
                 ru: ru,
                 ro: ro,

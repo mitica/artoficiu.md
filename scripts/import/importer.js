@@ -26,7 +26,8 @@ const client = createClient({
 
 client.getSpace(spaceId)
     .then(space => {
-        return helpers.syncPromise(getData(), items => createEntities(space, items))
+        return importImages(space)
+            .then(_ => helpers.syncPromise(getData(), items => createEntities(space, items)))
     })
     .then(_ => console.log('DONE!'))
     .catch(error => console.error(error))
@@ -38,9 +39,17 @@ function createEntities(space, items) {
             .then(_ => console.log(`created entry ${item.contentType}, ${item.id}`)));
 }
 
+function importImages(space) {
+    const dir = path.join('scripts', 'import', 'data');
+    const images = JSON.parse(fs.readFileSync(path.join(dir, 'images.json')))
+
+    return helpers.syncPromise(images, url => helpers.uploadImageUrl(space, url)
+        .catch(error => console.error(error)))
+}
+
 function getData() {
     const dir = path.join('scripts', 'import', 'data');
-    const filesNames = ['categories'];
+    const filesNames = ['property_values'];
 
     return filesNames.map(name => JSON.parse(fs.readFileSync(path.join(dir, name + '.json'))))
 }

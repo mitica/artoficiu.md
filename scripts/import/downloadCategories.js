@@ -61,7 +61,7 @@ function parseCategory($, id) {
                 ru: ru.shortTitle,
                 ro: ro.shortTitle,
             },
-            description: {
+            metaDescription: {
                 ru: ru.description,
                 ro: ro.description,
             },
