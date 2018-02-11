@@ -1,8 +1,6 @@
 
 const fs = require('fs')
-const fetch = require('node-fetch')
-const cheerio = require('cheerio')
-const helpers = require('./helpers');
+const helpers = require('./helpers')
 
 module.exports = function downloadCategories(space, headers) {
 
@@ -26,14 +24,7 @@ module.exports = function downloadCategories(space, headers) {
 }
 
 function getCategory(id, headers) {
-    return fetch(`http://www.artoficiu.md/Admin/ECommerce/EditCategory/${id}`, { headers: headers })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Invalid status code: ${response.status}`);
-            }
-            return response.text();
-        })
-        .then(html => cheerio.load(html))
+    return helpers.loadHtmlPage(`http://www.artoficiu.md/Admin/ECommerce/EditCategory/${id}`, headers)
         .then($ => parseCategory($, id))
 }
 
@@ -66,7 +57,7 @@ function parseCategory($, id) {
                 ru: ru.title,
                 ro: ro.title,
             },
-            shortTitle: {
+            name: {
                 ru: ru.shortTitle,
                 ro: ro.shortTitle,
             },
