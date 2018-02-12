@@ -2,7 +2,7 @@
     "id": "shop_product_variant",
     "data": {
         "name": "Shop Product Variant",
-        "description": "O vaianta de product",
+        "description": "A product variant",
         "displayField": "name",
         "fields": [
             {
@@ -10,7 +10,7 @@
                 "name": "Name",
                 "type": "Symbol",
                 "localized": true,
-                "required": true,
+                "required": false,
                 "validations": [],
                 "disabled": false,
                 "omitted": false
@@ -79,23 +79,6 @@
                     ],
                     "linkType": "Entry"
                 }
-            },
-            {
-                "id": "icon",
-                "name": "Icon",
-                "type": "Link",
-                "localized": false,
-                "required": false,
-                "validations": [
-                    {
-                        "linkMimetypeGroup": [
-                            "image"
-                        ]
-                    }
-                ],
-                "disabled": false,
-                "omitted": false,
-                "linkType": "Asset"
             }
         ]
     }

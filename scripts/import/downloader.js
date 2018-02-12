@@ -5,6 +5,7 @@ const downloadCategories = require('./downloadCategories');
 const downloadProperties = require('./downloadProperties');
 const downloadPropertyValues = require('./downloadPropertyValues');
 const downloadProducts = require('./downloadProducts');
+const downloadProductVariants = require('./downloadProductVariants');
 const createClient = require('contentful-management').createClient
 
 console.log(`Start script: downloader`)
@@ -35,7 +36,8 @@ client.getSpace(spaceId)
             // downloadCategories(space, headers),
             // downloadProperties(space, headers),
             // downloadPropertyValues(space, headers),
-            downloadProducts(space, headers),
+            // downloadProducts(space, headers),
+            downloadProductVariants(space, headers),
         ]
 
         return Promise.all(tasks)

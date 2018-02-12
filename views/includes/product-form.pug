@@ -8,12 +8,7 @@ if (product.variants)
     - anyChecked = anyChecked || check
     .row
       .col-5
-        label(for=item.id).sp-var_title
-          i.sp-var_icon(style=item.colorCode?'background-color: #'+item.colorCode:null)
-            if(item.icon)
-              img(alt=item.icon.title, src=item.icon.url+'?w=32&h=32')
-
-          = item.title
+        +productVariantProperties(item)
       .col-2
         input.sp-var_check.js-sp-param(type='radio', name='variantId', value=item.id, id=item.id, checked=check, disabled=!item.isInStock)
       .col-5

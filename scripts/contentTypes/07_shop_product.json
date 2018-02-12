@@ -110,7 +110,7 @@
                     "validations": [
                         {
                             "linkContentType": [
-                                "shopProductVariant"
+                                "shop_product_variant"
                             ]
                         }
                     ],

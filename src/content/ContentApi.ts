@@ -1,7 +1,7 @@
 
-const debug = require('debug')('artoficiu-content');
+// const debug = require('debug')('artoficiu-content');
 import { CacheContentfulApi } from './CacheContentfulApi';
-import { ContentfulEntity, ContentfulEntityCollection, ApiQuery } from './ContentfulApi';
+import { ApiQuery } from './ContentfulApi';
 import {
     ShopCategoryEntity,
     ShopCategoryCollection,
@@ -12,13 +12,16 @@ import {
     PageCollection,
     PageEntity,
     ContentTypes,
-    ImageEntity,
     WebAppSettingsEntity,
-    SliderEntity,
-    SliderItemEntity,
-    ShopProductPropertyEntity,
-    ShopProductVariantEntity
 } from './entities';
+
+import {
+    toShopProducts,
+    toArticles,
+    toPages,
+    toShopCategories,
+    toSlider,
+} from './entityMappers'
 
 const ms = require('ms');
 
@@ -74,7 +77,8 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             content_type: ContentTypes.SHOP_CATEGORY,
             include: 1,
             limit: 1,
-        };
+        }
+        
         if (params.slug) {
             query['fields.slug'] = params.slug;
         } else {
@@ -90,7 +94,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             locale: formatLocale(params),
             content_type: ContentTypes.SHOP_CATEGORY,
             include: 1,
-            limit: 100,
+            limit: params.limit,
             order: 'fields.order',
         };
 
@@ -106,7 +110,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
         const query: ApiQuery = {
             locale: formatLocale(params),
             content_type: ContentTypes.SHOP_PRODUCT,
-            include: 2,
+            include: 4,
             limit: 1,
         };
 
@@ -198,7 +202,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             query.skip = params.skip;
         }
 
-        query.select = 'sys,fields.title,fields.slug,fields.summary,fields.image';
+        query.select = 'sys,fields.title,fields.slug,fields.summary,fields.image,fields.createdAt';
 
         return this.getArticles(query);
     }
@@ -265,7 +269,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             return {
                 id: item.sys.id,
                 createdAt: item.sys.createdAt,
-                homepageSlider: convertSlider(item.fields.homepageSlider),
+                homepageSlider: toSlider(item.fields.homepageSlider),
             }
         });
     }
@@ -326,289 +330,3 @@ CACHE_OPTIONS[ContentTypes.SHOP_PRODUCT] = {
     item: { max: 100, maxAge: ms('130m') },
     collection: { max: 50, maxAge: ms('10m') },
 };
-
-function convertSliderItem(item: ContentfulEntity): SliderItemEntity {
-    if (!item) {
-        return null;
-    }
-    const slider: SliderItemEntity = {
-        id: item.sys.id,
-        title: item.fields.title,
-        link: item.fields.link,
-        image: toImage(item.fields.image),
-    }
-
-    return slider;
-}
-
-function convertSlider(item: ContentfulEntity): SliderEntity {
-    if (!item) {
-        return null;
-    }
-    const slider: SliderEntity = {
-        id: item.sys.id,
-        items: item.fields.items && item.fields.items.map(convertSliderItem) || [],
-    }
-
-    return slider;
-}
-
-function toShopProducts(collection: ContentfulEntityCollection<ContentfulEntity>): ShopProductCollection {
-    const data: ShopProductCollection = {
-        items: [],
-        total: collection.total,
-        skip: collection.skip,
-        limit: collection.limit
-    }
-
-    if (!collection) {
-        return data;
-    }
-
-    if (!collection.items) {
-        data.total = collection.total || data.total;
-        return data;
-    }
-
-    data.items = collection.items.map(toShopProduct);
-
-    return data;
-}
-
-function toShopProduct(entity: ContentfulEntity): ShopProductEntity {
-    if (!entity) {
-        return null;
-    }
-    const data: ShopProductEntity = {
-        id: entity.sys.id,
-        createdAt: entity.sys.createdAt,
-        updatedAt: entity.sys.updatedAt,
-        title: entity.fields.title,
-        slug: entity.fields.slug,
-        description: entity.fields.description,
-        price: entity.fields.price,
-        oldPrice: entity.fields.oldPrice,
-        isInStock: entity.fields.isInStock,
-    }
-
-    if (entity.fields.images) {
-        data.images = entity.fields.images.map(toImage);
-    }
-
-    if (entity.fields.categories) {
-        data.categories = entity.fields.categories.map(toShopCategory);
-    }
-
-    if (entity.fields.properties) {
-        data.properties = entity.fields.properties.map(toShopProductProperty);
-    }
-
-    if (entity.fields.variants) {
-        data.variants = entity.fields.variants.map(toShopProductVariant);
-    }
-
-    return data;
-}
-
-function toShopProductVariant(entity: ContentfulEntity): ShopProductVariantEntity {
-    if (!entity) {
-        return null;
-    }
-    const data: ShopProductVariantEntity = {
-        id: entity.sys.id,
-        createdAt: entity.sys.createdAt,
-        updatedAt: entity.sys.updatedAt,
-        title: entity.fields.title,
-        isInStock: entity.fields.isInStock,
-        price: entity.fields.price,
-        oldPrice: entity.fields.oldPrice,
-        colorCode: entity.fields.colorCode,
-        icon: entity.fields.icon && toImage(entity.fields.icon),
-    }
-
-    return data;
-}
-
-function toShopProductProperty(entity: ContentfulEntity): ShopProductPropertyEntity {
-    if (!entity) {
-        return null;
-    }
-    const data: ShopProductPropertyEntity = {
-        id: entity.sys.id,
-        createdAt: entity.sys.createdAt,
-        updatedAt: entity.sys.updatedAt,
-        title: entity.fields.title,
-        value: entity.fields.value,
-        icon: entity.fields.icon && toImage(entity.fields.icon),
-    }
-
-    return data;
-}
-
-function toArticles(collection: ContentfulEntityCollection<ContentfulEntity>): ArticleCollection {
-    const data: ArticleCollection = {
-        items: [],
-        total: collection.total,
-        skip: collection.skip,
-        limit: collection.limit
-    };
-    if (!collection) {
-        return data;
-    }
-
-    if (!collection.items) {
-        return data;
-    }
-
-    data.items = collection.items.map(toArticle);
-
-    return data;
-}
-
-function toArticle(entity: ContentfulEntity): ArticleEntity {
-    if (!entity) {
-        return null;
-    }
-    const data: ArticleEntity = {
-        id: entity.sys.id,
-        createdAt: entity.sys.createdAt,
-        updatedAt: entity.sys.updatedAt,
-        title: entity.fields.title,
-        shortTitle: entity.fields.shortTitle,
-        slug: entity.fields.slug,
-        summary: entity.fields.summary,
-    }
-
-    if (entity.fields.text) {
-        data.text = entity.fields.text;
-    } else {
-        debug(`article no field: text!`);
-    }
-
-    if (entity.fields.image) {
-        data.image = toImage(entity.fields.image);
-    }
-
-    return data;
-}
-
-function toPages(collection: ContentfulEntityCollection<ContentfulEntity>): PageCollection {
-    const data: PageCollection = {
-        items: [],
-        total: collection.total,
-        skip: collection.skip,
-        limit: collection.limit
-    }
-
-    if (!collection) {
-        return data;
-    }
-
-    if (!collection.items) {
-        return data;
-    }
-
-    data.items = collection.items.map(toPage);
-
-    return data;
-}
-
-function toPage(entity: ContentfulEntity): PageEntity {
-    if (!entity) {
-        return null;
-    }
-    const data: PageEntity = {
-        id: entity.sys.id,
-        createdAt: entity.sys.createdAt,
-        updatedAt: entity.sys.updatedAt,
-        title: entity.fields.title,
-        shortTitle: entity.fields.shortTitle,
-        slug: entity.fields.slug,
-        summary: entity.fields.summary,
-    }
-
-    if (entity.fields.text) {
-        data.text = entity.fields.text;
-    } else {
-        debug(`page no field text`);
-    }
-
-    if (entity.fields.image) {
-        data.image = toImage(entity.fields.image);
-    }
-
-    return data;
-}
-
-
-function toShopCategories(collection: ContentfulEntityCollection<ContentfulEntity>): ShopCategoryCollection {
-    const data: ShopCategoryCollection = {
-        items: [],
-        total: collection.total,
-        skip: collection.skip,
-        limit: collection.limit
-    }
-
-    if (!collection) {
-        return data;
-    }
-
-    if (!collection.items) {
-        return data;
-    }
-
-    data.items = collection.items.map(toShopCategory);
-
-    return data;
-}
-
-function toShopCategory(entity: ContentfulEntity): ShopCategoryEntity {
-    if (!entity) {
-        return null;
-    }
-    const data: ShopCategoryEntity = {
-        id: entity.sys.id,
-        // createdAt: entity.createdAt,
-        // updatedAt: entity.updatedAt,
-    }
-    if (entity.fields) {
-        data.title = entity.fields.title;
-        data.shortTitle = entity.fields.shortTitle;
-        data.slug = entity.fields.slug;
-
-        if (entity.fields.parent) {
-            data.parent = toShopCategory(entity.fields.parent);
-        }
-    }
-
-    return data;
-}
-
-function toImage(entity: ContentfulEntity): ImageEntity {
-    if (!entity) {
-        return null;
-    }
-    const data: ImageEntity = {
-        id: entity.sys.id
-    }
-
-    if (entity.fields) {
-        if (entity.fields.file) {
-            if (entity.fields.file.url) {
-                data.url = entity.fields.file.url;
-            }
-            if (entity.fields.file.contentType) {
-                data.contentType = entity.fields.file.contentType;
-            }
-            if (entity.fields.file.details) {
-                data.size = entity.fields.file.details.size;
-                if (entity.fields.file.details.image) {
-                    data.width = entity.fields.file.details.image.width;
-                    data.height = entity.fields.file.details.image.height;
-                }
-            }
-        }
-    }
-
-    return data;
-}

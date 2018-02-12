@@ -33,6 +33,10 @@ client.getSpace(spaceId)
     .catch(error => console.error(error))
 
 function createEntities(space, items) {
+    if (items.length) {
+        console.log(`=================================`)
+        console.log(`start importing entities ${items[0].contentType}`)
+    }
     return helpers.syncPromise(items,
         item => space.createEntryWithId(item.contentType, item.id, { fields: item.fields })
             .then(ce => ce.publish())
@@ -41,18 +45,24 @@ function createEntities(space, items) {
 }
 
 function importImages(space) {
+
+    if (process.env.CT) {
+        return Promise.resolve()
+    }
+
     const dir = path.join('scripts', 'import', 'data');
     const images = JSON.parse(fs.readFileSync(path.join(dir, 'images.json')))
 
     return helpers.syncPromise(images,
         url => helpers.uploadImageUrl(space, url)
             .then(_ => helpers.delay(2000))
+            .then(_ => console.log(`imported image ${url}`))
             .catch(error => console.error(error)))
 }
 
 function getData() {
     const dir = path.join('scripts', 'import', 'data');
-    const filesNames = ['property_values'];
+    const filesNames = process.env.CT && process.env.CT.split(/[,;\s]+/g) || ['categories', 'properties', 'property_values', 'product_variants', 'products'];
 
     return filesNames.map(name => JSON.parse(fs.readFileSync(path.join(dir, name + '.json'))))
 }

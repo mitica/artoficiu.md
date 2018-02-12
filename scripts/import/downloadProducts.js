@@ -45,7 +45,7 @@ function parseProduct($, id, headers) {
         .toArray()
         .map(item => $(item).val())
 
-    console.log('product categories', categories)
+    // console.log('product categories', categories)
 
     const price = parseFloat($('input#Price').val())
     const newPrice = parseFloat($('input#NewPrice').val())
@@ -90,6 +90,9 @@ function parseProduct($, id, headers) {
                 ru: name,
                 ro: name,
             },
+            isInStock: {
+                ru: variants.length > 0
+            },
             description: {
                 ru: ru.description,
                 ro: ro.description,
@@ -104,11 +107,11 @@ function parseProduct($, id, headers) {
             },
             categories: {
                 ru: categories.map(item => {
-                    return { "sys": { "type": "Link", "linkType": "Entry", "id": `shop_category${item}` } }
+                    return { "sys": { "type": "Link", "linkType": "Entry", "id": `category${item}` } }
                 }),
             },
             images: {
-                ru: variants.map(item => {
+                ru: images.map(item => {
                     return { "sys": { "type": "Link", "linkType": "Asset", "id": helpers.md5(item) } }
                 }),
             },
@@ -127,36 +130,6 @@ function parseProduct($, id, headers) {
     }
 
     return product
-}
-
-function parseProductVariant($) {
-    const name = $('input#Name').val()
-    if (!name) {
-        return Promise.reject(new Error(`Invalid product variant page`))
-    }
-
-    const color = $('select[name="Properties[0].ValueId"] option[selected]').val()
-
-    return {
-        id: helpers.createCategoryId(id),
-        contentType: 'shop_category',
-        fields: {
-            order: { ru: order },
-            slug: { ru: slug },
-            title: {
-                ru: ru.title,
-                ro: ro.title,
-            },
-            shortTitle: {
-                ru: ru.shortTitle,
-                ro: ro.shortTitle,
-            },
-            description: {
-                ru: ru.description,
-                ro: ro.description,
-            },
-        }
-    }
 }
 
 function getIds() {

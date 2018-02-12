@@ -30,10 +30,11 @@ function getItem(id, headers) {
 
 function parseItem($, id) {
     const propertyId = parseInt($('#PropertyId').val())
+    const name = $('#Name').val()
     const ro = $('#Translations_0__Name').val()
     const ru = $('#Translations_1__Name').val()
 
-    if (!ro || !propertyId) {
+    if (!name || !propertyId) {
         throw new Error(`Invalid property value page`)
     }
 
@@ -41,10 +42,10 @@ function parseItem($, id) {
         id: `property_value${id}`,
         contentType: 'property_value',
         fields: {
-            name: { ru: {sys:{"type": "Link", "linkType": "Entry", "id": `property${propertyId}`} }},
+            name: { ru: { sys: { "type": "Link", "linkType": "Entry", "id": `property${propertyId}` } } },
             value: {
-                ru: ru,
-                ro: ro,
+                ru: ru || ro || name,
+                ro: ro || name || ru,
             },
         }
     }

@@ -58,13 +58,18 @@ export interface ShopProductVariantEntity extends Entity {
     price?: number
     oldPrice?: number
     isInStock?: boolean
-    icon?: ImageEntity
-    colorCode?: string
+    properties?: PropertyValueEntity[]
 }
 
-export interface ShopProductPropertyEntity extends Entity {
-    title?: string
+export interface PropertyEntity extends Entity {
+    name?: string
+}
+
+export interface PropertyValueEntity extends Entity {
+    name?: string
     value?: string
+    /** Color code, etc. */
+    identifier?: string
     icon?: ImageEntity
 }
 
@@ -77,7 +82,7 @@ export interface ShopProductEntity extends Entity {
     images?: ImageEntity[]
     variants?: ShopProductVariantEntity[]
     description?: string
-    properties?: ShopProductPropertyEntity[]
+    properties?: PropertyValueEntity[]
     categories?: ShopCategoryEntity[]
 }
 

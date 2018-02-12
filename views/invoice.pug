@@ -63,7 +63,7 @@ html(lang=culture.language)
                 strong= item.product.title
                 if (item.variant)
                   |  
-                  em=item.variant.title
+                  em=item.variant.title || item.variant.properties.map(it=>it.value).join('/')
               td.text-right= item.quantity
                 |  
                 = __('units')

@@ -12,7 +12,7 @@ block main_content
     h1
       a(href=currentPageLink)= article.title
     .article_details
-      time= util.moment(article.createdAt).locale(culture.language).format('ll')
+      time= util.moment(article.createdAt).locale(culture.language).format('LL')
     .article_body!= util.renderArticle(article.text)
 
   //- +articleListBlock(articles)
