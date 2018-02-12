@@ -36,6 +36,7 @@ function createEntities(space, items) {
     return helpers.syncPromise(items,
         item => space.createEntryWithId(item.contentType, item.id, { fields: item.fields })
             .then(ce => ce.publish())
+            .then(_ => helpers.delay(3000))
             .then(_ => console.log(`created entry ${item.contentType}, ${item.id}`)));
 }
 
@@ -43,8 +44,10 @@ function importImages(space) {
     const dir = path.join('scripts', 'import', 'data');
     const images = JSON.parse(fs.readFileSync(path.join(dir, 'images.json')))
 
-    return helpers.syncPromise(images, url => helpers.uploadImageUrl(space, url)
-        .catch(error => console.error(error)))
+    return helpers.syncPromise(images,
+        url => helpers.uploadImageUrl(space, url)
+            .then(_ => helpers.delay(2000))
+            .catch(error => console.error(error)))
 }
 
 function getData() {

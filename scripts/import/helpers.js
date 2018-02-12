@@ -75,3 +75,7 @@ exports.uploadImageUrl = function (space, url, title) {
         }
     })
 }
+
+exports.delay = function (ms, result) {
+    return new Promise(resolve => setTimeout(() => resolve(result), ms))
+}
