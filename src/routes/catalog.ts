@@ -60,7 +60,8 @@ route.get('/catalog/:category', function (req: Request, res: Response, next: Nex
                 error.statusCode = 404;
                 return next(error);
             }
-            res.locals.site.head.title = __('catalog') + ' / ' + data.selectedShopCategory.title;
+            res.locals.site.head.title = data.selectedShopCategory.metaTitle || __('catalog') + ' / ' + (data.selectedShopCategory.title || data.selectedShopCategory.name);
+            res.locals.site.description = data.selectedShopCategory.metaDescription
             return ContentData.shopProducts({ limit: 20, skip: page * 20, language: culture.language, order: '-createdAt', categoryId: data.selectedShopCategory.id })
                 .then(shopProducts => {
                     data.shopProducts = shopProducts;
@@ -94,9 +95,8 @@ route.get('/catalog/item/:slug', function (req: Request, res: Response, next: Ne
                 return next(error);
             }
 
-            res.locals.site.head.title = product.title;
-
-            // console.log(JSON.stringify(product))
+            res.locals.site.head.title = product.metaTitle || product.title || product.name;
+            res.locals.site.head.description = product.metaDescription;
 
             res.render('catalog-item', data);
         })

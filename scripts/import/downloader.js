@@ -36,8 +36,8 @@ client.getSpace(spaceId)
             // downloadCategories(space, headers),
             // downloadProperties(space, headers),
             // downloadPropertyValues(space, headers),
-            // downloadProducts(space, headers),
-            downloadProductVariants(space, headers),
+            downloadProducts(space, headers),
+            // downloadProductVariants(space, headers),
         ]
 
         return Promise.all(tasks)

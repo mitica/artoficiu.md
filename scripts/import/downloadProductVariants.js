@@ -51,12 +51,17 @@ function parseItem($, id, headers) {
         .toArray()
         .map(item => $(item).val())
 
+    if (!properties.length) {
+        console.log('Variant without props');
+        return Promise.resolve()
+    }
+
     const variant = {
         id: `shop_product_variant${id}`,
         contentType: 'shop_product_variant',
         fields: {
             isInStock: { ru: quantity > 0 },
-            // name: createVariantName(properties),
+            name: createVariantName(properties),
             properties: {
                 ru: properties.map(item => {
                     return { "sys": { "type": "Link", "linkType": "Entry", "id": `property_value${item}` } }
@@ -70,9 +75,7 @@ function parseItem($, id, headers) {
 
 function createVariantName(properties) {
     const property_values = require('./data/property_values')
-    const values = property_values.filter(item => properties.indexOf(p => 'property_value' + p.id === item.id) > -1)
-    if(properties.length)
-    console.log('filtered values', values, properties)
+    const values = property_values.filter(item => properties.findIndex(p => ('property_value' + p) === item.id) > -1)
     const ro = values.map(val => val.fields.value.ro).join('/')
     const ru = values.map(val => val.fields.value.ru).join('/')
 

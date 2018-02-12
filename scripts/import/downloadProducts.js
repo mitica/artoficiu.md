@@ -38,7 +38,11 @@ function parseProduct($, id, headers) {
     if (!name) {
         return Promise.reject(new Error(`Invalid product page`))
     }
-    const slug = $('#Descriptions_0__UrlTitlePrepend').val()
+    let slug = toSlug($('#Descriptions_0__UrlTitlePrepend').val().trim() + ' ' + name);
+
+    if (slug[0] === '-') {
+        slug = slug.substr(1)
+    }
 
     const categories = $('input[type="checkbox"]', '.list-unstyled')
         .filter((_, item) => $(item).attr('name').indexOf('Categories') === 0 && $(item).prop('checked'))
@@ -68,6 +72,38 @@ function parseProduct($, id, headers) {
         metaDescription: $('#Descriptions_1__MetaDescription').val(),
     }
 
+    if (ro.description) {
+        ro.description = ro.description.replace(/\!\[\]\(data:image\/.+\)/g, '')
+    }
+    if (ru.description) {
+        ru.description = ru.description.replace(/\!\[\]\(data:image\/.+\)/g, '')
+    }
+
+    if (ro.metaDescription && ro.metaDescription.length > 255) {
+        ro.metaDescription = ro.metaDescription.substr(0, 255)
+    }
+    if (ru.metaDescription && ru.metaDescription.length > 255) {
+        ru.metaDescription = ru.metaDescription.substr(0, 255)
+    }
+    if (ro.metaTitle && ro.metaTitle.length > 255) {
+        ro.metaTitle = ro.metaTitle.substr(0, 255)
+    }
+    if (ru.metaTitle && ru.metaTitle.length > 255) {
+        ru.metaTitle = ru.metaTitle.substr(0, 255)
+    }
+    if (ro.metaTitle && ro.metaTitle.trim().length < 5) {
+        delete ro.metaTitle
+    }
+    if (ro.metaDescription && ro.metaDescription.trim().length < 5) {
+        delete ro.metaDescription
+    }
+    if (ru.metaTitle && ru.metaTitle.trim().length < 5) {
+        delete ru.metaTitle
+    }
+    if (ru.metaDescription && ru.metaDescription.trim().length < 5) {
+        delete ru.metaDescription
+    }
+
     const images = $('a.fancybox-button', '#table_images')
         .toArray()
         .map(item => 'http://www.artoficiu.md' + $(item).attr('href').replace('/Images/1/', '/Images/0/'))
@@ -79,6 +115,7 @@ function parseProduct($, id, headers) {
         .toArray()
         .map(tr => $('a', tr).attr('href'))
         .map(url => /(\d+)$/.exec(url)[1])
+        .filter(id => variantExists(id))
 
     const product = {
         id: `shop_product${id}`,
@@ -123,6 +160,21 @@ function parseProduct($, id, headers) {
         }
     }
 
+    if (~[undefined, null, '', ' '].indexOf(product.fields.metaDescription.ru)) {
+        delete product.fields.metaDescription
+    } else {
+        if (~[undefined, null, '', ' '].indexOf(product.fields.metaDescription.ro)) {
+            delete product.fields.metaDescription.ro
+        }
+    }
+    if (~[undefined, null, '', ' '].indexOf(product.fields.metaTitle.ru)) {
+        delete product.fields.metaTitle
+    } else {
+        if (~[undefined, null, '', ' '].indexOf(product.fields.metaTitle.ro)) {
+            delete product.fields.metaTitle.ro
+        }
+    }
+
     if (newPrice && newPrice > 0 && showNewPrice) {
         product.oldPrice = {
             ru: price
@@ -130,6 +182,15 @@ function parseProduct($, id, headers) {
     }
 
     return product
+}
+
+function toSlug(name) {
+    return name.trim().toLowerCase()
+        .replace(/[\s]+/g, '-').replace(/[-]{2,}/g, '-')
+}
+
+function variantExists(id) {
+    return require('./data/product_variants').find(item => item.id === 'shop_product_variant' + id)
 }
 
 function getIds() {

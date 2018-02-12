@@ -14,10 +14,10 @@ mixin productListBlock(items, options)
             span.c-prod-bl_price= util.formatNumber(item.price, culture.language, 2)
               |  
               = __('lei')
-          h6.c-prod-bl_title= item.title
+          h6.c-prod-bl_title= item.name
 
 mixin productVariantProperties(variant)
-  - var title = variant.title || variant.properties.map(item=>item.value).join('/')
+  - var title = variant.name || variant.properties.map(item=>item.value).join('/')
   label(for=variant.id).sp-var_title
     each item in variant.properties
       if (item.identifier || item.icon)

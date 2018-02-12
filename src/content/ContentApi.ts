@@ -140,7 +140,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             query.skip = params.skip;
         }
 
-        query.select = 'sys,fields.title,fields.slug,fields.price,fields.images,fields.oldPrice,fields.isInStock';
+        query.select = 'sys,fields.name,fields.title,fields.slug,fields.price,fields.images,fields.oldPrice,fields.isInStock';
 
         switch (params.order) {
             case 'createdAt':

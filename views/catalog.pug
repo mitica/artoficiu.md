@@ -6,7 +6,7 @@ block main_content
       if (selectedShopCategory)
         a(href=links.catalog())= __('catalog')
         |  / 
-        = (selectedShopCategory.shortTitle || selectedShopCategory.title)
+        = (selectedShopCategory.name || selectedShopCategory.title)
       else
         = __('catalog')
 

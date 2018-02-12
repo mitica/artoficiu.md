@@ -12,16 +12,12 @@ table.table
         td.align-middle.text-right= (i+1)
         td.align-middle
           .media
-            img(class="mr-3" src=util.imageIconUrl(item.product.images[0].url) alt=item.product.title)
+            img(class="mr-3" src=util.imageIconUrl(item.product.images[0].url) alt=item.product.name)
             .media-body
               h6
-                a(href=links.catalog.item(item.product.slug))= item.product.title
+                a(href=links.catalog.item(item.product.slug))= item.product.name
               if (item.variant)
-                .sp-var_title
-                  i.sp-var_icon(style=item.variant.colorCode?'background-color: #'+item.variant.colorCode:null)
-                    if(item.variant.icon)
-                      img(alt=item.variant.icon.title, src=item.variant.icon.url+'?w=32&h=32')
-                  = item.variant.title
+                +productVariantProperties(item.variant)
                     
         td.align-middle.text-right
           strong= util.formatNumber(item.product.price, culture.language)
