@@ -38,11 +38,7 @@ function parseProduct($, id, headers) {
     if (!name) {
         return Promise.reject(new Error(`Invalid product page`))
     }
-    let slug = toSlug($('#Descriptions_0__UrlTitlePrepend').val().trim() + ' ' + name);
-
-    if (slug[0] === '-') {
-        slug = slug.substr(1)
-    }
+    const slug = toSlug($('#Descriptions_0__UrlTitlePrepend').val().trim() + ' ' + name)
 
     const categories = $('input[type="checkbox"]', '.list-unstyled')
         .filter((_, item) => $(item).attr('name').indexOf('Categories') === 0 && $(item).prop('checked'))
@@ -186,7 +182,10 @@ function parseProduct($, id, headers) {
 
 function toSlug(name) {
     return name.trim().toLowerCase()
-        .replace(/[\s]+/g, '-').replace(/[-]{2,}/g, '-')
+        .replace(/[\s]+/g, '-')
+        .replace(/[-]{2,}/g, '-')
+        .replace(/^-/, '')
+        .replace(/-$/, '')
 }
 
 function variantExists(id) {
@@ -195,7 +194,7 @@ function variantExists(id) {
 
 function getIds() {
     const ids = [];
-    for (var i = 1; i < 30; i++) {
+    for (var i = 1; i < 100; i++) {
         ids.push(i);
     }
     return ids;
