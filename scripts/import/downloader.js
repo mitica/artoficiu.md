@@ -33,11 +33,11 @@ const headers = {
 client.getSpace(spaceId)
     .then(space => {
         const tasks = [
-            // downloadCategories(space, headers),
-            // downloadProperties(space, headers),
-            // downloadPropertyValues(space, headers),
+            downloadCategories(space, headers),
+            downloadProperties(space, headers),
+            downloadPropertyValues(space, headers),
             downloadProducts(space, headers),
-            // downloadProductVariants(space, headers),
+            downloadProductVariants(space, headers),
         ]
 
         return Promise.all(tasks)

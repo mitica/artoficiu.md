@@ -30,11 +30,12 @@ function getCategory(id, headers) {
 
 function parseCategory($, id) {
     const order = parseInt($('#Order').val())
-    const slug = $('#Translations_0__UrlSlug').val()
+    let slug = $('#Translations_0__UrlSlug').val()
 
     if (!slug) {
         throw new Error(`Invalid category page`)
     }
+    slug = helpers.toSlug(slug)
 
     const ro = {
         title: $('#Translations_0__H1').val(),

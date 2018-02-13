@@ -128,9 +128,9 @@ export function toPropertyValue(entity: ContentfulEntity): PropertyValueEntity {
         id: entity.sys.id,
         // createdAt: entity.sys.createdAt,
         // updatedAt: entity.sys.updatedAt,
-        name: entity.fields.name.fields.name,
+        name: entity.fields.name,
         value: entity.fields.value,
-        identifier: entity.fields.identifier,
+        colorCode: entity.fields.colorCode,
         icon: entity.fields.icon && toImage(entity.fields.icon),
     }
 

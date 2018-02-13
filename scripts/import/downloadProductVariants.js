@@ -64,7 +64,7 @@ function parseItem($, id, headers) {
             name: createVariantName(properties),
             properties: {
                 ru: properties.map(item => {
-                    return { "sys": { "type": "Link", "linkType": "Entry", "id": `property_value${item}` } }
+                    return { "sys": { "type": "Link", "linkType": "Entry", "id": `shop_property_value${item}` } }
                 }),
             }
         }
@@ -75,7 +75,9 @@ function parseItem($, id, headers) {
 
 function createVariantName(properties) {
     const property_values = require('./data/property_values')
-    const values = property_values.filter(item => properties.findIndex(p => ('property_value' + p) === item.id) > -1)
+    const values = property_values
+        .filter(item => properties.findIndex(p => ('shop_property_value' + p) === item.id) > -1)
+        .sort((a, b) => a.id > b.id)
     const ro = values.map(val => val.fields.value.ro).join('/')
     const ru = values.map(val => val.fields.value.ru).join('/')
 

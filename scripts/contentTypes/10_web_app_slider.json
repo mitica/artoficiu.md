@@ -24,7 +24,7 @@
                 "validations": [
                     {
                         "linkContentType": [
-                            "slider_item"
+                            "slider"
                         ]
                     }
                 ],

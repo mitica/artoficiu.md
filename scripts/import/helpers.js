@@ -79,3 +79,11 @@ exports.uploadImageUrl = function (space, url, title) {
 exports.delay = function (ms, result) {
     return new Promise(resolve => setTimeout(() => resolve(result), ms))
 }
+
+exports.toSlug = function (name) {
+    return name.trim().toLowerCase()
+        .replace(/[\s\(\)+=,.;{}@#!%^*&"\/\\|?$\[\]:]+/g, '-')
+        .replace(/[-]{2,}/g, '-')
+        .replace(/^-/, '')
+        .replace(/-$/, '')
+}

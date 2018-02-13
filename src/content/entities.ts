@@ -61,15 +61,11 @@ export interface ShopProductVariantEntity extends Entity {
     properties?: PropertyValueEntity[]
 }
 
-export interface PropertyEntity extends Entity {
-    name?: string
-}
-
 export interface PropertyValueEntity extends Entity {
     name?: string
     value?: string
     /** Color code, etc. */
-    identifier?: string
+    colorCode?: string
     icon?: ImageEntity
 }
 

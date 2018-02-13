@@ -46,9 +46,9 @@ function createEntities(space, items) {
 
 function importImages(space) {
 
-    if (process.env.CT) {
+    // if (process.env.CT) {
         return Promise.resolve()
-    }
+    // }
 
     const dir = path.join('scripts', 'import', 'data');
     const images = JSON.parse(fs.readFileSync(path.join(dir, 'images.json')))
@@ -62,7 +62,7 @@ function importImages(space) {
 
 function getData() {
     const dir = path.join('scripts', 'import', 'data');
-    const filesNames = process.env.CT && process.env.CT.split(/[,;\s]+/g) || ['categories', 'properties', 'property_values', 'product_variants', 'products'];
+    const filesNames = process.env.CT && process.env.CT.split(/[,;\s]+/g) || ['categories', 'property_values', 'product_variants', 'products'];
 
     return filesNames.map(name => JSON.parse(fs.readFileSync(path.join(dir, name + '.json'))))
 }

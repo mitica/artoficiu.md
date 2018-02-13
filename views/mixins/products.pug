@@ -20,8 +20,8 @@ mixin productVariantProperties(variant)
   - var title = variant.name || variant.properties.map(item=>item.value).join('/')
   label(for=variant.id).sp-var_title
     each item in variant.properties
-      if (item.identifier || item.icon)
-        i.sp-var_icon(style=item.identifier?'background-color: #'+item.identifier:null)
+      if (item.colorCode || item.icon)
+        i.sp-var_icon(style=item.colorCode?'background-color: #'+item.colorCode:null)
           if(item.icon)
             img(alt=item.icon.title, src=item.icon.url+'?w=32&h=32')
 

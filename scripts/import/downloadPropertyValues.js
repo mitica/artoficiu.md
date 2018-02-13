@@ -39,16 +39,20 @@ function parseItem($, id) {
     }
 
     return {
-        id: `property_value${id}`,
-        contentType: 'property_value',
+        id: `shop_property_value${id}`,
+        contentType: 'shop_property_value',
         fields: {
-            name: { ru: { sys: { "type": "Link", "linkType": "Entry", "id": `property${propertyId}` } } },
+            name: getPropertyName(propertyId),
             value: {
                 ru: ru || ro || name,
                 ro: ro || name || ru,
             },
         }
     }
+}
+
+function getPropertyName(id) {
+    return require('./data/properties.json').find(item => item.id === 'property' + id).fields.name
 }
 
 
