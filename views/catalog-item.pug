@@ -51,14 +51,14 @@ block main_content
             h4= __('properties')
           .c-group_content
             each item in product.properties
-              .sp-prop
+              .sp-prop.row
                 .col-9
                   span.sp-prop_name= item.name
                     | :
                   span.sp-prop_value= item.value
                 .col-3
                   if (item.icon)
-                    img.sp-prop_icon(src=item.icon.url+'?w=45&h=45', alt=item.icon.title)
+                    img.sp-prop_icon(src=item.icon.url+'?w=32&h=32', alt=item.icon.title)
 
 
   br
