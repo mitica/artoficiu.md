@@ -82,7 +82,7 @@ exports.delay = function (ms, result) {
 
 exports.toSlug = function (name) {
     return name.trim().toLowerCase()
-        .replace(/[\s\(\)+=,.;{}@#!%^*&"\/\\|?$\[\]:]+/g, '-')
+        .replace(/[\s\(\)+=,.;{}@#!%^*&"\/\\|?$\[\]:_]+/g, '-')
         .replace(/[-]{2,}/g, '-')
         .replace(/^-/, '')
         .replace(/-$/, '')

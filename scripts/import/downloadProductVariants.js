@@ -50,6 +50,7 @@ function parseItem($, id, headers) {
     const properties = $('.portlet-body select option[selected]')
         .toArray()
         .map(item => $(item).val())
+        .filter(item => item !== 'true')
 
     if (!properties.length) {
         console.log('Variant without props');

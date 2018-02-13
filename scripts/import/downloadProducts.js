@@ -113,12 +113,17 @@ function parseProduct($, id, headers) {
         .map(url => /(\d+)$/.exec(url)[1])
         .filter(id => variantExists(id))
 
+    const properties = $('.portlet-body select option[selected]')
+        .toArray()
+        .map(item => $(item).val())
+        .filter(item => item !== 'true')
+
     const product = {
         id: `shop_product${id}`,
         contentType: 'shop_product',
         fields: {
             price: { ru: newPrice && newPrice > 0 && showNewPrice ? newPrice : price },
-            slug: { ru: slug.replace(/s+/g, '-') },
+            slug: { ru: slug },
             name: {
                 ru: name,
                 ro: name,
@@ -151,6 +156,11 @@ function parseProduct($, id, headers) {
             variants: {
                 ru: variants.map(item => {
                     return { "sys": { "type": "Link", "linkType": "Entry", "id": `shop_product_variant${item}` } }
+                }),
+            },
+            properties: {
+                ru: properties.map(item => {
+                    return { "sys": { "type": "Link", "linkType": "Entry", "id": `shop_property_value${item}` } }
                 }),
             }
         }
