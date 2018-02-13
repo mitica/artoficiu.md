@@ -20,8 +20,20 @@ export function selfCanonical(url: string) {
 export function formatNumber(n: number, lang: string, maximumFractionDigits: number = 2): string {
     const result = n.toLocaleString(lang, { maximumFractionDigits });
     switch (lang) {
-        case 'ro': return result.replace('.', ',').replace(',', '.');
-        case 'ru': return result.replace(',', ' ').replace('.', ',');
+        case 'ro': return result
+            // replace fraction with _
+            .replace('.', '_')
+            // replace significant with .
+            .replace(/,/g, '.')
+            // replace temp _ with ,
+            .replace('_', ',');
+        case 'ru': return result
+            // replace fraction with _
+            .replace('.', '_')
+            // replace significant with SPACE
+            .replace(/,/g, ' ')
+            // replace temp _ with ,
+            .replace('_', ',');
     }
 
     return result;
