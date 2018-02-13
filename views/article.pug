@@ -4,7 +4,8 @@ block head
   meta(property='og:type', content='article')
   meta(property='og:title', content=article.title)
   meta(property='og:description', content=article.summary)
-  meta(property='og:image', content=config.schema+article.image.url)
+  if (article.image)
+    meta(property='og:image', content=config.schema+article.image.url)
   meta(name='twitter:card', content='symmary')
 
 block main_content
