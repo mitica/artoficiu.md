@@ -54,7 +54,9 @@ route.get('/page/:slug', function (req: Request, res: Response, next: NextFuncti
             res.locals.article = page;
             res.locals.site.head.title = page.title;
             res.locals.site.head.description = page.summary;
-            res.locals.site.head.image = page.image.url;
+            if (page.image) {
+                res.locals.site.head.image = page.image.url;
+            }
 
             return dc.getData()
                 .then(data => {
@@ -80,11 +82,13 @@ route.get('/article/:slug', function (req: Request, res: Response, next: NextFun
             }
             res.locals.currentPageLink = links.article(article.slug);
             res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
-            
+
             res.locals.article = article;
             res.locals.site.head.title = article.title;
             res.locals.site.head.description = article.summary;
-            res.locals.site.head.image = article.image.url;
+            if (article.image) {
+                res.locals.site.head.image = article.image.url;
+            }
 
             return dc.getData()
                 .then(data => {
