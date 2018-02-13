@@ -74,8 +74,8 @@ export default function (req: Request, res: Response, next: NextFunction) {
             menu = menu.concat(pages && pages.items && pages.items.map(item => {
                 return {
                     link: links.page(item.slug),
-                    title: item.title || item.name,
-                    text: item.name || item.title,
+                    title: item.title || item.shortTitle,
+                    text: item.shortTitle || item.title,
                 }
             }));
 
