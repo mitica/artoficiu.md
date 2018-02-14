@@ -17,6 +17,38 @@ module.exports = function downloadCategories(space, headers) {
         if (categories.length === 0) {
             throw new Error(`No category explored!`)
         }
+        categories.push({
+            id: "category_popular",
+            contentType: "shop_category",
+            fields: {
+                name: {
+                    ru: "Популярные продукты",
+                    ro: "Produse populare",
+                },
+                slug: {
+                    ro: "popular",
+                },
+                isPromoted: {
+                    ro: true,
+                },
+            }
+        },
+        {
+            id: "category_recommended",
+            contentType: "shop_category",
+            fields: {
+                name: {
+                    ru: "Рекомендуемые продукты",
+                    ro: "Produse recomandate",
+                },
+                slug: {
+                    ro: "recommended",
+                },
+                isPromoted: {
+                    ro: true,
+                },
+            }
+        })
         return helpers.saveData('categories', categories)
     });
 }

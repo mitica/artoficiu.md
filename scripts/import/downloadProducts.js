@@ -44,6 +44,13 @@ function parseProduct($, id, headers) {
         .toArray()
         .map(item => $(item).val())
 
+    if ($('#IsRecommended').prop('checked')) {
+        categories.push('_recommended')
+    }
+    if ($('#IsPopular').prop('checked')) {
+        categories.push('_popular')
+    }
+
     // console.log('product categories', categories)
 
     const price = parseFloat($('input#Price').val())
