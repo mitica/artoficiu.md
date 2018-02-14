@@ -313,17 +313,17 @@ CACHE_OPTIONS[ContentTypes.WEB_APP_SETTINGS] = {
 
 CACHE_OPTIONS[ContentTypes.ARTICLE] = {
     item: { max: 50, maxAge: ms('1h') },
-    collection: { max: 50, maxAge: ms('30m') },
+    collection: { max: 50, maxAge: ms('10m') },
 };
 
 CACHE_OPTIONS[ContentTypes.PAGE] = {
     item: { max: 50, maxAge: ms('1h') },
-    collection: { max: 50, maxAge: ms('30m') },
+    collection: { max: 50, maxAge: ms('10m') },
 };
 
 CACHE_OPTIONS[ContentTypes.SHOP_CATEGORY] = {
     item: { max: 50, maxAge: ms('1h') },
-    collection: { max: 50, maxAge: ms('30m') },
+    collection: { max: 50, maxAge: ms('10m') },
 };
 
 CACHE_OPTIONS[ContentTypes.SHOP_PRODUCT] = {
