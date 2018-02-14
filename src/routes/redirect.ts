@@ -10,5 +10,5 @@ export default route;
 
 route.get('/favicon.ico', function (_req: Request, res: Response) {
     maxageRedirect(res);
-    res.redirect(301, '/static/img/favicon-32x32.png');
+    res.redirect(301, '/static/img/favicon.png');
 });
