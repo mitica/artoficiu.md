@@ -26,8 +26,10 @@ const client = createClient({
 
 client.getSpace(spaceId)
     .then(space => {
-        return importImages(space)
-            .then(_ => helpers.syncPromise(getData(), items => createEntities(space, items)))
+        if (process.env.IMAGES) {
+            return importImages(space)
+        }
+        return helpers.syncPromise(getData(), items => createEntities(space, items))
     })
     .then(_ => console.log('DONE!'))
     .catch(error => console.error(error))
@@ -45,11 +47,7 @@ function createEntities(space, items) {
 }
 
 function importImages(space) {
-
-    // if (process.env.CT) {
-        return Promise.resolve()
-    // }
-
+    console.log('start importing images')
     const dir = path.join('scripts', 'import', 'data');
     const images = JSON.parse(fs.readFileSync(path.join(dir, 'images.json')))
 
