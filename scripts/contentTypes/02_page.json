@@ -46,6 +46,16 @@
                 "omitted": false
             },
             {
+                "id": "text",
+                "name": "Text",
+                "type": "Text",
+                "localized": true,
+                "required": true,
+                "validations": [],
+                "disabled": false,
+                "omitted": false
+            },
+            {
                 "id": "shortTitle",
                 "name": "Short title",
                 "type": "Symbol",
@@ -63,21 +73,11 @@
                 "omitted": false
             },
             {
-                "id": "text",
-                "name": "Text",
-                "type": "Text",
-                "localized": true,
-                "required": true,
-                "validations": [],
-                "disabled": false,
-                "omitted": false
-            },
-            {
                 "id": "summary",
                 "name": "Summary",
                 "type": "Text",
                 "localized": true,
-                "required": true,
+                "required": false,
                 "validations": [],
                 "disabled": false,
                 "omitted": false

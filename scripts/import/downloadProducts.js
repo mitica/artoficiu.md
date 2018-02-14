@@ -188,7 +188,7 @@ function parseProduct($, id, headers) {
     }
 
     if (newPrice && newPrice > 0 && showNewPrice) {
-        product.oldPrice = {
+        product.fields.oldPrice = {
             ro: price
         }
     }

@@ -41,8 +41,9 @@ function createEntities(space, items) {
     }
     return helpers.syncPromise(items,
         item => space.createEntryWithId(item.contentType, item.id, { fields: item.fields })
+            .then(ce => helpers.delay(1000).then(_ => ce))
             .then(ce => ce.publish())
-            .then(_ => helpers.delay(3000))
+            .then(_ => helpers.delay(2000))
             .then(_ => console.log(`created entry ${item.contentType}, ${item.id}`)));
 }
 
