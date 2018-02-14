@@ -6,7 +6,7 @@ module.exports = function downloadItems(space, headers) {
 
     const items = [];
 
-    const tasks = getIds().map(id => getItem(id, headers)
+    return helpers.syncPromise(getIds(), id => getItem(id, headers)
         .then(item => {
             if (item) {
                 items.push(item)
@@ -14,13 +14,12 @@ module.exports = function downloadItems(space, headers) {
         })
         .catch(error => console.log(error.message))
     )
-
-    return Promise.all(tasks).then(() => {
-        if (items.length === 0) {
-            throw new Error(`No variant explored!`)
-        }
-        return helpers.saveData('product_variants', items)
-    });
+        .then(() => {
+            if (items.length === 0) {
+                throw new Error(`No variant explored!`)
+            }
+            return helpers.saveData('product_variants', items)
+        });
 }
 
 function getItem(id, headers) {
@@ -61,10 +60,10 @@ function parseItem($, id, headers) {
         id: `shop_product_variant${id}`,
         contentType: 'shop_product_variant',
         fields: {
-            isInStock: { ru: quantity > 0 },
+            isInStock: { ro: quantity > 0 },
             name: createVariantName(properties),
             properties: {
-                ru: properties.map(item => {
+                ro: properties.map(item => {
                     return { "sys": { "type": "Link", "linkType": "Entry", "id": `shop_property_value${item}` } }
                 }),
             }

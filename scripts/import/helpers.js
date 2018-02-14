@@ -63,10 +63,10 @@ exports.uploadImageUrl = function (space, url, title) {
     return exports.uploadFile(space, {
         fields: {
             title: {
-                ru: title
+                ro: title
             },
             file: {
-                ru: {
+                ro: {
                     contentType: contentType,
                     fileName: fileName,
                     upload: url

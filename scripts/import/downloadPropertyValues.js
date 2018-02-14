@@ -6,7 +6,7 @@ module.exports = function downloadItems(space, headers) {
 
     const items = [];
 
-    const tasks = getIds().map(id => getItem(id, headers)
+    return helpers.syncPromise(getIds(), id => getItem(id, headers)
         .then(item => {
             if (item) {
                 items.push(item)
@@ -14,13 +14,12 @@ module.exports = function downloadItems(space, headers) {
         })
         .catch(error => console.log(error.message))
     )
-
-    return Promise.all(tasks).then(() => {
-        if (items.length === 0) {
-            throw new Error(`No property value explored!`)
-        }
-        return helpers.saveData('property_values', items)
-    });
+        .then(() => {
+            if (items.length === 0) {
+                throw new Error(`No property value explored!`)
+            }
+            return helpers.saveData('property_values', items)
+        });
 }
 
 function getItem(id, headers) {

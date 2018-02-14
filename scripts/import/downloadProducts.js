@@ -10,7 +10,7 @@ module.exports = function downloadProducts(space, headers) {
 
     const products = [];
 
-    const tasks = getIds().map(id => getProduct(id, headers)
+    return helpers.syncPromise(getIds(), id => getProduct(id, headers)
         .then(product => {
             if (product) {
                 products.push(product)
@@ -18,14 +18,13 @@ module.exports = function downloadProducts(space, headers) {
         })
         .catch(error => console.log(error.message))
     )
-
-    return Promise.all(tasks).then(() => {
-        if (products.length === 0) {
-            throw new Error(`No product explored!`)
-        }
-        helpers.saveData('images', IMAGES.filter((v, i, a) => a.indexOf(v) === i))
-        return helpers.saveData('products', products)
-    });
+        .then(() => {
+            if (products.length === 0) {
+                throw new Error(`No product explored!`)
+            }
+            helpers.saveData('images', IMAGES.filter((v, i, a) => a.indexOf(v) === i))
+            return helpers.saveData('products', products)
+        });
 }
 
 function getProduct(id, headers) {
@@ -122,68 +121,68 @@ function parseProduct($, id, headers) {
         id: `shop_product${id}`,
         contentType: 'shop_product',
         fields: {
-            price: { ru: newPrice && newPrice > 0 && showNewPrice ? newPrice : price },
-            slug: { ru: slug },
+            price: { ro: newPrice && newPrice > 0 && showNewPrice ? newPrice : price },
+            slug: { ro: slug },
             name: {
                 ru: name,
                 ro: name,
             },
             isInStock: {
-                ru: variants.length > 0
+                ro: variants.length > 0
             },
             description: {
                 ru: ru.description,
                 ro: ro.description,
             },
             metaTitle: {
-                ru: ru.metaTitle || ro.metaTitle,
+                ru: ru.metaTitle,
                 ro: ro.metaTitle,
             },
             metaDescription: {
-                ru: ru.metaDescription || ro.metaDescription,
+                ru: ru.metaDescription,
                 ro: ro.metaDescription,
             },
             categories: {
-                ru: categories.map(item => {
+                ro: categories.map(item => {
                     return { "sys": { "type": "Link", "linkType": "Entry", "id": `category${item}` } }
                 }),
             },
             images: {
-                ru: images.map(item => {
+                ro: images.map(item => {
                     return { "sys": { "type": "Link", "linkType": "Asset", "id": helpers.md5(item) } }
                 }),
             },
             variants: {
-                ru: variants.map(item => {
+                ro: variants.map(item => {
                     return { "sys": { "type": "Link", "linkType": "Entry", "id": `shop_product_variant${item}` } }
                 }),
             },
             properties: {
-                ru: properties.map(item => {
+                ro: properties.map(item => {
                     return { "sys": { "type": "Link", "linkType": "Entry", "id": `shop_property_value${item}` } }
                 }),
             }
         }
     }
 
-    if (~[undefined, null, '', ' '].indexOf(product.fields.metaDescription.ru)) {
+    if (~[undefined, null, '', ' '].indexOf(product.fields.metaDescription.ro)) {
         delete product.fields.metaDescription
     } else {
-        if (~[undefined, null, '', ' '].indexOf(product.fields.metaDescription.ro)) {
-            delete product.fields.metaDescription.ro
+        if (~[undefined, null, '', ' '].indexOf(product.fields.metaDescription.ru)) {
+            delete product.fields.metaDescription.ru
         }
     }
-    if (~[undefined, null, '', ' '].indexOf(product.fields.metaTitle.ru)) {
+    if (~[undefined, null, '', ' '].indexOf(product.fields.metaTitle.ro)) {
         delete product.fields.metaTitle
     } else {
-        if (~[undefined, null, '', ' '].indexOf(product.fields.metaTitle.ro)) {
-            delete product.fields.metaTitle.ro
+        if (~[undefined, null, '', ' '].indexOf(product.fields.metaTitle.ru)) {
+            delete product.fields.metaTitle.ru
         }
     }
 
     if (newPrice && newPrice > 0 && showNewPrice) {
         product.oldPrice = {
-            ru: price
+            ro: price
         }
     }
 

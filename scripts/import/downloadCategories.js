@@ -6,16 +6,14 @@ module.exports = function downloadCategories(space, headers) {
 
     const categories = [];
 
-    const tasks = getIds().map(id => getCategory(id, headers)
+    return helpers.syncPromise(getIds(), id => getCategory(id, headers)
         .then(category => {
             if (category) {
                 categories.push(category)
             }
         })
         .catch(error => console.log(error.message))
-    )
-
-    return Promise.all(tasks).then(() => {
+    ).then(() => {
         if (categories.length === 0) {
             throw new Error(`No category explored!`)
         }
@@ -52,8 +50,8 @@ function parseCategory($, id) {
         id: helpers.createCategoryId(id),
         contentType: 'shop_category',
         fields: {
-            order: { ru: order },
-            slug: { ru: slug },
+            order: { ro: order },
+            slug: { ro: slug },
             title: {
                 ru: ru.title,
                 ro: ro.title,
