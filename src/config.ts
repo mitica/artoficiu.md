@@ -19,7 +19,7 @@ export interface IConfig {
 
 const config: IConfig = {
     name: "ArtOficiu",
-    host: "artoficiu.md",
+    host: "artoficiu.click.md",
     domain: "artoficiu.md",
     schema: "http:",
     languages: ["ro", "ru"],

@@ -70,6 +70,7 @@ export interface PropertyValueEntity extends Entity {
 }
 
 export interface ShopProductEntity extends Entity {
+    name?: string
     title?: string
     slug?: string
     price?: number
