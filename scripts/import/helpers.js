@@ -40,7 +40,7 @@ exports.loadHtmlPage = function (url, headers) {
 }
 
 exports.uploadFile = function (space, file) {
-    return space.createAssetWithId(exports.md5(file.fields.file.ru.upload), file)
+    return space.createAssetWithId(exports.md5(file.fields.file.ro.upload), file)
         .then(asset => asset.processForAllLocales())
         .then(processedAsset => processedAsset.publish())
         .then(publishedAsset => publishedAsset.sys.id)
