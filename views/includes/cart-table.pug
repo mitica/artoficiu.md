@@ -6,6 +6,7 @@ table.table
       th(scope="col").text-right= __('price')
       th(scope="col").text-right= __('quantity')
       th(scope="col").text-right= __('total')
+      th(scope="col")
   tbody
     each item, i in Cart.items
       tr
@@ -27,3 +28,5 @@ table.table
           strong.text-primary= util.formatNumber(item.price, culture.language)
             |  
             = __('lei')
+        td.align-middle.text-right
+          a(href=links.actions.cart.remove(item.id))= __('remove')

@@ -39,6 +39,28 @@ route.get('/actions/set_language/:lang', function (req: Request, res: Response) 
     res.redirect(ref);
 });
 
+
+route.get('/actions/cart/remove/:id', function (req: Request, res: Response) {
+
+    const id = req.params.id;
+
+    const cart = req.session.Cart as CartData;
+
+    CartHelpers.removeItem(cart, id)
+
+    new Promise<any>(resolve => {
+        req.session.save(error => {
+            if (error) {
+                return logger.error(error);
+            }
+            resolve();
+        });
+    }).then(_ => {
+        const ref = req.get('Referrer') || '/';
+        res.redirect(ref)
+    })
+})
+
 route.post('/actions/cart/add', function (req: Request, res: Response) {
 
     const productId = req.query.productId || req.query.productid || req.query.product_id;

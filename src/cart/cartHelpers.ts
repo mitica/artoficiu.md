@@ -12,6 +12,14 @@ export class CartHelpers {
         CartHelpers.setTotals(cart);
     }
 
+    static removeItem(cart: CartData, id: string) {
+        const index = cart.items.findIndex(it => it.id === id);
+        if (index > -1) {
+            cart.items.splice(index, 1);
+            CartHelpers.setTotals(cart);
+        }
+    }
+
     static setTotals(cart: CartData) {
         cart.quantity = 0;
         cart.price = 0;

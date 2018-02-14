@@ -12,7 +12,11 @@
   "actions": {
     "setLanguage": "/actions/set_language/${0}",
     "emailUs": "/actions/email_us",
-    "checkout": "/actions/checkout"
+    "checkout": "/actions/checkout",
+    "cart": {
+      "add": "/actions/cart/add",
+      "remove": "/actions/cart/remove/${0}"
+    }
   },
   "cart": "/cart",
   "checkout": {
