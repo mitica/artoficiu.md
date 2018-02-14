@@ -56,16 +56,17 @@ export default function (req: Request, res: Response, next: NextFunction) {
     dc.push('settings', ContentData.appSettings({ language: culture.language }).then(settings => {
         if (!settings) {
             // throw new Error(`WebAppSettings not created. Please, create one.`)
-            settings = {id: null}
+            settings = { id: null }
         }
 
         return settings;
     }));
 
     function createPageMenu() {
-        let menu: { link: string, text: string, title?: string }[] = [{
+        let menu: { link: string, text: string, title?: string, css?: string }[] = [{
             link: links.home(),
             text: __('index'),
+            css: 'd-none d-md-inline-block'
         }, {
             link: links.catalog(),
             text: __('catalog'),

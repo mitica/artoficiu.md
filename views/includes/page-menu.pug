@@ -2,5 +2,5 @@
   if (pageMenu)
     ul.c-page-menu_list
       each item in pageMenu
-        li.c-page-menu_i(class = (currentPageLink == item.link || item.link == '/articles' && currentPageLink.indexOf('/article') == 0 || item.link == '/catalog' && currentPageLink.indexOf('/catalog') == 0) ? 'selected' : null)
-          a(href=item.link, title=item.title, class=item.css)= item.text
+        li.c-page-menu_i(class = (currentPageLink == item.link || item.link == '/articles' && currentPageLink.indexOf('/article') == 0 || item.link == '/catalog' && currentPageLink.indexOf('/catalog') == 0) ? 'selected '+(item.css||'') : null)
+          a(href=item.link, title=item.title)= item.text
