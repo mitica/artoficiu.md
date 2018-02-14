@@ -19,3 +19,4 @@ block main_content
         a(href=links.catalog())= __('catalog')
     .c-group_content
       +productListBlock(shopProducts.items, {itemClass: 'col-6 col-md-3'})
+      a.u-btn.u-btn_accent(href=links.catalog())= __('view_all_products')

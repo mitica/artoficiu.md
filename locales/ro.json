@@ -82,5 +82,6 @@
 	"server_error": "Eroare necunoscută",
 	"invoice_email_subject": "Factura ArtOficiu",
 	"invoice_email_body": "Buna ziua,\n\nVă trimitem acest email fiindcă recent ați completat un formular de procurare de pe ArtOficiu.md\n\nPuteți descărca factura: ${invoice_pdf_link}\n\nCu stimă,\nArtOficiu",
-	"remove": "Șterge"
+	"remove": "Șterge",
+	"view_all_products": "Vezi toate produsele →"
 }

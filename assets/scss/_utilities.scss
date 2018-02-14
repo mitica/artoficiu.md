@@ -8,24 +8,16 @@
     height: auto;
 }
 
-.i-eye {
-    width: 11px;
-    height: 11px;
-    border: solid 2px $muted-color;
-    border-radius:  75% 15%;
-    position: relative;
-    transform: rotate(45deg);
-    margin-right: 10px;
+.u-btn {
     display: inline-block;
+    padding: 3px 10px;
 }
-.i-eye:before {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: $muted-color;
-    border-radius: 50%;
-    left: 2px;
-    top: 2px;
+
+.u-btn_accent {
+    background-color: $accent-color;
+    font-weight: bold;
+    text-decoration: none !important;
+    &:hover {
+        background-color: darken($accent-color, 5%)
+    }
 }
