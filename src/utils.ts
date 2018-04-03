@@ -51,3 +51,7 @@ export function remoteIp(req: Request) {
     }
     return ip;
 }
+
+export function seriesPromise<T, R>(arr: T[], iteratorFn: (item: T) => Promise<R>): Promise<R> {
+    return arr.reduce((p, item) => p.then(() => iteratorFn(item)), Promise.resolve(null));
+}
