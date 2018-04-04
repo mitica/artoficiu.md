@@ -4,10 +4,10 @@
   "articles": "/articles",
   "contact": "/contact",
   "page": "/page/${0}",
-  "catalog": {
-    "$url": "/catalog",
-    "category": "/catalog/${0}",
-    "item": "/catalog/item/${0}"
+  "shop": {
+    "$url": "/shop",
+    "category": "/shop/${0}",
+    "item": "/shop/item/${0}"
   },
   "actions": {
     "setLanguage": "/actions/set_language/${0}",

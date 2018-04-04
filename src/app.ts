@@ -9,11 +9,11 @@ import links from './links';
 import initi18n from './i18n';
 import catchError from './catch';
 import rootMiddleware from './middlewares/root';
-import catalogMiddleware from './middlewares/catalog';
+import shopMiddleware from './middlewares/shop';
 import homeRoute from './routes/home';
 import redirectRoute from './routes/redirect';
 import articlesRoute from './routes/articles';
-import catalogRoute from './routes/catalog';
+import shopRoute from './routes/shop';
 import actionsRoute from './routes/actions';
 import cartRoute from './routes/cart';
 import invoicesRoute from './routes/invoices';
@@ -71,11 +71,11 @@ app.use(rootMiddleware);
 
 app.use(invoicesRoute);
 
-app.use(catalogMiddleware);
+app.use(shopMiddleware);
 
 app.use(homeRoute);
 app.use(articlesRoute);
-app.use(catalogRoute);
+app.use(shopRoute);
 app.use(actionsRoute);
 app.use(cartRoute);
 

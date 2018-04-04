@@ -14,9 +14,9 @@ block main_content
     .c-group_title
       if (shopProducts.items.length < shopProducts.total)
         .c-group_title_more
-          a(href=links.catalog())= __('view_all')
+          a(href=links.shop())= __('view_all')
       h4
-        a(href=links.catalog())= __('catalog')
+        a(href=links.shop())= __('catalog')
     .c-group_content
       +productListBlock(shopProducts.items, {itemClass: 'col-6 col-md-3'})
-      a.u-btn.u-btn_accent(href=links.catalog())= __('view_all_products')
+      a.u-btn.u-btn_accent(href=links.shop())= __('view_all_products')

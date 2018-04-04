@@ -16,7 +16,7 @@ table.table
             img(class="mr-3" src=util.imageIconUrl(item.product.images[0].url) alt=item.product.name)
             .media-body
               h6
-                a(href=links.catalog.item(item.product.slug))= item.product.name
+                a(href=links.shop.item(item.product.slug))= item.product.name
               if (item.variant)
                 +productVariantProperties(item.variant)
                     

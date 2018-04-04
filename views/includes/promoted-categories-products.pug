@@ -5,8 +5,8 @@ if (promotedShopCategories && promotedShopCategories.items.length)
         .c-group_title
           if (promotedCategory.topProducts.items.length < promotedCategory.topProducts.total)
             .c-group_title_more
-              a(href=links.catalog.category(promotedCategory.slug))= __('view_all')
+              a(href=links.shop.category(promotedCategory.slug))= __('view_all')
           h4
-            a(href=links.catalog.category(promotedCategory.slug), title=promotedCategory.title||promotedCategory.name)= promotedCategory.name || promotedCategory.title
+            a(href=links.shop.category(promotedCategory.slug), title=promotedCategory.title||promotedCategory.name)= promotedCategory.name || promotedCategory.title
         .c-group_content
           +productListBlock(promotedCategory.topProducts.items, {itemClass: 'col-6 col-md-3'})

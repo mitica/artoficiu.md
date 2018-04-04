@@ -1,0 +1,5 @@
+if(shopCategories && shopCategories.items)
+  ul.c-catalog-menu
+    each item in shopCategories.items
+      li.c-catalog-menu_i(class= currentPageLink.indexOf(links.shop.category(item.slug))===0 ? 'selected' : null)
+        a(href=links.shop.category(item.slug), title=item.title || item.name)= item.name || item.title

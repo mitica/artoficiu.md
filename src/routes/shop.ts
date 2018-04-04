@@ -9,20 +9,20 @@ const route: Router = Router();
 
 export default route;
 
-//catalog
+//shop
 
-route.get('/catalog', function (req: Request, res: Response, next: NextFunction) {
+route.get('/shop', function (req: Request, res: Response, next: NextFunction) {
 
     const culture = res.locals.culture;
     const __ = res.locals.__;
     let page = parseInt(req.query.page);
     page = page > 0 ? page : 0;
 
-    res.locals.site.head.title = __('catalog_page_title');
-    res.locals.site.head.description = __('catalog_page_description');
-    res.locals.site.head.keywords = __('catalog_page_keywords');
+    res.locals.site.head.title = __('shop_page_title');
+    res.locals.site.head.description = __('shop_page_description');
+    res.locals.site.head.keywords = __('shop_page_keywords');
 
-    res.locals.currentPageLink = links.catalog();
+    res.locals.currentPageLink = links.shop();
     res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
 
     const dc: DataContainer = res.locals.dataContainer;
@@ -31,14 +31,14 @@ route.get('/catalog', function (req: Request, res: Response, next: NextFunction)
 
     dc.getData()
         .then(data => {
-            res.render('catalog', data);
+            res.render('shop', data);
         })
         .catch(next);
 });
 
-//catalog/:category
+//shop/:category
 
-route.get('/catalog/:category', function (req: Request, res: Response, next: NextFunction) {
+route.get('/shop/:category', function (req: Request, res: Response, next: NextFunction) {
 
     const categorySlug = req.params.category;
     const culture = res.locals.culture;
@@ -46,7 +46,7 @@ route.get('/catalog/:category', function (req: Request, res: Response, next: Nex
     let page = parseInt(req.query.page);
     page = page > 0 ? page : 0;
 
-    res.locals.currentPageLink = links.catalog.category(categorySlug);
+    res.locals.currentPageLink = links.shop.category(categorySlug);
     res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
 
     const dc: DataContainer = res.locals.dataContainer;
@@ -60,26 +60,26 @@ route.get('/catalog/:category', function (req: Request, res: Response, next: Nex
                 error.statusCode = 404;
                 return next(error);
             }
-            res.locals.site.head.title = data.selectedShopCategory.metaTitle || __('catalog') + ' / ' + (data.selectedShopCategory.title || data.selectedShopCategory.name);
+            res.locals.site.head.title = data.selectedShopCategory.metaTitle || __('shop') + ' / ' + (data.selectedShopCategory.title || data.selectedShopCategory.name);
             res.locals.site.description = data.selectedShopCategory.metaDescription
             return ContentData.shopProducts({ limit: 20, skip: page * 20, language: culture.language, order: '-createdAt', categoryId: data.selectedShopCategory.id })
                 .then(shopProducts => {
                     data.shopProducts = shopProducts;
-                    res.render('catalog', data);
+                    res.render('shop', data);
                 })
         })
         .catch(next);
 });
 
-//catalog/item
+//shop/item
 
-route.get('/catalog/item/:slug', function (req: Request, res: Response, next: NextFunction) {
+route.get('/shop/item/:slug', function (req: Request, res: Response, next: NextFunction) {
 
     const slug = req.params.slug;
     const culture = res.locals.culture;
     // const __ = res.locals.__;
 
-    res.locals.currentPageLink = links.catalog.item(slug);
+    res.locals.currentPageLink = links.shop.item(slug);
     res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
 
     const dc: DataContainer = res.locals.dataContainer;
@@ -98,7 +98,7 @@ route.get('/catalog/item/:slug', function (req: Request, res: Response, next: Ne
             res.locals.site.head.title = product.metaTitle || product.title || product.name;
             res.locals.site.head.description = product.metaDescription;
 
-            res.render('catalog-item', data);
+            res.render('shop-item', data);
         })
         .catch(next);
 });

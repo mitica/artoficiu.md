@@ -4,16 +4,16 @@ block main_content
   .page-title
     h2.page-title_h2
       if (selectedShopCategory)
-        a(href=links.catalog())= __('catalog')
+        a(href=links.shop())= __('shop')
         |  / 
         = (selectedShopCategory.name || selectedShopCategory.title)
       else
-        = __('catalog')
+        = __('shop')
 
   .c-catalog-menu_inline.d-lg-none
-    include ./includes/catalog-categories
+    include ./includes/shop-categories
   +productListBlock(shopProducts.items, {itemClass: 'col-6 col-md-3'})
   if (selectedShopCategory)
-    +catalogCategoryPager(shopProducts, selectedShopCategory)
+    +shopCategoryPager(shopProducts, selectedShopCategory)
   else
-    +catalogPager(shopProducts)
+    +shopPager(shopProducts)

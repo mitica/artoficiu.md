@@ -5,7 +5,7 @@ mixin productListBlock(items, options)
   ul.row.c-prod-bl
     each item, index in items
       li.c-prod-bl_item(class=itemClass)
-        a.c-prod-bl_i(href=links.catalog.item(item.slug))
+        a.c-prod-bl_i(href=links.shop.item(item.slug))
           .c-prod-bl_img
             img.c-prod-bl_pic(src=item.images[0].url+'?h=200', alt=item.title)
           .c-prod-bl_priceline

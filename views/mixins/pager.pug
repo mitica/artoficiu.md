@@ -1,17 +1,17 @@
-mixin catalogPager(collection)
+mixin shopPager(collection)
   - var currentPage = collection.skip / collection.limit
   - var totalPages = parseInt((collection.total / collection.limit).toString()) + (collection.total % collection.limit > 0 ? 1: 0)
   - var page = 0
   if (totalPages > 1)
     .c-pager
       while page < totalPages
-        a.c-pager_a(href=page > 0 ? links.catalog({page:page}): links.catalog(), class=currentPage===page?'selected':null)= ++page
+        a.c-pager_a(href=page > 0 ? links.shop({page:page}): links.shop(), class=currentPage===page?'selected':null)= ++page
 
-mixin catalogCategoryPager(collection, category)
+mixin shopCategoryPager(collection, category)
   - var currentPage = collection.skip / collection.limit
   - var totalPages = parseInt((collection.total / collection.limit).toString()) + (collection.total % collection.limit > 0 ? 1: 0)
   - var page = 0
   if (totalPages > 1)
     .c-pager
       while page < totalPages
-        a.c-pager_a(href=page > 0 ? links.catalog.category(category.slug, {page:page}): links.catalog.category(category.slug), class=currentPage===page?'selected':null)= ++page
+        a.c-pager_a(href=page > 0 ? links.shop.category(category.slug, {page:page}): links.shop.category(category.slug), class=currentPage===page?'selected':null)= ++page

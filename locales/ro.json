@@ -6,10 +6,10 @@
 	"error_page_title": "Eroare",
 	"error_page_description": "A apărut o eroare. Căutăm vinovații...",
 	"home": "Acasă",
-	"catalog": "Catalog",
+	"shop": "Magazin",
 	"articles": "Articole",
 	"contact": "Contact",
-	"catalog_products": "Catalog produse",
+	"shop_products": "Produse în magazin",
 	"latest_articles": "Articole noi",
 	"weather_in_chisinau": "Vremea în Chișinău",
 	"address_info": "or. Chișinău, str. Bucuriei 1",
@@ -29,9 +29,9 @@
 	"contact_contact_us": "Dacă ai careva propuneri sau dorești un parteneriat, scrie-ne. Lasă-ne mesajul tău în formularul de mai jos:",
 	"lei": "lei",
 	"view_all": "Vezi toate →",
-	"catalog_page_title": "Catalog produse",
-	"catalog_page_description": "Catalogul cu produse ArtOficiu",
-	"catalog_page_keywords": "catalog, produse, artoficiu",
+	"shop_page_title": "Produse în magazin",
+	"shop_page_description": "Magazinul cu produse ArtOficiu",
+	"shop_page_keywords": "magazin, produse, artoficiu",
 	"footer_info": "Un fotoliu bun trebuie să fie comod, funcțional și ușor în utilizare, oriunde ați fi - în oficiu sau acasă. Important - fotoliul trebuie să ales după spatele vostru. Alegeți fotoliu perfect pentru Dvs. din colecția ARTOFICIU.",
 	"price": "Preț",
 	"old_price": "Preț vechi",
@@ -83,5 +83,6 @@
 	"invoice_email_subject": "Factura ArtOficiu",
 	"invoice_email_body": "Buna ziua,\n\nVă trimitem acest email fiindcă recent ați completat un formular de procurare de pe ArtOficiu.md\n\nPuteți descărca factura: ${invoice_pdf_link}\n\nCu stimă,\nArtOficiu",
 	"remove": "Șterge",
-	"view_all_products": "Vezi toate produsele →"
+	"view_all_products": "Vezi toate produsele →",
+	"catalog": "catalog"
 }

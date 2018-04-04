@@ -68,8 +68,8 @@ export default function (req: Request, res: Response, next: NextFunction) {
             text: __('index'),
             css: 'd-none d-md-inline-block'
         }, {
-            link: links.catalog(),
-            text: __('catalog'),
+            link: links.shop(),
+            text: __('shop'),
         }];
         return ContentData.pages({ limit: 10, language: culture.language }).then(pages => {
             menu = menu.concat(pages && pages.items && pages.items.map(item => {
