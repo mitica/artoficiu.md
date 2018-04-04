@@ -26,5 +26,9 @@
   "invoices": {
     "invoice": "/invoices/${0}.html",
     "invoicePdf": "/invoices/${0}.pdf"
+  },
+  "narbutas": {
+    "$url": "/narbutas",
+    "page": "/narbutas/${0}"
   }
 }

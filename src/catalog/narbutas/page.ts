@@ -18,6 +18,7 @@ export type PageData = {
     htmlContent?: string
     images?: PageImage[]
     type: PageType
+    image?: PageImage
 }
 
 export type PageImage = {

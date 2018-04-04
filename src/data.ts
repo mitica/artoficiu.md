@@ -1,8 +1,11 @@
 import { ContentApi } from "./content/ContentApi";
 import { IOrdersRepository, DynamoOrdersRepository, createDbTables } from './orders';
 import logger from "./logger";
+import { CachePageStorage } from "./catalog/narbutas/cachePageStorage";
 
 createDbTables().catch(error => logger.error(error));
+
+export const NarbutasStorage = new CachePageStorage();
 
 export const OrdersRepository: IOrdersRepository = new DynamoOrdersRepository();
 

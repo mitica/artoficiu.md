@@ -1,0 +1,12 @@
+extends ./layouts/narbutas
+
+block main_content
+  .page-title
+    h2.page-title_h2= __('narbutas')
+      | : 
+      = page.title || page.name
+
+  +narbutasPagesListBlock(pages)
+
+  if (page.htmlContent)
+    #narbutas-html!= page.htmlContent

@@ -1,8 +1,8 @@
 import { getPage } from "./utils";
 const slug = require('slug');
 import { seriesPromise } from "../../utils";
-import { PageType, PageData, PageImage } from "../../storage/narbutas/page";
-import { PageStorage } from "../../storage/narbutas/pageStorage";
+import { PageType, PageData, PageImage } from "../../catalog/narbutas/page";
+import { PageStorage } from "../../catalog/narbutas/pageStorage";
 // const TurndownService = require('turndown')
 // const turndownService = new TurndownService()
 
@@ -17,22 +17,34 @@ async function generate(): Promise<any> {
 
     const rootMenu = await getPageMenu(HOST, 1);
 
-    await generatePages(rootMenu, null, PageType.CATEGORY);
-
+    const pages1 = await generatePages(rootMenu, null, PageType.CATEGORY);
+    let index1 = 0;
     await seriesPromise(rootMenu, async item => {
         console.log('getting menu 2')
         const menu2 = await getPageMenu(item.url, 2);
-        await generatePages(menu2, item.id, PageType.CATEGORY, true);
-
+        const pages2 = await generatePages(menu2, item.id, PageType.CATEGORY, true);
+        let index2 = 0;
         await seriesPromise(menu2, async item2 => {
             console.log('getting menu 3')
             const menu3 = await getPageMenu(item2.url, 3);
-            await generatePages(menu3, item2.id, PageType.PAGE, true);
+            const pages3 = await generatePages(menu3, item2.id, PageType.PAGE, true);
+
+            pages2[index2].image = pages1[index1].image = pages3[0].image;
+
+            await savePages(pages3);
+
+            index2++;
         });
+
+        await savePages(pages2);
+
+        index1++;
     });
+
+    await savePages(pages1);
 }
 
-async function generatePages(items: MenuLink[], parentId: string, type: PageType, explore?: boolean): Promise<any> {
+async function generatePages(items: MenuLink[], parentId: string, type: PageType, explore?: boolean): Promise<PageData[]> {
     parentId = parentId || null;
 
     let pages: PageData[] = [];
@@ -66,6 +78,8 @@ async function generatePages(items: MenuLink[], parentId: string, type: PageType
                 })
 
                 page.images = images;
+
+                page.image = images[0];
             }
 
             pages.push(page);
@@ -74,6 +88,10 @@ async function generatePages(items: MenuLink[], parentId: string, type: PageType
         pages = items.map<PageData>(item => ({ id: item.id, name: item.name, type, parentId }));
     }
 
+    return pages;
+}
+
+async function savePages(pages: PageData[]): Promise<any> {
     await seriesPromise(pages, page => storage.savePage(page));
 }
 

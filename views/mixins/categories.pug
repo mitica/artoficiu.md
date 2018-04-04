@@ -1,0 +1,10 @@
+
+mixin categoriesMenu(items)
+  if (items)
+    ul.c-cat-menu
+      each item in items
+        li.c-cat-menu_i(class = (currentPageLink === item.link ? 'selected' : null))
+          a(href=item.link, title=item.name)= item.name
+          if (item.items)
+            +categoriesMenu(item.items)
+              

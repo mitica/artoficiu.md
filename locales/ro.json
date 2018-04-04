@@ -84,5 +84,9 @@
 	"invoice_email_body": "Buna ziua,\n\nVă trimitem acest email fiindcă recent ați completat un formular de procurare de pe ArtOficiu.md\n\nPuteți descărca factura: ${invoice_pdf_link}\n\nCu stimă,\nArtOficiu",
 	"remove": "Șterge",
 	"view_all_products": "Vezi toate produsele →",
-	"catalog": "catalog"
+	"catalog": "catalog",
+	"catalog_narbutas": "catalog_narbutas",
+	"narbutas_page_title": "narbutas_page_title",
+	"narbutas_page_description": "narbutas_page_description",
+	"narbutas": "narbutas"
 }
