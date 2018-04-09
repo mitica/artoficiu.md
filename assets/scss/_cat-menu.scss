@@ -1,0 +1,26 @@
+
+.c-cat-menu {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    .c-cat-menu {
+        margin-left: 10px;
+        font-size: 90%;
+    }
+}
+
+.c-cat-menu_i {
+    display: block;
+    padding: 2px 0px 2px 10px;
+    a {
+        font-weight: bold;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    &.selected {
+        a {
+            color: $primary-color;
+            text-decoration: underline;
+        }
+    }
+}
