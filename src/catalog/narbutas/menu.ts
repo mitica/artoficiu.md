@@ -33,7 +33,7 @@ export class Menu {
                 const pages = ids.map(id => storage.getPage(id));
                 Promise.all(pages).then(pagesData => {
                     pagesData.forEach(pd => {
-                        const item = { id: pd.id, name: pd.name };
+                        const item = { id: pd.id, name: pd.name, parentId: pd.parentId };
                         Menu.items.set(pd.id, item);
                         const parentId = pd.parentId || null;
                         const list = Menu.itemsByParentId.get(parentId) || [];
@@ -51,4 +51,5 @@ export class Menu {
 export type MenuItem = {
     id: string
     name: string
+    parentId?: string
 }

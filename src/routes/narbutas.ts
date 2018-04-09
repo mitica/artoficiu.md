@@ -12,13 +12,14 @@ export default route;
 
 //narbutas
 
-route.get('/narbutas/:id', function (req: Request, res: Response, next: NextFunction) {
+route.get('/narbutas/:id', async function (req: Request, res: Response, next: NextFunction) {
 
     const id = (req.params.id as string).toLowerCase();
     const __ = res.locals.__;
     const dc: DataContainer = res.locals.dataContainer;
+    try {
+        const page = await NarbutasStorage.getPage(id);
 
-    NarbutasStorage.getPage(id).then(page => {
         if (!page) {
             const error: any = new Error(`Not found narbutas page ${id}`)
             error.statusCode = 404;
@@ -33,28 +34,42 @@ route.get('/narbutas/:id', function (req: Request, res: Response, next: NextFunc
         res.locals.site.head.title = __('narbutas') + ': ' + (page.title || page.name);
         res.locals.site.head.description = page.title;
 
+        let viewName: string;
+        let parentMenuId: string;
+
         if (page.type === PageType.CATEGORY) {
+            viewName = 'narbutas-category'
+            parentMenuId = page.parentId ? page.parentId : page.id;
             const items = NarbutasMenu.getItems(page.id);
 
-            return Promise.all(items.map(item => NarbutasStorage.getPage(item.id)))
-                .then(pages => {
-                    if (!pages) {
-                        const error: any = new Error(`Not found narbutas pages ${id}`)
-                        error.statusCode = 404;
-                        return next(error);
-                    }
-                    res.locals.pages = pages;
-                    return dc.getData()
-                        .then(data => {
-                            res.render('narbutas-category', data);
-                        });
-                });
+            const pages = await Promise.all(items.map(item => NarbutasStorage.getPage(item.id)))
+
+            if (!pages) {
+                const error: any = new Error(`Not found narbutas pages ${id}`)
+                error.statusCode = 404;
+                return next(error);
+            }
+
+            res.locals.pages = pages;
+
         } else {
-            return dc.getData()
-                .then(data => {
-                    res.render('narbutas-page', data);
-                });
+            viewName = 'narbutas-page';
+
+            const parentMenuItem = NarbutasMenu.getItem(page.parentId);
+            parentMenuId = parentMenuItem.parentId;
         }
-    })
-        .catch(next);
+
+        if (parentMenuId) {
+            const menuItem = res.locals.narbutasMenu.find((item: any) => item.id === parentMenuId);
+            if (menuItem) {
+                menuItem.items = NarbutasMenu.getItems(parentMenuId).map(item => ({ name: item.name, link: links.narbutas.page(item.id) }));
+            }
+        }
+
+        const dcData = await dc.getData();
+
+        return res.render(viewName, dcData);
+    } catch (e) {
+        next(e);
+    }
 });
