@@ -1,0 +1,36 @@
+.c-cat-bl {
+    padding: 0px;
+    list-style: none;
+}
+
+.c-cat-bl_item {
+    margin-bottom: 20px;
+}
+
+.c-cat-bl_i {
+    display: block;
+    overflow: hidden;
+    padding: 2px;
+}
+
+.c-cat-bl_img {
+    text-align: center;
+    padding: 2px;
+    display: block;
+    display: flex;
+    height: 160px;
+    justify-content: center;
+    align-items: center;
+}
+
+.c-cat-bl_pic {
+    max-height: 99%;
+    max-width: 99%;
+}
+
+.c-cat-bl_title {
+    margin: 0px;
+    padding: 2px 6px;
+    text-align: center;
+    color: $primary-color;
+}

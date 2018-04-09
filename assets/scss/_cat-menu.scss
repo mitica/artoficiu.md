@@ -18,7 +18,7 @@
         text-overflow: ellipsis;
     }
     &.selected {
-        a {
+        & > a {
             color: $primary-color;
             text-decoration: underline;
         }

@@ -1,6 +1,6 @@
 mixin narbutasPagesListBlock(items, options)
   - options = options || { }
-  - itemClass = options.itemClass || 'col-3'
+  - itemClass = options.itemClass || 'col-6 col-md-3'
   ul.row.c-cat-bl
     each item, index in items
       li.c-cat-bl_item(class=itemClass)
