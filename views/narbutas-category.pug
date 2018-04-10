@@ -6,6 +6,9 @@ block main_content
       | : 
       = page.title || page.name
 
+  .c-cat-menu_inline.d-lg-none
+    +categoriesMenu(narbutasMenu)
+
   +narbutasPagesListBlock(pages)
 
   if (page.htmlContent)
