@@ -16,7 +16,7 @@ block main_content
         .c-group_title_more
           a(href=links.shop())= __('view_all')
       h4
-        a(href=links.shop())= __('catalog')
+        a(href=links.shop())= __('shop')
     .c-group_content
       +productListBlock(shopProducts.items, {itemClass: 'col-6 col-md-3'})
       a.u-btn.u-btn_accent(href=links.shop())= __('view_all_products')
