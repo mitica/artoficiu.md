@@ -103,7 +103,8 @@ async function generatePages(items: MenuLink[], parentId: string, type: PageType
                 $('.ad-thumb-list a').each((_index, element) => {
                     const img = $('img', element);
                     images.push({
-                        largeUrl: formatUrl(element.attribs['href']),
+                        largeUrl: formatUrl(element.attribs['href'].replace(/_resampled\/croppedimage\d+-/i, '')),
+                        mediumUrl: formatUrl(element.attribs['href']),
                         smallUrl: formatUrl(img.attr('src'))
                     })
                 })

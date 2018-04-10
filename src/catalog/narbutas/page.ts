@@ -23,6 +23,7 @@ export type PageData = {
 
 export type PageImage = {
     smallUrl?: string
+    mediumUrl?: string
     largeUrl?: string
 }
 
