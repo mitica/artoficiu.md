@@ -1,0 +1,39 @@
+
+.c-gallery {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.c-gallery-list {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.c-gallery-item {
+  display: inline-block;
+  height: 55px;
+  width: 75px;
+  margin: 3px;
+  border: 3px solid transparent;
+  &.active {
+    border-color: $accent-color;
+  }
+  img {
+    max-width: 100%;
+  }
+}
+
+.c-gallery-main {
+  display: block;
+  height: 400px;
+  width: 100%;
+}
+
+.c-gallery-main-item {
+  background-position: center center;
+  background-size: cover;
+  width: 100%;
+  display: block;
+  height: 100%;
+}

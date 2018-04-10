@@ -6,4 +6,16 @@
     a {
         color: $primary-color;
     }
+    .subitem {
+        display: flex;
+        .img {
+            flex: 1;
+        }
+        .text {
+            flex: 5;
+        }
+    }
+    .hidden {
+        display: none;
+    }
 }

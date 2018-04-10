@@ -5,6 +5,8 @@ block main_content
     h2.page-title_h2= __('narbutas')
       | : 
       = page.title || page.name
+  - var images = page.images.map(item=>({href:item.largeUrl,thumbnail:item.smallUrl}))
+  +imageGallery(images)
 
   if (page.htmlContent)
     #narbutas-html!= page.htmlContent

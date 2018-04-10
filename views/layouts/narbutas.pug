@@ -1,3 +1,14 @@
 extends ./layout
 
+block append styles
+  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.1/jquery.fancybox.min.css")
+
 include ../mixins/catalog
+include ../mixins/image-gallery
+
+block append scripts
+  script(async, src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.1/jquery.fancybox.min.js")
+  script.
+    setTimeout(function() {
+      $("#narbutas-html .fancybox").fancybox();
+    }, 3000);
