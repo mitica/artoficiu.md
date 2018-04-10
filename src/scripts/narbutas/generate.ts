@@ -54,6 +54,37 @@ async function generatePages(items: MenuLink[], parentId: string, type: PageType
             const $ = await getPage(item.url);
 
             // const content = turndownService.turndown($('#content').html());
+            $('#content .product_link').remove();
+            $('#content .product_links_title').remove();
+            $('#content h1').remove();
+            $('#content strong:empty').remove();
+            $('#content p:empty').remove();
+            $('#content div:empty').remove();
+            $('#content p:empty').remove();
+            $('#content a').each((_i, el) => {
+                const $el = $(el);
+                $el.attr('target', '_blank');
+                $el.removeAttr('onclick');
+                $el.removeAttr('style');
+                let href = $el.attr('href');
+                if (href && !href.startsWith('http')) {
+                    console.log('add http://narbutas.ru to link ' + href);
+                    href = 'http://narbutas.ru' + (href[0] === '/' ? href : '/' + href);
+                }
+                $el.attr('href', href);
+                $el.attr('rel', 'nofollow noindex');
+            });
+            $('#content p,#content div').each((_i, el) => {
+                const $el = $(el);
+                $el.removeAttr('style');
+                if ($el.find('img,a').length === 0) {
+                    if ($el.text().trim().length === 0 || $el.text().trim() === '&nbsp;') {
+                        console.log('remove empty element');
+                        $el.remove();
+                    }
+                }
+            });
+
             let content = $('#content').html();
 
             if (content) {

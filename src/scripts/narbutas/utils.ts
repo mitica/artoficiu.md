@@ -11,5 +11,7 @@ export function getPage(url: string): Promise<CheerioStatic> {
             }
             return response.text();
         })
-        .then(html => cheerio.load(html));
+        .then(html => cheerio.load(html, {
+            normalizeWhitespace: true,
+        }));
 }
