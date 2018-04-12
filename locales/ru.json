@@ -69,5 +69,7 @@
 	"invoice_email_subject": "invoice_email_subject",
 	"invoice_email_body": "invoice_email_body",
 	"checkout_success": "checkout_success",
-	"checkout_success_info": "checkout_success_info"
+	"checkout_success_info": "checkout_success_info",
+	"narbutas_page_title": "narbutas_page_title",
+	"narbutas_page_description": "narbutas_page_description"
 }

@@ -5,7 +5,8 @@
     include ./shop-categories
 
 .c-group
-  h4.c-group_title= __('catalog_narbutas')
+  h4.c-group_title
+    a(href=links.narbutas())= __('catalog_narbutas')
   .c-group_content
     +categoriesMenu(narbutasMenu)
 

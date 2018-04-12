@@ -11,6 +11,38 @@ const route: Router = Router();
 export default route;
 
 //narbutas
+route.get('/narbutas', async function (_req: Request, res: Response, next: NextFunction) {
+
+    const __ = res.locals.__;
+    const dc: DataContainer = res.locals.dataContainer;
+    try {
+
+        res.locals.currentPageLink = links.narbutas();
+        res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
+
+        res.locals.site.head.title = __('narbutas_page_title');
+        res.locals.site.head.description = __('narbutas_page_description');
+
+        const items = NarbutasMenu.getItems(null);
+
+        const pages = await Promise.all(items.map(item => NarbutasStorage.getPage(item.id)))
+
+        if (!pages) {
+            const error: any = new Error(`Not found narbutas pages`)
+            error.statusCode = 404;
+            return next(error);
+        }
+
+        res.locals.pages = pages;
+
+
+        const dcData = await dc.getData();
+
+        return res.render('narbutas', dcData);
+    } catch (e) {
+        next(e);
+    }
+});
 
 route.get('/narbutas/:id', async function (req: Request, res: Response, next: NextFunction) {
 

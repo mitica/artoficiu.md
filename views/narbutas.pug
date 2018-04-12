@@ -1,0 +1,10 @@
+extends ./layouts/narbutas
+
+block main_content
+  .page-title
+    h2.page-title_h2= __('narbutas_page_title')
+
+  .c-cat-menu_inline.d-lg-none
+    +categoriesMenu(narbutasMenu)
+
+  +narbutasPagesListBlock(pages)

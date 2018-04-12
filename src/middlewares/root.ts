@@ -66,6 +66,9 @@ export default function (req: Request, res: Response, next: NextFunction) {
         let menu: { link: string, text: string, title?: string, css?: string }[] = [{
             link: links.shop(),
             text: __('shop'),
+        }, {
+            link: links.narbutas(),
+            text: __('narbutas'),
         }];
         return ContentData.pages({ limit: 10, language: culture.language }).then(pages => {
             menu = menu.concat(pages && pages.items && pages.items.map(item => {
