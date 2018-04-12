@@ -64,10 +64,6 @@ export default function (req: Request, res: Response, next: NextFunction) {
 
     function createPageMenu() {
         let menu: { link: string, text: string, title?: string, css?: string }[] = [{
-            link: links.home(),
-            text: __('index'),
-            css: 'd-none d-md-inline-block'
-        }, {
             link: links.shop(),
             text: __('shop'),
         }];
