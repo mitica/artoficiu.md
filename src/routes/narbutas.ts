@@ -5,6 +5,7 @@ import { Menu as NarbutasMenu } from '../catalog/narbutas/menu';
 import links from '../links';
 import { canonical } from '../utils';
 import { PageType } from '../catalog/narbutas/page';
+import { QSMessage } from '../qsMessage';
 
 const route: Router = Router();
 
@@ -46,8 +47,16 @@ route.get('/narbutas', async function (_req: Request, res: Response, next: NextF
 
 route.get('/narbutas/:id', async function (req: Request, res: Response, next: NextFunction) {
 
-    const id = (req.params.id as string).toLowerCase();
     const __ = res.locals.__;
+    const message = req.query.message;
+
+    if (message === QSMessage.INPUT_ERROR) {
+        res.locals.alertMessage = __('contact_input_error');
+    } else if (message === QSMessage.SUCCESS) {
+        res.locals.alertMessage = __('contact_success');
+    }
+
+    const id = (req.params.id as string).toLowerCase();
     const dc: DataContainer = res.locals.dataContainer;
     try {
         const page = await NarbutasStorage.getPage(id);

@@ -1,6 +1,6 @@
 extends ./layouts/layout
 
-block head
+block append head
   script(async, src='https://www.google.com/recaptcha/api.js')
 
 block main_content
@@ -38,31 +38,5 @@ block main_content
     .col-lg-10
       if (alertMessage)
         .c-alert=alertMessage
-      form(action=links.actions.emailUs(), method='post')
-        .form-group.row
-          label.col-sm-3.col-form-label(for='field-1')
-            strong= __('name')
-              | *
-          .col-sm-9
-            input#field-1.form-control(type='text', name='name', required='', placeholder=__('name'))
-        .form-group.row
-          label.col-sm-3.col-form-label(for='field-2')
-            strong= __('email_or_telephone')
-              | *
-          .col-sm-9
-            input#field-2.form-control(type='text', name='contact', required='', placeholder=__('email_or_telephone'))
-        .form-group.row
-          label.col-sm-3.col-form-label(for='field-10')
-            strong= __('message')
-              | *
-          .col-sm-9
-            textarea#field-10.form-control(cols="30", required='', rows="3", name='message', placeholder=__('message'))
-        hr
-        .form-group.row
-          .col-sm-3
-          .col-sm-9
-            .g-recaptcha(data-sitekey="6LciIkUUAAAAADHEqR2DCLYNdI2TQjusBzZjvW1W")
-        hr
-        .text-right
-          button.btn.btn-warning.btn-lg.rounded-0(type='submit')= __('send')
+      +contactForm()
     .col-lg-1

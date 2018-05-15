@@ -78,3 +78,8 @@ html {
 .c-group_content {
     overflow: hidden;
 }
+
+.c-island {
+    padding: 10px;
+    background-color: darken($layout-color, 6%);
+}

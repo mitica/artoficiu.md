@@ -1,12 +1,25 @@
 extends ./layouts/narbutas
 
+block append head
+  script(async, src='https://www.google.com/recaptcha/api.js')
+
 block main_content
   .page-title
     h2.page-title_h2= __('narbutas')
       | : 
       = page.title || page.name
+      
   - var images = page.images.map(item=>({href:item.largeUrl,thumbnail:item.smallUrl}))
   +imageGallery(images)
-
+  br
   if (page.htmlContent)
     #narbutas-html!= page.htmlContent
+  br
+  .c-island
+    .c-group
+      h3.c-group_title= __('narbutas_order_title')
+      .c-group-content
+        p.lead= __('narbutas_order_info')
+        if (alertMessage)
+          .c-alert=alertMessage
+        +contactForm(site.head.title)

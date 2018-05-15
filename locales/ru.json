@@ -71,5 +71,7 @@
 	"checkout_success": "checkout_success",
 	"checkout_success_info": "checkout_success_info",
 	"narbutas_page_title": "narbutas_page_title",
-	"narbutas_page_description": "narbutas_page_description"
+	"narbutas_page_description": "narbutas_page_description",
+	"empty_cart_info": "empty_cart_info",
+	"not_in_stock": "not_in_stock"
 }

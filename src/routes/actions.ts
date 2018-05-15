@@ -14,6 +14,7 @@ import recaptchaValidate from '../recaptcha';
 import { remoteIp, canonical } from '../utils';
 import { createOrderFromCartData, Order } from '../orders/order';
 import { createCustomerFromPostData, Customer } from '../orders/customer';
+import { parse as parseUrl } from 'url';
 const ms = require('ms');
 
 const route: Router = Router();
@@ -128,18 +129,26 @@ function cartErrors(res: Response, errors: string | string[]) {
 
 route.post('/actions/email_us', function (req: Request, res: Response) {
 
-    const name = req.body.name;
+    const __ = res.locals.__;
     const contact = req.body.contact;
-    const message = req.body.message;
+    const name = req.body.name;
+    const message = `${req.body.message}\n\n----\ncontact: ${contact} ${name || ''}`;
     const recaptchaValue = req.body['g-recaptcha-response'];
+    const prevUrl = parseUrl(req.header('referer')).pathname;
+
+    let subject = req.body.subject || util.format(__('message_from_format'), contact);
 
 
-    if (!name || !contact || !message || !recaptchaValue) {
+    if (!contact || !message || !recaptchaValue) {
         logger.error(`contact us invalid params`, { name, message, contact });
         return res.redirect(links.contact({ message: QSMessage.INPUT_ERROR }));
     }
 
     const ip = remoteIp(req);
+
+    function formatRedurectUrl(message: string) {
+        return prevUrl + '?message=' + encodeURIComponent(message);
+    }
 
     recaptchaValidate(recaptchaValue, ip).then(isHuman => {
         if (!isHuman) {
@@ -147,12 +156,12 @@ route.post('/actions/email_us', function (req: Request, res: Response) {
             return false;
         }
 
-        const __ = res.locals.__;
+
 
         sendEmail({
             from: config.email,
             to: config.email,
-            subject: util.format(__('message_from_format'), contact),
+            subject,
             text: message,
         }).catch(error => logger.error(error));
 
@@ -160,13 +169,13 @@ route.post('/actions/email_us', function (req: Request, res: Response) {
     })
         .then(result => {
             if (result) {
-                return res.redirect(links.contact({ message: QSMessage.SUCCESS }))
+                return res.redirect(formatRedurectUrl(QSMessage.SUCCESS))
             }
-            return res.redirect(links.contact({ message: QSMessage.INPUT_ERROR }));
+            return res.redirect(formatRedurectUrl(QSMessage.INPUT_ERROR));
         })
         .catch(error => {
             logger.error(error)
-            res.redirect(links.contact({ message: QSMessage.SUCCESS }))
+            res.redirect(formatRedurectUrl(QSMessage.SUCCESS))
         });
 });
 
