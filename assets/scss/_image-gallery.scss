@@ -32,7 +32,8 @@
 
 .c-gallery-main-item {
   background-position: center center;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   width: 100%;
   display: block;
   height: 100%;

@@ -23,8 +23,6 @@
         el.parent().parent().find('.c-gallery-item')
             .each(function () { items.push({ src: $(this).attr('href') }) });
 
-        console.log('items', items);
-
         $.fancybox.open(items);
 
         return false;
