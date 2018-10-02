@@ -47,6 +47,7 @@ block main_content
       if (!product.isInStock)
         .c-alert= __('product_not_in_stock')
       else
+        br
         include ./includes/product-form
 
       if (product.properties && product.properties.length)
