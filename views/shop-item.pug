@@ -10,7 +10,7 @@ block main_content
   h1.sp-title= product.title || product.name
   if (product.categories)
     each item in product.categories
-      a.sp-cat(href=links.shop.category(item.slug))= item.name || item.title
+      a.sp-cat(href=links.shop.category(item.slug, {ref: 'product'}))= item.name || item.title
   .u-br
   .row
     .col-md-5

@@ -29,7 +29,7 @@ export default function (_req: Request, res: Response, next: NextFunction) {
     );
 
     res.locals.narbutasMenu = NarbutasMenu.getItems(null)
-        .map(item => ({ link: links.narbutas.page(item.id), ...item }));
+        .map(item => ({ link: links.narbutas.page(item.id, {ref: 'narbutas-menu'}), ...item }));
 
     next();
 };
