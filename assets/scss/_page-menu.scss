@@ -2,7 +2,7 @@
 .c-page-menu {
     overflow: hidden;
     text-align: center;
-    padding: 18px 0px;
+    padding: 16px 0px;
 }
 
 .c-page-menu_list {
@@ -13,22 +13,22 @@
 }
 .c-page-menu_i {
     display: inline-block;
-    padding: 2px 10px;
-    font-size: 120%;
-    font-weight: bold;
+    padding: 2px 8px;
+    font-size: 110%;
+    font-weight: 500;
 
     a {
         text-decoration: none;
         padding: 1px 0px 2px 0px;
         &:hover {
-            border-bottom: 3px solid $link-color;
+            border-bottom: 2px solid $link-color;
         }
     }
 
     &.selected {
         a {
             color: $primary-color;
-            border-bottom: 3px solid $primary-color;
+            border-bottom: 2px solid $primary-color;
         }
     }
 }
