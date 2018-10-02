@@ -95,7 +95,14 @@ route.get('/shop/item/:slug', function (req: Request, res: Response, next: NextF
                 return next(error);
             }
 
-            res.locals.site.head.title = product.metaTitle || product.title || product.name;
+            if (product.metaTitle || product.title) {
+                res.locals.site.head.title = product.metaTitle || product.title;
+            } else if (product.categories && product.categories.length) {
+                res.locals.site.head.title = product.name + ' - ' + product.categories[0].title;
+            } else {
+                res.locals.site.head.title = product.name;
+            }
+
             res.locals.site.head.description = product.metaDescription;
 
             res.render('shop-item', data);
