@@ -21,3 +21,8 @@
         background-color: darken($accent-color, 5%)
     }
 }
+
+.table th {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
