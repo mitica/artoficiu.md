@@ -15,11 +15,16 @@
 
 .u-btn_accent {
     background-color: $accent-color;
-    font-weight: bold;
+    font-weight: 500;
     text-decoration: none !important;
     &:hover {
         background-color: darken($accent-color, 5%)
     }
+}
+
+.u-br {
+    display: block;
+    padding-bottom: 1rem;
 }
 
 .table th {

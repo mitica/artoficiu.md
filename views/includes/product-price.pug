@@ -1,0 +1,17 @@
+.sp-price
+  h3= __('price')
+    | :  
+    em.sp-price_price= util.formatNumber(product.price, culture.language, 2)
+      | 
+      = __('lei')
+  .sp-price_tva= __('inclusive_tva')
+    | :  
+    = util.formatNumber(product.price/config.TVA, culture.language, 1)
+    | 
+    = __('lei')
+  if (product.oldPrice)
+    h5.sp-price_oldPrice= __('old_price')
+      | :  
+      em.sp-price_oldPrice= util.formatNumber(product.oldPrice, culture.language, 2)
+      | 
+      = __('lei')
