@@ -4,7 +4,19 @@
   "private": true,
   "description": "artoficiu.md",
   "main": "./lib/index.js",
-  "types": "./types/index.d.ts",
+  "watch": {
+    "start": {
+      "patterns": [
+        "lib",
+        "views",
+        "locales"
+      ],
+      "extensions": "js,json",
+      "quiet": true,
+      "legacyWatch": true,
+      "delay": 2000
+    }
+  },
   "scripts": {
     "start": "node ./lib/app.js",
     "dev": "tsc && node ./lib/app.js",
@@ -17,12 +29,13 @@
     "preversion": "yarn run tsc",
     "postversion": "git push --follow-tags",
     "prepublish": "yarn run tsc && yarn run clean-test-code",
-    "clean": "rm -fr ./lib && rm -fr ./types",
-    "clean-test-code": "rm -fr ./lib/**/*.test.js && rm -fr ./lib/*.test.js && rm -fr ./types/**/*.test.d.ts && rm -fr ./types/*.test.d.ts",
+    "clean": "rimraf ./lib",
+    "clean-test-code": "rimraf ./lib/**/*.test.js && rimraf ./lib/*.test.js",
     "create-content-types": "node ./scripts/createContentTypes.js",
     "download-old-data": "node ./scripts/import/downloader.js",
     "import-old-data": "node ./scripts/import/importer.js",
-    "gen-narbutas": "tsc && node ./lib/scripts/narbutas/generate.js"
+    "gen-narbutas": "tsc && node ./lib/scripts/narbutas/generate.js",
+    "watch": "npm-watch start"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -91,6 +104,8 @@
     "gulp-sass": "3.0.0",
     "gulp-sourcemaps": "^2.6.3",
     "gulp-to-ico": "^1.0.0",
+    "npm-watch": "^0.4.0",
+    "rimraf": "^2.6.2",
     "slug": "^0.9.1",
     "typescript": "^2.6.2"
   }
