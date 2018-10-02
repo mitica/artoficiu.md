@@ -22,10 +22,16 @@
         font-weight: 500;
         white-space: nowrap;
         text-overflow: ellipsis;
+        text-decoration: none;
+        &:hover{
+            border-bottom: 2px solid $primary-color;
+        }
     }
     &.selected {
         a {
-            text-decoration: underline;
+            // text-decoration: underline;
+            // text-decoration-color: $body-color;
+            border-bottom: 2px solid $primary-color;
         }
     }
 }

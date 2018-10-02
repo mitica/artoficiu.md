@@ -58,7 +58,8 @@ html(lang=culture.language)
       block page_header
     #page-main
       .container
-        include ../includes/page-menu
+        .d-none.d-md-block
+          include ../includes/page-menu
         #page-content
           block page_main
     #page-footer
