@@ -19,6 +19,7 @@ $header-height: 60px;
     height: $header-height;
     background-color: $primary-color;
     overflow: hidden;
+    z-index: 1000;
 }
 
 #header-address {

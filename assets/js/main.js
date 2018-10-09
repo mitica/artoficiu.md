@@ -34,4 +34,12 @@
     setTimeout(function () {
         $("#narbutas-html .fancybox").fancybox();
     }, 1000);
+
+    new Sticky('#page-header', {
+        wrap:true,
+
+    });
+    new Sticky('#left-content', {
+        marginTop: 80,
+    });
 })();
