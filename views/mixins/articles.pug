@@ -1,4 +1,18 @@
 
+mixin articleListBrick(articles)
+  .c-albr.row
+    each item in articles
+      .col-12.col-sm-6.col-md-4
+        .c-albr_i
+          a.c-albr_img(href=links.article(item.slug), title=item.title)
+            img.lazy.c-albr_pic(data-src=item.image.url+'?w=200&h=200', alt=item.title)
+          .c-albr_body
+            h4.c-albr_title
+              a(href=links.article(item.slug), title=item.title)= item.title
+            //- p.c-albr_summary= item.summary
+            .c-albr_stats
+              time= util.moment(item.createdAt).locale(culture.language).format('ll')
+
 mixin articleListBlock(articles)
   .c-alb
     each item in articles

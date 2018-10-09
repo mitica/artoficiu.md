@@ -66,3 +66,43 @@
     font-size: 80%;
     text-decoration: none;
 }
+
+
+// article list brick
+
+.c-albr_i {
+    background-color: white;
+    -webkit-box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+    box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+    margin-bottom: 4px;
+    padding: 3px 6px 6px 6px;
+}
+.c-albr_img {
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    padding: 2px;
+    line-height: 182px;
+    display: block;
+}
+.c-albr_body {
+    padding: 6px 4px 0px 4px;
+}
+.c-albr_title {
+    margin-bottom: 5px;
+}
+.c-albr_pic {
+    max-width: 100%;
+    max-height: 100%;
+}
+.c-albr_summary {
+    margin-bottom: 4px;
+}
+.c-albr_stats {
+    color: $muted-color;
+    font-size: 80%;
+    text-decoration: none;
+}

@@ -13,7 +13,7 @@ export default route;
 
 route.get('/', function (_req: Request, res: Response, next: NextFunction) {
 
-    const culture = res.locals.culture;
+    // const culture = res.locals.culture;
     const __ = res.locals.__;
 
     res.locals.site.head.title = __('home_page_title');
@@ -27,7 +27,7 @@ route.get('/', function (_req: Request, res: Response, next: NextFunction) {
 
     // dc.push('articleCollection', Data.articles({ limit: 10, order: '-createdAt' }));
 
-    dc.push('shopProducts', ContentData.shopProducts({ limit: 8, language: culture.language, order: '-createdAt' }));
+    // dc.push('shopProducts', ContentData.shopProducts({ limit: 8, language: culture.language, order: '-createdAt' }));
 
     dc.getData()
         .then(data => {

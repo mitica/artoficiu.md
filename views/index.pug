@@ -10,13 +10,20 @@ block slider_content
 block main_content
   include ./includes/promoted-categories-products
 
+  //- .c-group
+  //-   .c-group_title
+  //-     if (shopProducts.items.length < shopProducts.total)
+  //-       .c-group_title_more
+  //-         a(href=links.shop(), title=__('view_all'))= __('view_all')
+  //-     h4
+  //-       a(href=links.shop(), title=__('shop'))= __('shop')
+  //-   .c-group_content
+  //-     +productListBlock(shopProducts.items, {itemClass: 'col-6 col-md-3'})
+  //-     a.u-btn.u-btn_accent(href=links.shop(), title=__('view_all_products'))= __('view_all_products')
+
   .c-group
     .c-group_title
-      if (shopProducts.items.length < shopProducts.total)
-        .c-group_title_more
-          a(href=links.shop(), title=__('view_all'))= __('view_all')
       h4
-        a(href=links.shop(), title=__('shop'))= __('shop')
+        a(href=links.articles(), title=__('blog'))= __('blog')
     .c-group_content
-      +productListBlock(shopProducts.items, {itemClass: 'col-6 col-md-3'})
-      a.u-btn.u-btn_accent(href=links.shop(), title=__('view_all_products'))= __('view_all_products')
+      +articleListBrick(latestArticles.items)
