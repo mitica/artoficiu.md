@@ -1,6 +1,4 @@
-
 $header-height: 60px;
-
 #logo {
     display: block;
     width: 340px;
@@ -15,6 +13,12 @@ $header-height: 60px;
     max-width: 100%;
 }
 
+@include media-breakpoint-down(md) {
+    #logo {
+        width: 200px;
+    }
+}
+
 #page-header {
     height: $header-height;
     background-color: $primary-color;
@@ -27,8 +31,15 @@ $header-height: 60px;
     float: left;
     height: $header-height;
     color: $white;
-    font-weight: bold;
-    padding: 5px 20px 0px 20px;
+    font-weight: 500;
+    padding: 5px 0px 0px 18px;
+    svg {
+        width: 18px;
+        height: 18px;
+        fill: white;
+        display: inline-block;
+        margin-right: 12px;
+    }
 }
 
 .c-ulangs {
@@ -43,11 +54,10 @@ $header-height: 60px;
         font-size: 110%;
         text-decoration: none;
         margin-right: 2px;
-
         height: 100%;
         color: $layout-color;
-
-        &.selected, &:hover {
+        &.selected,
+        &:hover {
             color: $primary-color;
             background: $layout-color;
         }
@@ -63,6 +73,7 @@ $header-height: 60px;
     padding: 0px 15px;
     padding-top: $header-height/3.5;
 }
+
 .c-cart-icon_img {
     display: block;
     float: left;
@@ -72,6 +83,7 @@ $header-height: 60px;
         fill: $primary-color;
     }
 }
+
 .c-cart-icon_count {
     display: inline-block;
     padding-left: 6px;
