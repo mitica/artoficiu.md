@@ -1,11 +1,5 @@
 extends ./layouts/layout
 
-block append styles
-  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.1/jquery.fancybox.min.css")
-
-block append scripts
-  script(async, src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.1/jquery.fancybox.min.js")
-
 block main_content
   h1.sp-title= product.title || product.name
   if (product.categories)
