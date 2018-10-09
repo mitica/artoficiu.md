@@ -50,6 +50,7 @@ const mainJsFiles = [
   './node_modules/bootstrap/js/dist/util.js',
   './node_modules/bootstrap/js/dist/carousel.js',
   './node_modules/@fancyapps/fancybox/dist/jquery.fancybox.js',
+  './node_modules/vanilla-lazyload/dist/lazyload.js',
   './assets/js/cart.js',
   './assets/js/checkout.js',
   './assets/js/image-gallery.js',

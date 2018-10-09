@@ -7,7 +7,7 @@ mixin productListBlock(items, options)
       li.c-prod-bl_item(class=itemClass)
         a.c-prod-bl_i(href=links.shop.item(item.slug))
           .c-prod-bl_img
-            img.c-prod-bl_pic(src=item.images[0].url+'?h=200', alt=item.title)
+            img.lazy.c-prod-bl_pic(data-src=item.images[0].url+'?h=200', alt=item.title)
           .c-prod-bl_priceline
             if (item.oldPrice)
               del.c-prod-bl_oldPrice= util.formatNumber(item.oldPrice, culture.language,  2)
@@ -23,6 +23,6 @@ mixin productVariantProperties(variant)
       if (item.colorCode || item.icon)
         i.sp-var_icon(style=item.colorCode?'background-color: #'+item.colorCode:null)
           if(item.icon)
-            img(alt=item.icon.title, src=item.icon.url+'?w=32&h=32')
+            img.lazy(alt=item.icon.title, data-src=item.icon.url+'?w=32&h=32')
 
     = title

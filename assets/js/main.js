@@ -9,22 +9,25 @@
             el.addClass('selected');
         });
 
-        $('.sp-media_main-image').on('click', function(){
+        $('.sp-media_main-image').on('click', function () {
             event.preventDefault();
             event.stopPropagation();
-    
+
             var el = $(this);
-    
+
             var items = [];
             el.parent().find('.sp-media_image')
                 .each(function () { items.push({ src: $(this).attr('data-url') }) });
-                console.log(items);
-    
+
             $.fancybox.open(items);
-    
+
             return false;
         });
     }
 
     initSetProductSelectedImage();
+
+    new LazyLoad({
+        elements_selector: ".lazy"
+    });
 })();

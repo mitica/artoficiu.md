@@ -9112,6 +9112,11 @@ validate.io-undefined@^1.0.3:
   resolved "https://registry.yarnpkg.com/validate.io-undefined/-/validate.io-undefined-1.0.3.tgz#7e27fcbb315b841e78243431897671929e20b7f4"
   integrity sha1-fif8uzFbhB54JDQxiXZxkp4gt/Q=
 
+vanilla-lazyload@8.16:
+  version "8.16.0"
+  resolved "https://registry.yarnpkg.com/vanilla-lazyload/-/vanilla-lazyload-8.16.0.tgz#c4635f962090d54f3722fabbbf5e84c20c7bf273"
+  integrity sha512-sGutygIKL25pAUA/jVSCk+MdjfnATsk/MuBm94+lRqlqH30C3DkGJ/qlM9yAqIq5JfM9q2CSTgoVofFeuAzTcw==
+
 vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"

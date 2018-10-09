@@ -15,7 +15,7 @@ block main_content
         .sp-media_images
           each item, i in product.images
             .sp-media_image(class=i===0?'selected':null, data-url=item.url)
-              img.sp-media_pic(src=item.url+'?h=50', alt=item.title)
+              img.lazy.sp-media_pic(data-src=item.url+'?h=50', alt=item.title)
 
     .col-md-7.js-sp-form
       if (!product.isInStock)
