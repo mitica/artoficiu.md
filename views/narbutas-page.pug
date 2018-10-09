@@ -4,6 +4,10 @@ block append head
   script(async, src='https://www.google.com/recaptcha/api.js')
 
 block main_content
+  if (NODE_ENV === 'production')
+    link(rel="stylesheet", media="all", href="/static/css/" + assets.getName('item.css'))
+  else
+    link(rel="stylesheet", media="all", href="/static/css/item.css")
   .page-title
     h2.page-title_h2= __('narbutas')
       | : 

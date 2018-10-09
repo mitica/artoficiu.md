@@ -6,8 +6,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-@import "../../node_modules/@fancyapps/fancybox/dist/jquery.fancybox";
-
 @import "variables";
 
 @import "../../node_modules/bootstrap/scss/functions";
@@ -57,11 +55,8 @@
 @import "article";
 @import "footer";
 @import "product-block-list";
-@import "shop-product";
 @import "alert";
 @import "pager";
 
 @import "cat-menu";
 @import "cat-block-list";
-@import "narbutas-page";
-@import "image-gallery";

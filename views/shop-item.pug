@@ -1,6 +1,10 @@
 extends ./layouts/layout
 
 block main_content
+  if (NODE_ENV === 'production')
+    link(rel="stylesheet", media="all", href="/static/css/" + assets.getName('item.css'))
+  else
+    link(rel="stylesheet", media="all", href="/static/css/item.css")
   h1.sp-title= product.title || product.name
   if (product.categories)
     each item in product.categories

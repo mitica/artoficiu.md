@@ -17,6 +17,7 @@ const mainSassFiles = [
   './assets/scss/main.scss',
   './assets/scss/error-page.scss',
   './assets/scss/invoice.scss',
+  './assets/scss/item.scss',
 ];
 
 const cssDist = './public/static/css';
