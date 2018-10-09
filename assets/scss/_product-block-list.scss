@@ -38,7 +38,7 @@
 }
 
 .c-prod-bl_priceline {
-    background: $accent-color;
+    // background: $accent-color;
     padding: 2px 6px;
     text-align: center;
     font-size: 110%;
@@ -47,7 +47,7 @@
 
 .c-prod-bl_price {
     color: $primary-color;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .c-prod-bl_oldPrice {
@@ -57,6 +57,6 @@
 
 .c-prod-bl_title {
     margin:0px;
-    padding: 2px 6px;
+    padding: 3px 5px 8px;
     text-align: center;
 }
