@@ -1,4 +1,3 @@
-
 .c-catalog-menu_inline {
     margin-bottom: 20px;
     .c-catalog-menu_i {
@@ -15,15 +14,14 @@
 
 .c-catalog-menu_i {
     display: block;
-    padding: 1px 0px 1px 10px;
-    // font-size: 100%;
+    padding: 1px 0px 1px 10px; // font-size: 100%;
     a {
         color: $primary-color;
         font-weight: 500;
         white-space: nowrap;
         text-overflow: ellipsis;
         text-decoration: none;
-        &:hover{
+        &:hover {
             border-bottom: 2px solid $primary-color;
         }
     }
@@ -31,6 +29,24 @@
         a {
             // text-decoration: underline;
             // text-decoration-color: $body-color;
+            border-bottom: 2px solid $primary-color;
+        }
+    }
+}
+
+.c-catalog__sort {
+    position: relative;
+    margin-top: -6px;
+    padding-bottom: 6px;
+    a {
+        display: inline-block;
+        margin: 0px 4px;
+        text-decoration: none;
+        &:hover {
+            color: $primary-color;
+        }
+        &.selected {
+            color: $primary-color;
             border-bottom: 2px solid $primary-color;
         }
     }

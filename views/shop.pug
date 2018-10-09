@@ -9,13 +9,21 @@ block main_content
         = (selectedShopCategory.name || selectedShopCategory.title)
       else
         = __('shop')
+  .c-catalog__sort
+    span= __('sort_by')+': '
+    if (selectedShopCategory)
+      a(href=links.shop.category(selectedShopCategory.slug), title=__('date'), class=sortParam == null ? 'selected' : null)= __('date')
+      a(href=links.shop.category(selectedShopCategory.slug, {sort: 'price'}), title=__('price'), class=sortParam==='price'?'selected' : null)= __('price')
+    else
+      a(href=links.shop(), title=__('date'), class=sortParam == null ? 'selected' : null)= __('date')
+      a(href=links.shop({sort: 'price'}), title=__('price'), class=sortParam === 'price' ? 'selected' : null)= __('price')
 
   .c-catalog-menu_inline.d-lg-none
     include ./includes/shop-categories
   +productListBlock(shopProducts.items, {itemClass: 'col-6 col-md-3'})
   if (selectedShopCategory)
-    +shopCategoryPager(shopProducts, selectedShopCategory)
+    +shopCategoryPager(shopProducts, selectedShopCategory, sortParam)
   else
-    +shopPager(shopProducts)
+    +shopPager(shopProducts, sortParam)
   .c-catalog-menu_inline.d-lg-none
     include ./includes/shop-categories

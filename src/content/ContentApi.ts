@@ -150,10 +150,10 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
                 query.order = '-sys.createdAt';
                 break;
             case 'price':
-                query.order = 'sys.price';
+                query.order = 'fields.price';
                 break;
             case '-price':
-                query.order = '-sys.price';
+                query.order = '-fields.price';
                 break;
 
             default:

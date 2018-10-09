@@ -22,12 +22,24 @@ route.get('/shop', function (req: Request, res: Response, next: NextFunction) {
     res.locals.site.head.description = __('shop_page_description');
     res.locals.site.head.keywords = __('shop_page_keywords');
 
-    res.locals.currentPageLink = links.shop();
+    const defaultOrder = '-createdAt';
+    let order = defaultOrder as 'price' | '-createdAt';
+    let sortParam = null;
+    if (~['price'].indexOf(req.query.sort)) {
+        order = 'price';
+        sortParam = 'price';
+    }
+
+    res.locals.sortParam = sortParam;
+    res.locals.pageParam = page > 0 ? page : null;
+
+    res.locals.currentPageLink = page > 0 ? links.shop({ page: page, sort: sortParam }) : links.shop({ sort: sortParam });
     res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
+
 
     const dc: DataContainer = res.locals.dataContainer;
 
-    dc.push('shopProducts', ContentData.shopProducts({ limit: 20, skip: page * 20, language: culture.language, order: '-createdAt' }));
+    dc.push('shopProducts', ContentData.shopProducts({ limit: 20, skip: page * 20, language: culture.language, order }));
 
     dc.getData()
         .then(data => {
@@ -46,8 +58,16 @@ route.get('/shop/:category', function (req: Request, res: Response, next: NextFu
     let page = parseInt(req.query.page);
     page = page > 0 ? page : 0;
 
-    res.locals.currentPageLink = links.shop.category(categorySlug);
-    res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
+    const defaultOrder = '-createdAt';
+    let order = defaultOrder as 'price' | '-createdAt';
+    let sortParam: string = null;
+    if (~['price'].indexOf(req.query.sort)) {
+        order = 'price';
+        sortParam = 'price';
+    }
+
+    res.locals.sortParam = sortParam;
+    res.locals.pageParam = page > 0 ? page : null;
 
     const dc: DataContainer = res.locals.dataContainer;
 
@@ -60,9 +80,15 @@ route.get('/shop/:category', function (req: Request, res: Response, next: NextFu
                 error.statusCode = 404;
                 return next(error);
             }
+
+            const slug = data.selectedShopCategory.slug;
+
+            res.locals.currentPageLink = page > 0 ? links.shop.category(slug, { page: page, sort: sortParam }) : links.shop.category(slug, { sort: sortParam });
+            res.locals.site.head.canonical = canonical(res.locals.currentPageLink);
+
             res.locals.site.head.title = data.selectedShopCategory.metaTitle || __('shop') + ' / ' + (data.selectedShopCategory.title || data.selectedShopCategory.name);
             res.locals.site.description = data.selectedShopCategory.metaDescription
-            return ContentData.shopProducts({ limit: 20, skip: page * 20, language: culture.language, order: '-createdAt', categoryId: data.selectedShopCategory.id })
+            return ContentData.shopProducts({ limit: 20, skip: page * 20, language: culture.language, order, categoryId: data.selectedShopCategory.id })
                 .then(shopProducts => {
                     data.shopProducts = shopProducts;
                     res.render('shop', data);

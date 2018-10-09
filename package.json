@@ -78,7 +78,7 @@
     "ournet.logger": "^0.1.0",
     "pug": "^2.0.0-rc.4",
     "turndown": "^4.0.1",
-    "urlset": "^0.6.0",
+    "urlset": "^0.6.1",
     "vanilla-lazyload": "8.16",
     "vogels": "^2.2.0"
   },

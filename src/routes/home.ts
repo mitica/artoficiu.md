@@ -1,6 +1,6 @@
 
 import { Router, Request, Response, NextFunction } from 'express';
-import { DataContainer, ContentData } from '../data';
+import { DataContainer } from '../data';
 import links from '../links';
 import { canonical } from '../utils';
 import { QSMessage } from '../qsMessage';
