@@ -31,16 +31,8 @@ html(lang=culture.language)
     else
       link(rel="stylesheet", media="all", href="/static/css/main.css")
 
-    //- link(rel='dns-prefetch', href='//ajax.googleapis.com')
-    //- link(rel='dns-prefetch', href='//tpc.googlesyndication.com')
-    //- link(rel='dns-prefetch', href='//pagead2.googlesyndication.com')
+    link(rel='dns-prefetch', href='"//images.ctfassets.net')
 
-    script(async, src="https://www.googletagmanager.com/gtag/js?id=" + config.googleAnalyticsId)
-    script.
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '#{config.googleAnalyticsId}');
     if (_events && _events.length)
       script
         each a in _events
@@ -65,12 +57,19 @@ html(lang=culture.language)
       .container
         include ../includes/footer
 
-    script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js", crossorigin="anonymous")
+    //- script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js", crossorigin="anonymous", async)
     if (NODE_ENV==='production')
       script(type='text/javascript', async, src="/static/js/" + assets.getName('main.js'))
     else
       script(type='text/javascript', async, src="/static/js/main.js")
     block scripts
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', '#{config.googleAnalyticsId}', '#{config.domain}');
+      ga('send', 'pageview');
 
     //- if (config.facebookId)
     //-   script.

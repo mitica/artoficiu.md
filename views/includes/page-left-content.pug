@@ -15,11 +15,3 @@
     a(href=links.articles())= __('articles')
   .c-group_content
     +articleListMedia(latestArticles.items)
-
-.c-group
-  h4.c-group_title= __('weather_in_chisinau')
-  .c-hroup_content
-    // Click.md Weather Widget
-    iframe(src='http://meteo.click.md/widget2/widget_frame?color=e5e5e5&itemcolor=&textcolor=&pos=v&days=3&w=250&header=false&id=618426', scrolling='no', frameborder='0', style='border:none;overflow:hidden;height:191px;width:250px;', allowtransparency='true')
-    noscript
-      a(href='http://meteo.click.md') Click.md
