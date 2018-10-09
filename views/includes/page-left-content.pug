@@ -1,17 +1,17 @@
 .c-group
   h4.c-group_title
-    a(href=links.shop())= __('shop_products')
+    a(href=links.shop(), title=__('shop_products'))= __('shop_products')
   .c-group_content
     include ./shop-categories
 
 .c-group
   h4.c-group_title
-    a(href=links.narbutas())= __('catalog_narbutas')
+    a(href=links.narbutas(), title='NARBUTAS')= __('catalog_narbutas')
   .c-group_content
     +categoriesMenu(narbutasMenu)
 
 .c-group
   h4.c-group_title
-    a(href=links.articles())= __('articles')
+    a(href=links.articles(), title=__('articles'))= __('articles')
   .c-group_content
     +articleListMedia(latestArticles.items)

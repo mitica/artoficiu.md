@@ -9,7 +9,7 @@ mixin imageSlider(slider, options)
       each item, i in slider.items
         .carousel-item.c-image-slider_item(class=i==0?'active':null)
           if (item.link)
-            a(href=item.link)
+            a(href=item.link, title=item.title)
               img.d-block.w-100(src=item.image.url, alt='')
           else
             img.d-block.w-100(src=item.image.url, alt='')

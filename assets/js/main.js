@@ -30,4 +30,8 @@
     new LazyLoad({
         elements_selector: ".lazy"
     });
+
+    setTimeout(function () {
+        $("#narbutas-html .fancybox").fancybox();
+    }, 1000);
 })();

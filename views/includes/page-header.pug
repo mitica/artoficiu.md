@@ -1,6 +1,6 @@
 .row
   .col-7
-    a#logo(href=links.home())
+    a#logo(href=links.home(), title=config.name)
     #header-address= __('address_info')
      br
      = __('tel')
@@ -15,4 +15,4 @@
     .c-ulangs
       each item in config.languages
         if (item!==culture.language)
-          a(rel='noindex nofollow',href=links.actions.setLanguage(item), class=item===culture.language?'selected':null)= item
+          a(rel='noindex nofollow', title=item, href=links.actions.setLanguage(item), class=item===culture.language?'selected':null)= item

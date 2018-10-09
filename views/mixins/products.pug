@@ -5,9 +5,9 @@ mixin productListBlock(items, options)
   ul.row.c-prod-bl
     each item, index in items
       li.c-prod-bl_item(class=itemClass)
-        a.c-prod-bl_i(href=links.shop.item(item.slug))
+        a.c-prod-bl_i(href=links.shop.item(item.slug), title=item.name)
           .c-prod-bl_img
-            img.lazy.c-prod-bl_pic(data-src=item.images[0].url+'?h=200', alt=item.title)
+            img.lazy.c-prod-bl_pic(data-src=item.images[0].url+'?h=200', alt=(item.name || item.title))
           .c-prod-bl_priceline
             if (item.oldPrice)
               del.c-prod-bl_oldPrice= util.formatNumber(item.oldPrice, culture.language,  2)

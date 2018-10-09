@@ -4,7 +4,7 @@ block main_content
   .page-title
     h2.page-title_h2
       if (selectedShopCategory)
-        a(href=links.shop())= __('shop')
+        a(href=links.shop(), title=__('shop'))= __('shop')
         |  / 
         = (selectedShopCategory.name || selectedShopCategory.title)
       else

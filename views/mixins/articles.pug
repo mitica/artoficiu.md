@@ -7,7 +7,7 @@ mixin articleListBlock(articles)
           img.lazy.c-alb_pic(data-src=item.image.url+'?w=200&h=200', alt=item.title)
         .media-body
           h3.c-alb_title
-            a(href=links.article(item.slug))= item.title
+            a(href=links.article(item.slug), title=item.title)= item.title
           p.c-alb_summary= item.summary
           .c-alb_stats
             time= util.moment(item.createdAt).locale(culture.language).format('ll')
@@ -15,7 +15,7 @@ mixin articleListBlock(articles)
 mixin articleListMedia(articles)
   .c-alm
     each item in articles
-      a.media.c-alm_i(href=links.article(item.slug))
+      a.media.c-alm_i(href=links.article(item.slug), title=item.title)
         .c-alm_img.mr-3
           img.lazy.c-alm_pic(data-src=item.image.url+'?w=50&h=50&fit=fill', alt=item.title)
         .media-body

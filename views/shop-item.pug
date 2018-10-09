@@ -4,7 +4,7 @@ block main_content
   h1.sp-title= product.title || product.name
   if (product.categories)
     each item in product.categories
-      a.sp-cat(href=links.shop.category(item.slug, {ref: 'product'}))= item.name || item.title
+      a.sp-cat(href=links.shop.category(item.slug, {ref: 'product'}), title=item.name)= item.name || item.title
   .u-br
   .row
     .col-md-5
@@ -15,7 +15,7 @@ block main_content
         .sp-media_images
           each item, i in product.images
             .sp-media_image(class=i===0?'selected':null, data-url=item.url)
-              img.lazy.sp-media_pic(data-src=item.url+'?h=50', alt=item.title)
+              img.lazy.sp-media_pic(data-src=item.url+'?h=50', alt=("image "+i))
 
     .col-md-7.js-sp-form
       if (!product.isInStock)

@@ -11,7 +11,7 @@ block head
 block main_content
   article.article
     h1
-      a(href=currentPageLink)= article.title
+      a(href=currentPageLink, title=article.title)= article.title
     .article_details
       time= util.moment(article.createdAt).locale(culture.language).format('LL')
     .article_body!= util.renderArticle(article.text)
