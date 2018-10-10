@@ -35,13 +35,11 @@
         $("#narbutas-html .fancybox").fancybox();
     }, 1000);
 
-    var stickyHeader = new Sticky('#page-header', {
-        wrap: true,
-
+    new StickySidebar('#page-header', {
+        innerWrapperSelector: '#page-header__inner',
     });
-    new Sticky('#left-content', {
-        marginTop: 80,
+    new StickySidebar('#left-content', {
+        topSpacing: 80,
+        bottomSpacing: 200,
     });
-
-    setInterval(function () { stickyHeader.update() }, 500);
 })();

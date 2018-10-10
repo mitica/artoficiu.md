@@ -8,37 +8,37 @@ $header-height: 60px;
     background-repeat: no-repeat;
     background-size: contain;
     background-color: $accent-color;
-    float: left;
     overflow: hidden;
     max-width: 100%;
 }
 
-@include media-breakpoint-down(md) {
-    #logo {
-        width: 200px;
-    }
-}
-
 #page-header {
     height: $header-height;
-    background-color: $primary-color;
     overflow: hidden;
     z-index: 1000;
+}
+#page-header__inner {
+    background-color: $primary-color;
+    height: $header-height;
+    overflow: hidden;
 }
 
 #header-address {
     display: block;
-    float: left;
     height: $header-height;
     color: $white;
     font-weight: 500;
-    padding: 5px 0px 0px 18px;
+    padding-top: 5px;
     svg {
         width: 18px;
         height: 18px;
         fill: white;
         display: inline-block;
         margin-right: 12px;
+    }
+    div {
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 }
 
