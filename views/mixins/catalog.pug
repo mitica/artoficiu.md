@@ -7,5 +7,5 @@ mixin narbutasPagesListBlock(items, options)
         a.c-cat-bl_i(href=links.narbutas.page(item.id), title=item.name)
           .c-cat-bl_img
             if (item.image)
-              img.lazy.c-cat-bl_pic(data-src=item.image.mediumUrl, alt=(item.name || item.title))
+              img.lazy.c-cat-bl_pic(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", data-src=item.image.mediumUrl, alt=(item.name || item.title))
           h6.c-cat-bl_title= item.name

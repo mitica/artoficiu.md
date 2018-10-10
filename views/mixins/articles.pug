@@ -5,7 +5,7 @@ mixin articleListBrick(articles)
       .col-12.col-sm-6.col-md-4
         .c-albr_i
           a.c-albr_img(href=links.article(item.slug), title=item.title)
-            img.lazy.c-albr_pic(data-src=item.image.url+'?w=200&h=200', alt=item.title)
+            img.lazy.c-albr_pic(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", data-src=item.image.url+'?w=200&h=200', alt=item.title)
           .c-albr_body
             h4.c-albr_title
               a(href=links.article(item.slug), title=item.title)= item.title
@@ -18,7 +18,7 @@ mixin articleListBlock(articles)
     each item in articles
       .media.c-alb_i
         .c-alb_img.mr-3
-          img.lazy.c-alb_pic(data-src=item.image.url+'?w=200&h=200', alt=item.title)
+          img.lazy.c-alb_pic(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", data-src=item.image.url+'?w=200&h=200', alt=item.title)
         .media-body
           h3.c-alb_title
             a(href=links.article(item.slug), title=item.title)= item.title
@@ -31,7 +31,7 @@ mixin articleListMedia(articles)
     each item in articles
       a.media.c-alm_i(href=links.article(item.slug), title=item.title)
         .c-alm_img.mr-3
-          img.lazy.c-alm_pic(data-src=item.image.url+'?w=50&h=50&fit=fill', alt=item.title)
+          img.lazy.c-alm_pic(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", data-src=item.image.url+'?w=50&h=50&fit=fill', alt=item.title)
         .media-body
           h6.c-alm_title= item.title
           .c-alm_stats

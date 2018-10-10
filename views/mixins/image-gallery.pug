@@ -7,4 +7,4 @@ mixin imageGallery(items)
       .c-gallery-list
         each item, index in items
           a.c-gallery-item(class=(index===0?'active':null), href=item.href, title=item.title, target='_blank', rel='nofollow')
-            img.lazy(data-src=(item.thumbnail || item.href), alt=item.title)
+            img.lazy(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", data-src=(item.thumbnail || item.href), alt=item.title)

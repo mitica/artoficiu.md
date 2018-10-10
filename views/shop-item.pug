@@ -1,5 +1,9 @@
 extends ./layouts/layout
 
+block append head
+  meta(property="og:type", content='product')
+  meta(property="og:image", content=product.images[0] && product.images[0].url)
+
 block main_content
   if (NODE_ENV === 'production')
     link(rel="stylesheet", media="all", href="/static/css/" + assets.getName('item.css'))
@@ -15,11 +19,11 @@ block main_content
       - var lightboxId = 'sp-media-'+product.id;
       .sp-media
         .sp-media_main-image
-          img.sp-media_main-pic(src=product.images[0].url, alt=product.images[0].title)
+          img.sp-media_main-pic.lazy(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", data-src=product.images[0].url, alt=product.images[0].title)
         .sp-media_images
           each item, i in product.images
             .sp-media_image(class=i===0?'selected':null, data-url=item.url)
-              img.lazy.sp-media_pic(data-src=item.url+'?h=50', alt=("image "+i))
+              img.lazy.sp-media_pic(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", data-src=item.url+'?h=50', alt=("image "+i))
 
     .col-md-7.js-sp-form
       if (!product.isInStock)
@@ -42,7 +46,7 @@ block main_content
                   span.sp-prop_value= item.value
                 .col-3
                   if (item.icon)
-                    img.sp-prop_icon(src=item.icon.url+'?w=32&h=32', alt=item.icon.title)
+                    img.sp-prop_icon.lazy(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", data-src=item.icon.url+'?w=32&h=32', alt=item.icon.title)
 
 
   br

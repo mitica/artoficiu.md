@@ -35,11 +35,13 @@
         $("#narbutas-html .fancybox").fancybox();
     }, 1000);
 
-    new Sticky('#page-header', {
-        wrap:true,
+    var stickyHeader = new Sticky('#page-header', {
+        wrap: true,
 
     });
     new Sticky('#left-content', {
         marginTop: 80,
     });
+
+    setInterval(function () { stickyHeader.update() }, 500);
 })();
