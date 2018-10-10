@@ -13,6 +13,7 @@ export interface IConfig {
     facebookId?: string
 
     googleAnalyticsId: string
+    countItemsPerPromotedCategory: number
 
     TVA: number
 }
@@ -33,6 +34,7 @@ const config: IConfig = {
     googleAnalyticsId: 'UA-55418815-1',
 
     TVA: 6,
+    countItemsPerPromotedCategory: 4,
 };
 
 export default config;
