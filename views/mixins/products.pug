@@ -17,12 +17,14 @@ mixin productListBlock(items, options)
           h6.c-prod-bl_title= item.name
 
 mixin productVariantProperties(variant)
-  - var title = variant.name || variant.properties.map(item=>item.value).join('/')
+  - var title = variant.name
   label(for=variant.id).sp-var_title
-    each item in variant.properties
-      if (item.colorCode || item.icon)
-        i.sp-var_icon(style=item.colorCode?'background-color: #'+item.colorCode:null)
-          if(item.icon)
-            img.lazy(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", alt=item.icon.title, data-src=item.icon.url+'?w=32&h=32')
+    if (variant.properties)
+      - title = title || variant.properties.map(item=>item.value).join('/')
+        each item in variant.properties
+          if (item.colorCode || item.icon)
+            i.sp-var_icon(style=item.colorCode?'background-color: #'+item.colorCode:null)
+              if(item.icon)
+                img.lazy(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", alt=item.icon.title, data-src=item.icon.url+'?w=32&h=32')
 
     = title
