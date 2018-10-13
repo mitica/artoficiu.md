@@ -22,7 +22,7 @@ mixin productVariantProperties(variant)
     if (variant.properties)
       - title = title || variant.properties.map(item=>item.value).join('/')
         each item in variant.properties
-          if (item.colorCode || item.icon)
+          if (item && (item.colorCode || item.icon))
             i.sp-var_icon(style=item.colorCode?'background-color: #'+item.colorCode:null)
               if(item.icon)
                 img.lazy(src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", alt=item.icon.title, data-src=item.icon.url+'?w=32&h=32')
