@@ -18,7 +18,7 @@ import {
 } from './entities';
 
 export function toSliderItem(item: ContentfulEntity): SliderItemEntity {
-    if (!item) {
+    if (!item || !item.fields) {
         return null;
     }
     const slider: SliderItemEntity = {
@@ -32,7 +32,7 @@ export function toSliderItem(item: ContentfulEntity): SliderItemEntity {
 }
 
 export function toSlider(item: ContentfulEntity): SliderEntity {
-    if (!item) {
+    if (!item || !item.fields) {
         return null;
     }
     const slider: SliderEntity = {
@@ -66,7 +66,7 @@ export function toShopProducts(collection: ContentfulEntityCollection<Contentful
 }
 
 function toShopProduct(entity: ContentfulEntity): ShopProductEntity {
-    if (!entity) {
+    if (!entity || !entity.fields) {
         return null;
     }
     const data: ShopProductEntity = {
@@ -102,7 +102,7 @@ function toShopProduct(entity: ContentfulEntity): ShopProductEntity {
 }
 
 function toShopProductVariant(entity: ContentfulEntity): ShopProductVariantEntity {
-    if (!entity) {
+    if (!entity || !entity.fields) {
         return null;
     }
     const data: ShopProductVariantEntity = {
@@ -121,7 +121,7 @@ function toShopProductVariant(entity: ContentfulEntity): ShopProductVariantEntit
 }
 
 export function toPropertyValue(entity: ContentfulEntity): PropertyValueEntity {
-    if (!entity) {
+    if (!entity || !entity.fields) {
         return null;
     }
     const data: PropertyValueEntity = {
@@ -158,7 +158,7 @@ export function toArticles(collection: ContentfulEntityCollection<ContentfulEnti
 }
 
 function toArticle(entity: ContentfulEntity): ArticleEntity {
-    if (!entity) {
+    if (!entity || !entity.fields) {
         return null;
     }
     const data: ArticleEntity = {
@@ -205,7 +205,7 @@ export function toPages(collection: ContentfulEntityCollection<ContentfulEntity>
 }
 
 export function toPage(entity: ContentfulEntity): PageEntity {
-    if (!entity) {
+    if (!entity || !entity.fields) {
         return null;
     }
     const data: PageEntity = {
