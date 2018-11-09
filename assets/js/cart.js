@@ -1,5 +1,50 @@
 (function () {
     $(document).ready(function () {
+
+        function setPriceValue(value) {
+            var el = $('.js-sp-form .js-sp-price');
+            value = value || el.data('value');
+
+            el.text(value);
+        }
+        function setPriceTva(value) {
+            var el = $('.js-sp-form .js-sp-tva');
+            value = value || el.data('value');
+
+            el.text(value);
+        }
+
+        function selectProductVariant(el) {
+            var varEl = $(el);
+            if (varEl.prop('disabled')) {
+                console.log('not in stock');
+                return;
+            }
+
+            var price = varEl.data('price');
+            var tva = varEl.data('tva');
+
+            if (!price) {
+                console.log('variant without price, set default value');
+                setPriceValue();
+                setPriceTva();
+                return;
+            }
+            setPriceValue(price);
+            setPriceTva(tva);
+
+        }
+
+        $('.js-sp-form').on('click', '.js-sp-variant', function () {
+            selectProductVariant(this);
+        });
+
+        var checkedVariant = $('.js-sp-form .js-sp-variant:checked')[0];
+        if (checkedVariant) {
+            selectProductVariant(checkedVariant);
+        }
+
+
         $('.js-sp-form').on('click', '.js-sp-add', function () {
             var addBtn = $(this);
             addBtn.prop('disabled', true);

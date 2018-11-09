@@ -10,7 +10,7 @@ if (product.variants)
       .col-5
         +productVariantProperties(item)
       .col-2
-        input.sp-var_check.js-sp-param(type='radio', name='variantId', value=item.id, id=item.id, checked=check, disabled=!item.isInStock)
+        input.sp-var_check.js-sp-param.js-sp-variant(type='radio', name='variantId', data-price=item.price ? util.formatNumber(item.price, culture.language, 2): '', data-tva=item.price ? util.formatNumber(item.price/config.TVA, culture.language, 1): '', value=item.id, id=item.id, checked=check, disabled=!item.isInStock)
       .col-5
         if (item.isInStock)
           label(for=item.id).sp-var_inStock= __('in_stock')
