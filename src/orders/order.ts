@@ -40,6 +40,7 @@ export type OrderItemProduct = {
 export type OrderItemProductVariant = {
     id: string
     title: string
+    price?: number
 }
 
 export function createOrderFromCartData(cart: CartData, customer: Customer, comments?: string): Order {
@@ -50,7 +51,7 @@ export function createOrderFromCartData(cart: CartData, customer: Customer, comm
         status: OrderStatus.PENDING,
         customer: customer,
         comments: comments,
-        total: cart.price,
+        total: cart.total,
         countItems: cart.items.length,
         quantity: cart.quantity,
         createdAt: new Date(),
@@ -69,7 +70,8 @@ export function createOrderFromCartData(cart: CartData, customer: Customer, comm
             quantity: item.quantity,
             variant: item.variant && {
                 id: item.variant.id,
-                title: item.variant.title,
+                title: item.variant.title || item.variant.properties && item.variant.properties.map(it=>it.value).join('/'),
+                price: item.variant.price,
             }
         }
 

@@ -3,7 +3,7 @@
     h5= __('total_without_tva')
       | :
   .col-7
-    h5.text-primary= util.formatNumber(Cart.price - Cart.price/config.TVA, culture.language, 1)
+    h5.text-primary= util.formatNumber(Cart.total - Cart.total/config.TVA, culture.language, 1)
       |  
       = __('lei')
 .row
@@ -11,7 +11,7 @@
     h5= __('tva')
       | :
   .col-7
-    h5.text-primary= util.formatNumber(Cart.price/config.TVA, culture.language, 1)
+    h5.text-primary= util.formatNumber(Cart.total/config.TVA, culture.language, 1)
       |  
       = __('lei')
 hr
@@ -20,6 +20,6 @@ hr
     h3= __('total')
       | :
   .col-7
-    h3.text-primary= util.formatNumber(Cart.price, culture.language)
+    h3.text-primary= util.formatNumber(Cart.total, culture.language)
       |  
       = __('lei')

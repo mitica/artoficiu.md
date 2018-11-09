@@ -21,11 +21,11 @@ table.table
                 +productVariantProperties(item.variant)
                     
         td.align-middle.text-right
-          strong= util.formatNumber(item.product.price, culture.language)
+          strong= util.formatNumber(item.price, culture.language)
         td.align-middle.text-right
           strong= item.quantity
         td.align-middle.text-right
-          strong.text-primary= util.formatNumber(item.price, culture.language)
+          strong.text-primary= util.formatNumber(item.total, culture.language)
             |  
             = __('lei')
         td.align-middle.text-right

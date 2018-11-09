@@ -93,12 +93,9 @@ route.post('/actions/cart/add', function (req: Request, res: Response) {
 
             const Cart = req.session.Cart as CartData;
             CartHelpers.addItem(Cart, {
-                id: product.id,
                 product: product,
                 quantity: quantity,
                 variant: variant,
-                variantId: variant && variant.id,
-                price: product.price * quantity
             });
 
             return new Promise<any>((resolve, reject) => {

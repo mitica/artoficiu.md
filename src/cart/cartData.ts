@@ -4,14 +4,14 @@ export function createEmptyCartData(): CartData {
     return {
         items: [],
         quantity: 0,
-        price: 0,
+        total: 0,
     }
 }
 
 export type CartData = {
     items: CartItemData[]
     quantity: number
-    price: number
+    total: number
 }
 
 
@@ -22,4 +22,5 @@ export type CartItemData = {
     variant?: ShopProductVariantEntity
     variantId?: string
     price: number
+    total: number
 }
