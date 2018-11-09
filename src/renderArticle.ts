@@ -48,5 +48,5 @@ function renderVideo(id: string, href: string, title: string, text: string) {
     id = 'video-' + id;
     title = encodeURIComponent(title || text);
     text = encodeURIComponent(text);
-    return `<p><video class="article_video" controls><source src="${href}" /></video></p>`
+    return `<p class="article_video_p"><video class="article_video" controls><source src="${href}" /></video></p>`
 }
