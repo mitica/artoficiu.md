@@ -2,6 +2,16 @@
 
 Codul sursă al proiectului [Artoficiu.md](http://artoficiu.md). Vezi [schimbările](changelog).
 
+## Info
+
+- Pe prima pagină apar doar categoriile care sunt promovate (Reduceri, Recomandări, etc.)
+- Conținutul unui articol, descrierile produselor și alte info se introdul în format 
+[markdown](https://en.wikipedia.org/wiki/Markdown). Simplu și ușor de învățat. De asemenea, 
+simplu de transformat/transportat.
+- Dacă o variantă a unui produs(roșu, de piele, 140x60 etc.) are preț, atunci **se va folosi/calcula** 
+acest preț, în caz contrar se va folosi prețul produsului.
+
+
 ## Conținut
 
 Conținutul siteului este ținut pe platforma Contentful.com.
