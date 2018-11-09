@@ -16,11 +16,15 @@ $header-height: 60px;
     height: $header-height;
     overflow: hidden;
     z-index: 1000;
+    will-change: min-height;
 }
 #page-header__inner {
     background-color: $primary-color;
     height: $header-height;
     overflow: hidden;
+    transform: translate(0, 0); /* For browsers don't support translate3d. */
+    transform: translate3d(0, 0, 0);
+    will-change: position, transform;
 }
 
 #header-address {

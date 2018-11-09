@@ -47,15 +47,16 @@ html(lang=culture.language)
     
     #fb-root
     include ../includes/page-top-info
-    #page-header
-      #page-header__inner
-        block page_header
-    #page-main
-      .container
-        #top-page-menu
-          include ../includes/page-menu
-        #page-content
-          block page_main
+    #page-main-content
+      #page-header
+        #page-header__inner
+          block page_header
+      #page-main
+        .container
+          #top-page-menu
+            include ../includes/page-menu
+          #page-content
+            block page_main
     #page-footer
       .container
         include ../includes/footer

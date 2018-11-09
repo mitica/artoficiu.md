@@ -36,7 +36,9 @@
     }, 1000);
 
     new StickySidebar('#page-header', {
+        // topSpacing: $('#page-top-info').innerHeight(),
         innerWrapperSelector: '#page-header__inner',
+        containerSelector: '#page-main-content',
     });
     new StickySidebar('#left-content', {
         topSpacing: 80,
