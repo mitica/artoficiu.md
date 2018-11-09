@@ -20,11 +20,16 @@
 }
 
 .article_pic_a {
-    width: 250px;
+    // width: 250px;
     text-align: center;
     background: $white;
     border-radius: $border-radius;
     padding: 2px;
-    float: right;
-    margin: 5px 0px 10px 15px;
+    // float: right;
+    margin: 10px;
+}
+
+.article_video {
+    max-height: 400px;
+    max-width: 100%;
 }
