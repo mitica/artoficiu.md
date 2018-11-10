@@ -24,6 +24,7 @@ export function createCustomerFromPostData(data: any): Customer {
         name: data.name,
         email: data.email,
         telephone: data.telephone,
+        address: data.address,
         VAT: data.VAT || data.vat || data.TVA || data.TVACode || data.tvaCode || data.tva_code,
         bank: data.bank,
         bankCode: data.bankCode || data.bank_code,

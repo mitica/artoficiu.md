@@ -206,14 +206,41 @@ route.post('/actions/checkout', function (req: Request, res: Response) {
                 throw new Error(`Not created db order!`);
             }
 
+            const invoicePdfLink = canonical(links.invoices.invoicePdf(createdOrder.id));
+
             const emailSubject = __('invoice_email_subject');
-            const emailBody = __('invoice_email_body').replace('${invoice_pdf_link}', canonical(links.invoices.invoicePdf(createdOrder.id)));
+            const emailBody = __('invoice_email_body').replace('${invoice_pdf_link}', invoicePdfLink);
 
             sendEmail({
                 to: [createdOrder.customer.email],
                 subject: emailSubject,
                 text: emailBody,
             }).catch(error => logger.error(error))
+                .then(() => {
+                    return sendEmail({
+                        from: config.email,
+                        to: config.email,
+                        subject: 'Comanda pe ArtOficiu.md',
+                        text: `Comandă nouă:
+
+De la ${customer.name},
+
+Tel: ${customer.telephone || '-'}
+Email: ${customer.email || '-'}
+Adresa: ${customer.address || '-'}
+
+Bank: ${customer.bank || '-'}
+Bank Account: ${customer.bankAccount || '-'}
+Bank Code: ${customer.bankCode || '-'}
+IDNO: ${customer.idno || '-'}
+TVA: ${customer.VAT || '-'}
+
+Comanda: ${invoicePdfLink}
+
+Comentarii: ${order.comments || '-'}
+`,
+                    })
+                }).catch(error => logger.error(error));
 
             return res.redirect(links.checkout.success());
         })
