@@ -32,13 +32,20 @@ html(lang=culture.language)
       link(rel="stylesheet", media="all", href="/static/css/main.css")
 
     link(rel='preconnect', href='//images.ctfassets.net')
-    link(rel='preconnect', href='https://www.google-analytics.com')
+    link(rel='preconnect', href='https://www.googletagmanager.com')
 
     if (_events && _events.length)
       script
         each a in _events
           = "gtag('event', '"+a.action+"', {'event_category':'"+a.category+"', 'event_label':'"+a.label+"'})"
-
+    // Google Tag Manager
+    script.
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-MDR997');
+    // End Google Tag Manager
   body
     include ../mixins/articles
     include ../mixins/products
@@ -67,13 +74,13 @@ html(lang=culture.language)
     else
       script(type='text/javascript', async, src="/static/js/main.js")
     block scripts
-    script.
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-      ga('create', '#{config.googleAnalyticsId}', '#{config.domain}');
-      ga('send', 'pageview');
+    //- script.
+    //-   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    //-   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    //-   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    //-   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    //-   ga('create', '#{config.googleAnalyticsId}', '#{config.domain}');
+    //-   ga('send', 'pageview');
 
     //- if (config.facebookId)
     //-   script.
@@ -84,3 +91,7 @@ html(lang=culture.language)
     //-       js.src = 'https://connect.facebook.net/#{culture.locale}/sdk.js#xfbml=1&version=v2.11&appId=#{config.facebookId}';
     //-       fjs.parentNode.insertBefore(js, fjs);
     //-     }(document, 'script', 'facebook-jssdk'));
+    // Google Tag Manager (noscript)
+    noscript
+      iframe(src='https://www.googletagmanager.com/ns.html?id=GTM-MDR997', height='0', width='0', style='display:none;visibility:hidden')
+    // End Google Tag Manager (noscript)
