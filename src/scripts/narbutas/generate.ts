@@ -93,8 +93,11 @@ async function generatePages(items: MenuLink[], parentId: string, type: PageType
             }
 
             const page: PageData = {
-                id: item.id, name: item.name, type,
-                htmlContent: content,
+                id: item.id,
+                name: item.name,
+                shortName: item.shortName,
+                type,
+                htmlContent: content.trim(),
                 parentId,
             };
 
@@ -120,7 +123,7 @@ async function generatePages(items: MenuLink[], parentId: string, type: PageType
         pages = items.map<PageData>(item => ({ id: item.id, name: item.name, type, parentId }));
     }
 
-    return pages;
+    return pages.sort(a => a.type === PageType.PAGE ? -1 : 0);
 }
 
 async function savePages(pages: PageData[]): Promise<any> {
@@ -135,8 +138,9 @@ async function getPageMenu(url: string, level: number): Promise<MenuLink[]> {
     page(`#mid_left .sme${level} > a`).each((_index, element) => {
         const item: MenuLink = {
             url: HOST + element.attribs['href'],
-            id: slug(element.attribs['title'].trim().toLowerCase()),
+            id: slug(element.attribs['href'].replace(/\//g, '').trim().toLowerCase()),
             name: element.attribs['title'],
+            shortName: page(element).text().trim(),
         };
 
         items.push(item);
@@ -146,11 +150,12 @@ async function getPageMenu(url: string, level: number): Promise<MenuLink[]> {
 }
 
 function formatUrl(url: string) {
-    return HOST + ('/' + url).replace(/\/\//g, '/', );
+    return HOST + ('/' + url).replace(/\/\//g, '/');
 }
 
 type MenuLink = {
     id: string
     url: string
     name: string
+    shortName: string
 }

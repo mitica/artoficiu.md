@@ -97,13 +97,13 @@ route.get('/narbutas/:id', async function (req: Request, res: Response, next: Ne
             viewName = 'narbutas-page';
 
             const parentMenuItem = NarbutasMenu.getItem(page.parentId);
-            parentMenuId = parentMenuItem.parentId;
+            parentMenuId = parentMenuItem.parentId || page.parentId;
         }
 
         if (parentMenuId) {
             const menuItem = res.locals.narbutasMenu.find((item: any) => item.id === parentMenuId);
             if (menuItem) {
-                menuItem.items = NarbutasMenu.getItems(parentMenuId).map(item => ({ name: item.name, link: links.narbutas.page(item.id) }));
+                menuItem.items = NarbutasMenu.getItems(parentMenuId).map(item => ({ name: item.name, shortName: item.shortName, link: links.narbutas.page(item.id) }));
             }
         }
 

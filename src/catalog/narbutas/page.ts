@@ -14,6 +14,7 @@ export type PageData = {
     id: string
     parentId?: string
     name?: string
+    shortName?: string
     title?: string
     htmlContent?: string
     images?: PageImage[]

@@ -1,6 +1,6 @@
 import { readdir } from "fs";
 import { basename } from "path";
-import { getPagesDir } from "./page";
+import { getPagesDir, PageType } from "./page";
 import { PageStorage } from "./pageStorage";
 
 export class Menu {
@@ -32,14 +32,16 @@ export class Menu {
                 const ids = files.map(file => basename(file, '.json'));
                 const pages = ids.map(id => storage.getPage(id));
                 Promise.all(pages).then(pagesData => {
-                    pagesData.forEach(pd => {
-                        const item = { id: pd.id, name: pd.name, parentId: pd.parentId };
-                        Menu.items.set(pd.id, item);
-                        const parentId = pd.parentId || null;
-                        const list = Menu.itemsByParentId.get(parentId) || [];
-                        list.push(item);
-                        Menu.itemsByParentId.set(parentId, list);
-                    });
+                    pagesData
+                        .sort(a => a.type === PageType.PAGE ? -1 : 0)
+                        .forEach(pd => {
+                            const item = { id: pd.id, name: pd.name, shortName: pd.shortName, parentId: pd.parentId };
+                            Menu.items.set(pd.id, item);
+                            const parentId = pd.parentId || null;
+                            const list = Menu.itemsByParentId.get(parentId) || [];
+                            list.push(item);
+                            Menu.itemsByParentId.set(parentId, list);
+                        });
                     Menu.loaded = true;
                     resolve();
                 });
@@ -51,5 +53,6 @@ export class Menu {
 export type MenuItem = {
     id: string
     name: string
+    shortName?: string
     parentId?: string
 }
