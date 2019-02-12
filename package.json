@@ -34,7 +34,7 @@
     "create-content-types": "node ./scripts/createContentTypes.js",
     "download-old-data": "node ./scripts/import/downloader.js",
     "import-old-data": "node ./scripts/import/importer.js",
-    "gen-narbutas": "tsc && node ./lib/scripts/narbutas/generate.js",
+    "gen-narbutas": "tsc && node ./lib/scripts/narbutas2/generate.js",
     "watch": "npm-watch start"
   },
   "engines": {
