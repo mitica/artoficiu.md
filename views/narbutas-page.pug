@@ -14,7 +14,7 @@ block main_content
       = page.title || page.name
       
   - var images = page.images.map(item=>({href:item.largeUrl,thumbnail:item.smallUrl}))
-  +imageGallery(images)
+  +imageGallery(images.length>0?images:[{href:page.image.largeUrl,thumbnail:page.image.smallUrl}])
   br
   if (page.htmlContent)
     #narbutas-html!= page.htmlContent
