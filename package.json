@@ -72,7 +72,7 @@
     "marked": "^0.3.18",
     "moment-timezone": "^0.5.14",
     "ms": "^2.1.1",
-    "node-fetch": "^2.1.2",
+    "node-fetch": "^2.6.1",
     "nodemailer": "^4.4.2",
     "object-hash": "^1.2.0",
     "ournet.logger": "^0.1.0",
