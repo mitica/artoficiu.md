@@ -1,6 +1,6 @@
 {
   "name": "artoficiu.md",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "private": true,
   "description": "artoficiu.md",
   "main": "./lib/index.js",
@@ -34,15 +34,15 @@
     "create-content-types": "node ./scripts/createContentTypes.js",
     "download-old-data": "node ./scripts/import/downloader.js",
     "import-old-data": "node ./scripts/import/importer.js",
-    "gen-narbutas": "tsc && node ./lib/scripts/narbutas2/generate.js",
+    "gen-narbutas": "node ./lib/scripts/narbutas2/generate.js",
     "watch": "npm-watch start"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mitica/artoficiu.md.git"
+    "url": "https://github.com/mitica/artoficiu.md.git"
   },
   "keywords": [
     "artoficiu",
@@ -51,16 +51,16 @@
   "author": "Dumitru Cantea",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Mitica/artoficiu.md/issues"
+    "url": "https://github.com/mitica/artoficiu.md/issues"
   },
-  "homepage": "https://github.com/Mitica/artoficiu.md",
+  "homepage": "https://github.com/mitica/artoficiu.md",
   "dependencies": {
-    "@fancyapps/fancybox": "^3.5.2",
+    "@fancyapps/fancybox": "3.5.2",
     "bootstrap": "^4.1.3",
     "contentful": "^5.0.5",
     "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
-    "express": "^4.16.2",
+    "express": "^4.17.1",
     "express-session": "^1.15.6",
     "gulp-concat": "^2.6.1",
     "gulp-uglify": "^3.0.0",
@@ -85,31 +85,31 @@
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.7",
-    "@types/express": "^4.11.0",
+    "@types/express": "^4.17.1",
     "@types/express-session": "^1.15.6",
     "@types/html-pdf": "^2.1.2",
     "@types/i18n": "^0.8.3",
     "@types/lru-cache": "^4.1.0",
     "@types/marked": "^0.3.0",
     "@types/ms": "^0.7.30",
-    "@types/node": "^6.x.x",
+    "@types/node": "^8.x.x",
     "@types/node-fetch": "^1.6.8",
     "@types/nodemailer": "^4.3.2",
     "ava": "^0.23.0",
     "cheerio": "^1.0.0-rc.2",
     "contentful-management": "^4.2.0",
     "debug": "^3.1.0",
-    "gulp": "^3.9.1",
-    "gulp-clean-css": "^3.9.2",
-    "gulp-imagemin": "^4.1.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-rev-all": "^0.9.7",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-rev-all": "^2.0.3",
     "gulp-sass": "3.0.0",
-    "gulp-sourcemaps": "^2.6.3",
+    "gulp-sourcemaps": "^3.0.0",
     "gulp-to-ico": "^1.0.0",
     "npm-watch": "^0.4.0",
     "rimraf": "^2.6.2",
     "slug": "^0.9.1",
-    "typescript": "^2.6.2"
+    "typescript": "^4.1.0"
   }
 }
