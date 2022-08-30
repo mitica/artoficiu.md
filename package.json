@@ -70,7 +70,7 @@
     "lightbox2": "^2.10.0",
     "lru-cache": "^4.1.2",
     "marked": "^0.3.18",
-    "moment-timezone": "^0.5.14",
+    "moment-timezone": "^0.5.35",
     "ms": "^2.1.1",
     "node-fetch": "^2.6.1",
     "nodemailer": "^4.4.2",
